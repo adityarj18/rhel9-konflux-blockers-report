@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RHEL 9 Konflux Migration — Blockers Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;700&family=Red+Hat+Text:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg: #f5f5f5;
+  --surface: #ffffff;
+  --ink: #1f1f1f;
+  --muted: #6a6e73;
+  --border: #d2d2d2;
+  --accent: #ee0000;
+  --accent-dark: #a30000;
+  --info: #0066cc;
+  --info-bg: #e7f1fa;
+  --warn: #f0ab00;
+  --warn-bg: #fdf7e7;
+  --success: #3e8635;
+  --success-bg: #f3faf2;
+  --todo: #c58c00;
+  --todo-bg: #fff8e6;
+  --progress: #0066cc;
+  --progress-bg: #e7f1fa;
+  --done: #3e8635;
+  --done-bg: #f3faf2;
+  --other: #6a6e73;
+  --other-bg: #f0f0f0;
+  --callout: #f0f0f0;
+  --nav-h: 56px;
+  --max: 1200px;
+  --bar: #c9190b;
+  --bar-track: #e7e7e7;
+  --card-border: #c8c8c8;
+  --focus: #0066cc;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "Red Hat Text", "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.45;
+  font-size: 15px;
+}
+h1, h2, h3, .brand {
+  font-family: "Red Hat Display", "Red Hat Text", "Source Sans 3", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+a { color: var(--info); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  height: var(--nav-h);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1rem; gap: 1rem;
+}
+.nav-left { display: flex; align-items: baseline; gap: .75rem; flex-wrap: wrap; min-width: 0; }
+.nav .brand { font-size: 1rem; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nav .meta { color: var(--muted); font-size: .85rem; white-space: nowrap; }
+.nav-actions { display: flex; gap: .5rem; flex-shrink: 0; }
+.btn {
+  appearance: none; border: 1px solid var(--border); background: var(--surface);
+  color: var(--ink); font: inherit; font-size: .875rem; font-weight: 500;
+  padding: .4rem .75rem; border-radius: 4px; cursor: pointer;
+}
+.btn:hover { border-color: #989898; background: #fafafa; }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 1.25rem 1rem 3rem; }
+.hero {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.hero h1 { margin: 0 0 .35rem; font-size: 1.75rem; }
+.hero .sub { color: var(--muted); margin: 0 0 1rem; font-size: 1rem; }
+.links { display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; font-size: .95rem; }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .75rem;
+  margin-bottom: 1.25rem;
+}
+.stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.1rem;
+}
+.stat .n { font-family: "Red Hat Display", sans-serif; font-size: 2rem; font-weight: 700; line-height: 1.1; color: var(--ink); }
+.stat .l { color: var(--muted); font-size: .85rem; margin-top: .25rem; }
+.stat.warn .n { color: #8a6d00; }
+.stat.danger .n { color: var(--accent-dark); }
+.callout {
+  background: var(--warn-bg);
+  border: 1px solid #f0d78c;
+  border-left: 4px solid var(--warn);
+  border-radius: 4px;
+  padding: 1rem 1.15rem;
+  margin-bottom: 1.25rem;
+}
+.callout h2 { margin: 0 0 .5rem; font-size: 1.05rem; }
+.callout p { margin: 0; color: var(--ink); }
+.callout ul { margin: .5rem 0 0; padding-left: 1.2rem; }
+.callout code { background: rgba(0,0,0,.06); padding: .05em .35em; border-radius: 3px; font-size: .9em; }
+section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.25rem 1.35rem;
+  margin-bottom: 1.25rem;
+}
+section h2 {
+  margin: 0 0 .15rem;
+  font-size: 1.2rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: .5rem;
+}
+.section-sub { color: var(--muted); font-size: .9rem; margin: .4rem 0 1rem; }
+.charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.15rem;
+}
+.chart-card h3 { margin: 0 0 .75rem; font-size: 1rem; }
+.bar-row {
+  display: grid;
+  grid-template-columns: minmax(100px, 38%) 1fr 2.5rem;
+  gap: .5rem;
+  align-items: center;
+  margin-bottom: .4rem;
+  font-size: .82rem;
+}
+.bar-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink); }
+.bar-track { background: var(--bar-track); height: 10px; border-radius: 2px; overflow: hidden; }
+.bar-fill { background: var(--bar); height: 100%; border-radius: 2px; }
+.bar-val { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); font-weight: 500; }
+.findings {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .75rem;
+  margin-bottom: 1.25rem;
+}
+.finding {
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  padding: 1rem 1.1rem;
+}
+.finding h3 { margin: 0 0 .4rem; font-size: 1rem; }
+.finding p { margin: 0; color: var(--muted); font-size: .9rem; }
+.finding .tag {
+  display: inline-block;
+  font-size: .75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--accent-dark);
+  margin-bottom: .35rem;
+}
+.toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .75rem;
+  margin-bottom: .75rem;
+}
+.toolbar label { font-size: .85rem; color: var(--muted); }
+.toolbar input {
+  flex: 1; min-width: 180px; max-width: 360px;
+  font: inherit; padding: .45rem .65rem;
+  border: 1px solid var(--border); border-radius: 4px;
+  background: #fff;
+}
+.toolbar input:focus { outline: 2px solid var(--focus); outline-offset: 1px; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 4px; }
+table {
+  width: 100%; border-collapse: collapse; font-size: .85rem;
+}
+th, td {
+  text-align: left; padding: .5rem .6rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+th {
+  background: #fafafa;
+  font-weight: 600;
+  white-space: nowrap;
+  position: sticky; top: 0;
+}
+tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #fafafa; }
+.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.nowrap { white-space: nowrap; }
+.small { font-size: .8rem; color: var(--muted); max-width: 160px; word-break: break-word; }
+.muted { color: var(--muted); }
+.tiny { font-size: .75rem; }
+.age-stale { color: var(--accent-dark); font-weight: 600; }
+.status {
+  display: inline-block;
+  font-size: .75rem;
+  font-weight: 600;
+  padding: .15rem .45rem;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.st-todo { background: var(--todo-bg); color: #8a6d00; }
+.st-progress { background: var(--progress-bg); color: var(--progress); }
+.st-done { background: var(--done-bg); color: var(--done); }
+.st-other { background: var(--other-bg); color: var(--other); }
+.pills { display: flex; flex-wrap: wrap; gap: .4rem; }
+.pill {
+  display: inline-flex; align-items: center; gap: .35rem;
+  background: #f0f0f0; border: 1px solid var(--border);
+  border-radius: 4px; padding: .25rem .55rem; font-size: .8rem;
+}
+.pill strong { font-variant-numeric: tabular-nums; }
+.pill-muted { opacity: .85; }
+.ready-list {
+  display: flex; flex-wrap: wrap; gap: .4rem .55rem;
+  line-height: 1.6;
+}
+.ready-list code {
+  background: var(--success-bg);
+  border: 1px solid #bde5b8;
+  color: #1e4f18;
+  padding: .15rem .4rem;
+  border-radius: 3px;
+  font-size: .85rem;
+}
+.appendix { font-size: .9rem; color: var(--muted); }
+.appendix ul { margin: .4rem 0 0; padding-left: 1.2rem; }
+.toc {
+  display: flex; flex-wrap: wrap; gap: .5rem .9rem;
+  margin-top: .85rem; font-size: .85rem;
+}
+.toc a { color: var(--muted); }
+.toc a:hover { color: var(--info); }
+.count-badge {
+  display: inline-block;
+  background: #f0f0f0;
+  border-radius: 3px;
+  padding: .1rem .4rem;
+  font-size: .8rem;
+  font-weight: 600;
+  margin-left: .35rem;
+  color: var(--muted);
+}
+@media (max-width: 900px) {
+  .stats, .findings, .charts { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .stats, .findings, .charts { grid-template-columns: 1fr; }
+  .nav .brand { font-size: .9rem; }
+  .hero h1 { font-size: 1.35rem; }
+  .bar-row { grid-template-columns: minmax(80px, 42%) 1fr 2rem; }
+}
+@media print {
+  body { background: #fff; font-size: 11pt; }
+  .nav-actions, .toolbar { display: none !important; }
+  .nav { position: static; border: none; height: auto; padding: .5rem 0; }
+  .wrap { max-width: none; padding: 0; }
+  section, .hero, .stat, .chart-card, .finding, .callout {
+    break-inside: avoid;
+    box-shadow: none;
+    border-color: #ccc;
+  }
+  .table-wrap { overflow: visible; border: none; }
+  table { font-size: 9pt; }
+  a { color: inherit; text-decoration: none; }
+  a[href]::after { content: ""; }
+}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Report toolbar">
+  <div class="nav-left">
+    <span class="brand">RHEL 9 Konflux Blockers</span>
+    <span class="meta">Snapshot · 28 Jul 2026</span>
+  </div>
+  <div class="nav-actions">
+    <button type="button" class="btn" id="btn-print">Print</button>
+    <button type="button" class="btn btn-primary" id="btn-download">Download HTML</button>
+  </div>
+</nav>
+
+<div class="wrap">
+  <!-- 1. Header -->
+  <header class="hero" id="top">
+    <h1>RHEL 9 Konflux Migration — Blockers</h1>
+    <p class="sub">Meeting-ready snapshot of open blockers, blocked packages, and spreadsheet hygiene.</p>
+    <div class="links">
+      <a href="https://docs.google.com/spreadsheets/d/1MJhmkOFgbSjuvuO9f8v5DDWiuxiMTGPOhVOHII67-5o" target="_blank" rel="noopener">Tracking spreadsheet</a>
+      <a href="https://redhat.atlassian.net/browse/KFLUXMIG-1166" target="_blank" rel="noopener">KFLUXMIG-1166</a>
+      <a href="https://redhat.atlassian.net/browse/KFLUXMIG-937" target="_blank" rel="noopener">KFLUXMIG-937</a>
+    </div>
+    <nav class="toc" aria-label="Sections">
+      <a href="#stats">Stats</a>
+      <a href="#reconcile">Counts</a>
+      <a href="#charts">Charts</a>
+      <a href="#findings">Findings</a>
+      <a href="#open-blockers">Open blockers</a>
+      <a href="#stale">Stale</a>
+      <a href="#packages">Blocked packages</a>
+      <a href="#ready">Ready to clear</a>
+      <a href="#labels">Labels</a>
+      <a href="#source">Source</a>
+    </nav>
+  </header>
+
+  <!-- 2. Key stats -->
+  <div class="stats" id="stats">
+    <div class="stat danger">
+      <div class="n">118</div>
+      <div class="l">Blocked packages<br/><span class="muted">status = blocked</span></div>
+    </div>
+    <div class="stat">
+      <div class="n">55</div>
+      <div class="l">Open blockers<br/><span class="muted">live Jira issues</span></div>
+    </div>
+    <div class="stat warn">
+      <div class="n">30</div>
+      <div class="l">Resolved but still blocked<br/><span class="muted">pkgs ready to clear</span></div>
+    </div>
+    <div class="stat warn">
+      <div class="n">26</div>
+      <div class="l">Needs attention<br/><span class="muted">16 unassigned + 10 stale ≥30d</span></div>
+    </div>
+  </div>
+
+  <!-- 3. Reconciliation -->
+  <div class="callout" id="reconcile">
+    <h2>Count reconciliation</h2>
+    <p>
+      Spreadsheet summary cell shows <strong>124</strong> blocked,
+      while packages with <code>status = blocked</code> = <strong>118</strong>,
+      and rows with a Blockers field = <strong>126</strong>.
+      Onboarding progress: <strong>2683</strong> / 2812 RPMs
+      (<strong>95.4%</strong> onboarded).
+    </p>
+    <ul>
+      <li>Open blockers: <strong>55</strong> · Unassigned open: <strong>16</strong></li>
+      <li>Done/resolved still listed on blocked pkgs: <strong>52</strong> · Packages all-resolved: <strong>30</strong></li>
+      <li>Stale open blockers (≥30 days since update): <strong>10</strong> · Unassigned package owners: <strong>21</strong></li>
+    </ul>
+  </div>
+
+  <!-- 4. Charts -->
+  <div class="charts" id="charts">
+    <div class="chart-card">
+      <h3>Open blocker status</h3>
+      <div class="bar-row"><div class="bar-label" title="New">New</div><div class="bar-track"><div class="bar-fill" style="width:100.0%"></div></div><div class="bar-val">26</div></div>
+<div class="bar-row"><div class="bar-label" title="Planning">Planning</div><div class="bar-track"><div class="bar-fill" style="width:50.0%"></div></div><div class="bar-val">13</div></div>
+<div class="bar-row"><div class="bar-label" title="Integration">Integration</div><div class="bar-track"><div class="bar-fill" style="width:15.4%"></div></div><div class="bar-val">4</div></div>
+<div class="bar-row"><div class="bar-label" title="To Do">To Do</div><div class="bar-track"><div class="bar-fill" style="width:15.4%"></div></div><div class="bar-val">4</div></div>
+<div class="bar-row"><div class="bar-label" title="Backlog">Backlog</div><div class="bar-track"><div class="bar-fill" style="width:7.7%"></div></div><div class="bar-val">2</div></div>
+<div class="bar-row"><div class="bar-label" title="In Progress">In Progress</div><div class="bar-track"><div class="bar-fill" style="width:7.7%"></div></div><div class="bar-val">2</div></div>
+<div class="bar-row"><div class="bar-label" title="Review">Review</div><div class="bar-track"><div class="bar-fill" style="width:7.7%"></div></div><div class="bar-val">2</div></div>
+<div class="bar-row"><div class="bar-label" title="Approved">Approved</div><div class="bar-track"><div class="bar-fill" style="width:3.8%"></div></div><div class="bar-val">1</div></div>
+<div class="bar-row"><div class="bar-label" title="Pending Approval">Pending Approval</div><div class="bar-track"><div class="bar-fill" style="width:3.8%"></div></div><div class="bar-val">1</div></div>
+    </div>
+    <div class="chart-card">
+      <h3>Theme → package impact</h3>
+      <div class="bar-row"><div class="bar-label" title="calculate-deps / buildroot">calculate-deps / buildroot</div><div class="bar-track"><div class="bar-fill" style="width:100.0%"></div></div><div class="bar-val">40</div></div>
+<div class="bar-row"><div class="bar-label" title="pipeline / build failure">pipeline / build failure</div><div class="bar-track"><div class="bar-fill" style="width:67.5%"></div></div><div class="bar-val">27</div></div>
+<div class="bar-row"><div class="bar-label" title="build-time signing">build-time signing</div><div class="bar-track"><div class="bar-fill" style="width:20.0%"></div></div><div class="bar-val">8</div></div>
+<div class="bar-row"><div class="bar-label" title="java portable / buildroot">java portable / buildroot</div><div class="bar-track"><div class="bar-fill" style="width:12.5%"></div></div><div class="bar-val">5</div></div>
+<div class="bar-row"><div class="bar-label" title="other">other</div><div class="bar-track"><div class="bar-fill" style="width:10.0%"></div></div><div class="bar-val">4</div></div>
+<div class="bar-row"><div class="bar-label" title="missing Konflux component">missing Konflux component</div><div class="bar-track"><div class="bar-fill" style="width:7.5%"></div></div><div class="bar-val">3</div></div>
+<div class="bar-row"><div class="bar-label" title="clone / registry">clone / registry</div><div class="bar-track"><div class="bar-fill" style="width:7.5%"></div></div><div class="bar-val">3</div></div>
+<div class="bar-row"><div class="bar-label" title="feature enablement">feature enablement</div><div class="bar-track"><div class="bar-fill" style="width:2.5%"></div></div><div class="bar-val">1</div></div>
+<div class="bar-row"><div class="bar-label" title="dist-git / source">dist-git / source</div><div class="bar-track"><div class="bar-fill" style="width:2.5%"></div></div><div class="bar-val">1</div></div>
+<div class="bar-row"><div class="bar-label" title="repo / branch gap">repo / branch gap</div><div class="bar-track"><div class="bar-fill" style="width:2.5%"></div></div><div class="bar-val">1</div></div>
+    </div>
+    <div class="chart-card">
+      <h3>SST breakdown (blocked pkgs)</h3>
+      <div class="bar-row"><div class="bar-label" title="rhel-sst-high-availability">high-availability</div><div class="bar-track"><div class="bar-fill" style="width:100.0%"></div></div><div class="bar-val">31</div></div>
+<div class="bar-row"><div class="bar-label" title="rhel-sst-pt-gcc">pt-gcc</div><div class="bar-track"><div class="bar-fill" style="width:29.0%"></div></div><div class="bar-val">9</div></div>
+<div class="bar-row"><div class="bar-label" title="rhel-sst-java">java</div><div class="bar-track"><div class="bar-fill" style="width:25.8%"></div></div><div class="bar-val">8</div></div>
+<div class="bar-row"><div class="bar-label" title="rhel-sst-pt-python-ruby-nodejs">pt-python-ruby-nodejs</div><div class="bar-track"><div class="bar-fill" style="width:22.6%"></div></div><div class="bar-val">7</div></div>
+<div class="bar-row"><div class="bar-label" title="rhel-sst-pt-libraries">pt-libraries</div><div class="bar-track"><div class="bar-fill" style="width:16.1%"></div></div><div class="bar-val">5</div></div>
+<div class="bar-row"><div class="bar-label" title="rhel-sst-display-productivity">display-productivity</div><div class="bar-track"><div class="bar-fill" style="width:16.1%"></div></div><div class="bar-val">5</div></div>
+<div class="bar-row"><div class="bar-label" title="rhel-sst-cs-databases">cs-databases</div><div class="bar-track"><div class="bar-fill" style="width:16.1%"></div></div><div class="bar-val">5</div></div>
+<div class="bar-row"><div class="bar-label" title="rhel-sst-accelerators">accelerators</div><div class="bar-track"><div class="bar-fill" style="width:9.7%"></div></div><div class="bar-val">3</div></div>
+<div class="bar-row"><div class="bar-label" title="rhel-sst-dotnet">dotnet</div><div class="bar-track"><div class="bar-fill" style="width:9.7%"></div></div><div class="bar-val">3</div></div>
+<div class="bar-row"><div class="bar-label" title="rhel-sst-cs-bootloaders">cs-bootloaders</div><div class="bar-track"><div class="bar-fill" style="width:9.7%"></div></div><div class="bar-val">3</div></div>
+<div class="bar-row"><div class="bar-label" title="rhel-sst-virtualization-windows">virtualization-windows</div><div class="bar-track"><div class="bar-fill" style="width:9.7%"></div></div><div class="bar-val">3</div></div>
+<div class="bar-row"><div class="bar-label" title="rhel-sst-cs-stacks">cs-stacks</div><div class="bar-track"><div class="bar-fill" style="width:9.7%"></div></div><div class="bar-val">3</div></div>
+<div class="bar-row"><div class="bar-label" title="rhel-sst-network-drivers">network-drivers</div><div class="bar-track"><div class="bar-fill" style="width:6.5%"></div></div><div class="bar-val">2</div></div>
+<div class="bar-row"><div class="bar-label" title="rhel-sst-network-management">network-management</div><div class="bar-track"><div class="bar-fill" style="width:6.5%"></div></div><div class="bar-val">2</div></div>
+<div class="bar-row"><div class="bar-label" title="(none)">(none)</div><div class="bar-track"><div class="bar-fill" style="width:6.5%"></div></div><div class="bar-val">2</div></div>
+    </div>
+    <div class="chart-card">
+      <h3>Assignee load (open blockers)</h3>
+      <div class="bar-row"><div class="bar-label" title="Unassigned">Unassigned</div><div class="bar-track"><div class="bar-fill" style="width:100.0%"></div></div><div class="bar-val">16</div></div>
+<div class="bar-row"><div class="bar-label" title="Djordje Todorovic">Djordje Todorovic</div><div class="bar-track"><div class="bar-fill" style="width:18.8%"></div></div><div class="bar-val">3</div></div>
+<div class="bar-row"><div class="bar-label" title="Josh Matsuoka">Josh Matsuoka</div><div class="bar-track"><div class="bar-fill" style="width:18.8%"></div></div><div class="bar-val">3</div></div>
+<div class="bar-row"><div class="bar-label" title="Filip Janus">Filip Janus</div><div class="bar-track"><div class="bar-fill" style="width:18.8%"></div></div><div class="bar-val">3</div></div>
+<div class="bar-row"><div class="bar-label" title="ruby-maint bot">ruby-maint bot</div><div class="bar-track"><div class="bar-fill" style="width:18.8%"></div></div><div class="bar-val">3</div></div>
+<div class="bar-row"><div class="bar-label" title="Yan Vugenfirer">Yan Vugenfirer</div><div class="bar-track"><div class="bar-fill" style="width:12.5%"></div></div><div class="bar-val">2</div></div>
+<div class="bar-row"><div class="bar-label" title="RHCS Maintenance">RHCS Maintenance</div><div class="bar-track"><div class="bar-fill" style="width:12.5%"></div></div><div class="bar-val">2</div></div>
+<div class="bar-row"><div class="bar-label" title="Network Management Team">Network Management Team</div><div class="bar-track"><div class="bar-fill" style="width:12.5%"></div></div><div class="bar-val">2</div></div>
+<div class="bar-row"><div class="bar-label" title="Lumir Balhar">Lumir Balhar</div><div class="bar-track"><div class="bar-fill" style="width:12.5%"></div></div><div class="bar-val">2</div></div>
+<div class="bar-row"><div class="bar-label" title="Aviv Sabadra">Aviv Sabadra</div><div class="bar-track"><div class="bar-fill" style="width:6.2%"></div></div><div class="bar-val">1</div></div>
+<div class="bar-row"><div class="bar-label" title="Kamal Heib">Kamal Heib</div><div class="bar-track"><div class="bar-fill" style="width:6.2%"></div></div><div class="bar-val">1</div></div>
+<div class="bar-row"><div class="bar-label" title="abrt-devel-list">abrt-devel-list</div><div class="bar-track"><div class="bar-fill" style="width:6.2%"></div></div><div class="bar-val">1</div></div>
+<div class="bar-row"><div class="bar-label" title="Richard Hughes">Richard Hughes</div><div class="bar-track"><div class="bar-fill" style="width:6.2%"></div></div><div class="bar-val">1</div></div>
+<div class="bar-row"><div class="bar-label" title="bootloader -eng-team">bootloader -eng-team</div><div class="bar-track"><div class="bar-fill" style="width:6.2%"></div></div><div class="bar-val">1</div></div>
+<div class="bar-row"><div class="bar-label" title="Michal Schorm">Michal Schorm</div><div class="bar-track"><div class="bar-fill" style="width:6.2%"></div></div><div class="bar-val">1</div></div>
+    </div>
+  </div>
+
+  <!-- 5. Findings -->
+  <div class="findings" id="findings">
+    <div class="finding">
+      <div class="tag">Largest blocker</div>
+      <h3><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a> — 34 packages</h3>
+      <p>Calculate-deps failures from inconsistent buildroot across arches (missing OpenStack/testing deps). Status <strong>New</strong>, unassigned. Theme drives ~40 pkgs under calculate-deps / buildroot.</p>
+    </div>
+    <div class="finding">
+      <div class="tag">Spreadsheet hygiene</div>
+      <h3>30 pkgs ready to clear · 52 done still listed</h3>
+      <p>Status=blocked counts (118) disagree with summary cell (124) and Blockers-field rows (126). Clearing resolved blockers will drop the blocked tally.</p>
+    </div>
+    <div class="finding">
+      <div class="tag">Stale work</div>
+      <h3>10 open blockers ≥30 days stale</h3>
+      <p>16 open blockers are unassigned. Oldest include RHELBLD pipeline failures untouched for 100+ days — triage or close to restore signal.</p>
+    </div>
+  </div>
+
+  <!-- 6. Open blockers -->
+  <section id="open-blockers">
+    <h2>Open blockers <span class="count-badge">55</span></h2>
+    <p class="section-sub">Live Jira issues currently blocking RHEL 9 Konflux packages. Keys link to Jira.</p>
+    <div class="toolbar">
+      <label for="filter-blockers">Filter</label>
+      <input type="search" id="filter-blockers" placeholder="Search key, summary, assignee, label…" autocomplete="off" />
+      <span class="muted tiny" id="filter-blockers-count"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="tbl-blockers">
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>Summary</th>
+            <th class="num">Pkgs</th>
+            <th>Status</th>
+            <th>Assignee</th>
+            <th>Components</th>
+            <th>Labels</th>
+            <th class="num">Age</th>
+          </tr>
+        </thead>
+        <tbody>
+<tr data-search="rok-1907 rok-1907 number of packages fail calculate-deps due to inconsistent buildroot across arches -- missing openstack/testing deps new unassigned konflux, rhel-9, rok — calculate-deps / buildroot glibc glibc32 google-api-python-client google-auth-httplib2 librepository python-cliff python-debtcollector python-eventlet python-fasteners python-google-api-core python-hacking python-keystoneauth1 python-mox3 python-novaclient python-oauth2client python-os-service-types python-oslo-config python-oslo-i18n python-oslo-serialization python-oslo-sphinx python-oslo-utils python-oslotest python-podman-api python-requests-kerberos python-requests-mock python-rfc3986 python-rsa python-simplejson python-stestr python-stevedore python-testrepository"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td>Number of packages fail calculate-deps due to inconsistent buildroot across arches -- missing OpenStack/testing deps</td><td class="num">34</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td><td class="num ">7d</td></tr>
+<tr data-search="konflux-6111 konflux-6111 rpm build-time signing approved djordje todorovic cy25q3, cy25q4, cy26q2, cy26q2-commitment-delivered, cy26q3, cy26q3-inprogress, rok-ready, upstream rpm build build-time signing fwupd grub2 kernel kernel-rt s390utils shim"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/KONFLUX-6111" target="_blank" rel="noopener">KONFLUX-6111</a></td><td>RPM build-time signing</td><td class="num">6</td><td><span class="status st-done">Approved</span></td><td>Djordje Todorovic</td><td class="small">RPM Build</td><td class="small">CY25Q3, CY25Q4, CY26Q2, CY26Q2-Commitment-Delivered, CY26Q3, CY26Q3-InProgress, rok-ready, upstream</td><td class="num ">0d</td></tr>
+<tr data-search="rhelbld-18718 rhelbld-18718 java-openjdk portable packages missing from java-openjdk-rhel-9-build koji tag backlog aviv sabadra — releng java portable / buildroot java-1.8.0-openjdk java-11-openjdk java-17-openjdk java-21-openjdk java-25-openjdk"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18718" target="_blank" rel="noopener">RHELBLD-18718</a></td><td>java-openjdk portable packages missing from java-openjdk-rhel-9-build Koji tag</td><td class="num">5</td><td><span class="status st-todo">Backlog</span></td><td>Aviv Sabadra</td><td class="small">releng</td><td class="small">—</td><td class="num ">12d</td></tr>
+<tr data-search="rhel-157300 rhel-157300 konflux pipeline failed from rhel-sst-network-drivers  planning kamal heib — lmod, openmpi pipeline / build failure lmod openmpi"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-157300" target="_blank" rel="noopener">RHEL-157300</a></td><td>konflux pipeline failed from rhel-sst-network-drivers </td><td class="num">2</td><td><span class="status st-progress">Planning</span></td><td>Kamal Heib</td><td class="small">Lmod, openmpi</td><td class="small">—</td><td class="num ">28d</td></tr>
+<tr data-search="rhel-190052 rok-1837 konflux build failing - component missing from rhel-arr-osci-tenant planning abrt-devel-list — python-argcomplete, xmlrpc-c missing konflux component "><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-190052" target="_blank" rel="noopener">RHEL-190052</a> <span class="muted tiny">(was ROK-1837)</span></td><td>Konflux Build Failing - Component missing from rhel-arr-osci-tenant</td><td class="num">2</td><td><span class="status st-progress">Planning</span></td><td>abrt-devel-list</td><td class="small">python-argcomplete, xmlrpc-c</td><td class="small">—</td><td class="num ">20d</td></tr>
+<tr data-search="rok-1939 rok-1939 3 packages fail clone-repository -- quay.io 401/read-only on oras push new unassigned — — clone / registry perl-text-unidecode python-pytest-subtests"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1939" target="_blank" rel="noopener">ROK-1939</a></td><td>3 packages fail clone-repository -- quay.io 401/read-only on oras push</td><td class="num">2</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td><td class="num ">21d</td></tr>
+<tr data-search="kfluxmig-363 kfluxmig-363 virtio-win enablement pending approval yan vugenfirer migration, non-container-based, rhel — feature enablement virtio-win"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/KFLUXMIG-363" target="_blank" rel="noopener">KFLUXMIG-363</a></td><td>virtio-win enablement</td><td class="num">1</td><td><span class="status st-progress">Pending Approval</span></td><td>Yan Vugenfirer</td><td class="small">—</td><td class="small">migration, non-container-based, rhel</td><td class="num ">20d</td></tr>
+<tr data-search="rhel-155402 rhel-155402 konflux pipeline rpm_build failed! - decentxml new josh matsuoka — decentxml pipeline / build failure decentxml"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-155402" target="_blank" rel="noopener">RHEL-155402</a></td><td>Konflux pipeline rpm_build failed! - decentxml</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Josh Matsuoka</td><td class="small">decentxml</td><td class="small">—</td><td class="num age-stale">31d</td></tr>
+<tr data-search="rhel-156486 rhel-156486 konflux pipeline rpm_build failed! - jmc new josh matsuoka — jmc pipeline / build failure jmc"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-156486" target="_blank" rel="noopener">RHEL-156486</a></td><td>Konflux pipeline rpm_build failed! - jmc</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Josh Matsuoka</td><td class="small">jmc</td><td class="small">—</td><td class="num ">20d</td></tr>
+<tr data-search="rhel-156488 rhel-156488 konflux pipeline rpm_build failed! - jmc-core new josh matsuoka — jmc-core pipeline / build failure jmc-core"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-156488" target="_blank" rel="noopener">RHEL-156488</a></td><td>Konflux pipeline rpm_build failed! - jmc-core</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Josh Matsuoka</td><td class="small">jmc-core</td><td class="small">—</td><td class="num ">20d</td></tr>
+<tr data-search="rhel-156848 rhel-156848 konflux pipeline failed!. (calculate-deps-s390x failed)- tomcatjss new rhcs maintenance — tomcatjss calculate-deps / buildroot tomcatjss"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-156848" target="_blank" rel="noopener">RHEL-156848</a></td><td>Konflux pipeline failed!. (calculate-deps-s390x Failed)- tomcatjss</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>RHCS Maintenance</td><td class="small">tomcatjss</td><td class="small">—</td><td class="num ">3d</td></tr>
+<tr data-search="rhel-156850 rhel-156850 konflux pipeline failed!. (calculate-deps-s390x failed) - jboss-jsp-2.2-api new rhcs maintenance — jboss-jsp-2.2-api calculate-deps / buildroot jboss-jsp-2.2-api"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-156850" target="_blank" rel="noopener">RHEL-156850</a></td><td>Konflux pipeline failed!. (calculate-deps-s390x Failed) - jboss-jsp-2.2-api</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>RHCS Maintenance</td><td class="small">jboss-jsp-2.2-api</td><td class="small">—</td><td class="num ">28d</td></tr>
+<tr data-search="rhel-158347 rhel-158347 konflux pipeline failed!  for (modemmanager) planning network management team — modemmanager pipeline / build failure modemmanager"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-158347" target="_blank" rel="noopener">RHEL-158347</a></td><td>Konflux pipeline failed!  For (ModemManager)</td><td class="num">1</td><td><span class="status st-progress">Planning</span></td><td>Network Management Team</td><td class="small">ModemManager</td><td class="small">—</td><td class="num ">3d</td></tr>
+<tr data-search="rhel-159656 rhel-159656 konflux pipeline rpm_build failed! (nispor) planning network management team — nispor pipeline / build failure nispor"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-159656" target="_blank" rel="noopener">RHEL-159656</a></td><td>Konflux pipeline rpm_build failed! (nispor)</td><td class="num">1</td><td><span class="status st-progress">Planning</span></td><td>Network Management Team</td><td class="small">nispor</td><td class="small">—</td><td class="num ">3d</td></tr>
+<tr data-search="rhel-183529 rhel-183529 konflux pipeline calculate-deps failed! (pgaudit) new filip janus — pgaudit calculate-deps / buildroot pgaudit"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183529" target="_blank" rel="noopener">RHEL-183529</a></td><td>Konflux pipeline calculate-deps failed! (pgaudit)</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Filip Janus</td><td class="small">pgaudit</td><td class="small">—</td><td class="num ">24d</td></tr>
+<tr data-search="rhel-183530 rhel-183530 konflux pipeline calculate-deps failed! (pg_repack) new filip janus — pg_repack calculate-deps / buildroot pg_repack"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183530" target="_blank" rel="noopener">RHEL-183530</a></td><td>Konflux pipeline calculate-deps failed! (pg_repack)</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Filip Janus</td><td class="small">pg_repack</td><td class="small">—</td><td class="num ">24d</td></tr>
+<tr data-search="rhel-183531 rhel-183531 konflux pipeline calculate-deps failed! (postgres-decoderbufs) new unassigned — postgres-decoderbufs calculate-deps / buildroot postgres-decoderbufs"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183531" target="_blank" rel="noopener">RHEL-183531</a></td><td>Konflux pipeline calculate-deps failed! (postgres-decoderbufs)</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">postgres-decoderbufs</td><td class="small">—</td><td class="num ">24d</td></tr>
+<tr data-search="rhel-183532 rhel-183532 gnome software ftbfs on rhel 9 planning richard hughes — gnome-software pipeline / build failure gnome-software"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183532" target="_blank" rel="noopener">RHEL-183532</a></td><td>GNOME Software FTBFS on RHEL 9</td><td class="num">1</td><td><span class="status st-progress">Planning</span></td><td>Richard Hughes</td><td class="small">gnome-software</td><td class="small">—</td><td class="num ">27d</td></tr>
+<tr data-search="rhel-183536 rhel-183536 konflux pipeline rpmbuild failed! (gnu-efi) integration bootloader -eng-team — gnu-efi pipeline / build failure gnu-efi"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183536" target="_blank" rel="noopener">RHEL-183536</a></td><td>Konflux pipeline rpmbuild failed! (gnu-efi)</td><td class="num">1</td><td><span class="status st-progress">Integration</span></td><td>bootloader -eng-team</td><td class="small">gnu-efi</td><td class="small">—</td><td class="num ">19d</td></tr>
+<tr data-search="rhel-183537 rhel-183537 konflux pipeline clone-repository failed! (groff) new michal schorm — groff clone / registry groff"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183537" target="_blank" rel="noopener">RHEL-183537</a></td><td>Konflux pipeline clone-repository failed! (groff)</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Michal Schorm</td><td class="small">groff</td><td class="small">—</td><td class="num ">15d</td></tr>
+<tr data-search="rhel-183543 rhel-183543 konflux pipeline rpmbuild failed! (python3.11-lxml) new lumir balhar — python3.11-lxml pipeline / build failure python3.11-lxml"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183543" target="_blank" rel="noopener">RHEL-183543</a></td><td>Konflux pipeline rpmbuild failed! (python3.11-lxml)</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Lumir Balhar</td><td class="small">python3.11-lxml</td><td class="small">—</td><td class="num ">25d</td></tr>
+<tr data-search="rhel-183545 rhel-183545 konflux pipeline rpmbuild failed! (python-psycopg2) planning filip janus — python-psycopg2 pipeline / build failure python-psycopg2"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183545" target="_blank" rel="noopener">RHEL-183545</a></td><td>Konflux pipeline rpmbuild failed! (python-psycopg2)</td><td class="num">1</td><td><span class="status st-progress">Planning</span></td><td>Filip Janus</td><td class="small">python-psycopg2</td><td class="small">—</td><td class="num ">6d</td></tr>
+<tr data-search="rhel-183547 rhel-183547 konflux pipeline rpmbuild failed! (python3.11-psycopg2) new lumir balhar — python3.11-psycopg2 pipeline / build failure python3.11-psycopg2"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183547" target="_blank" rel="noopener">RHEL-183547</a></td><td>Konflux pipeline rpmbuild failed! (python3.11-psycopg2)</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Lumir Balhar</td><td class="small">python3.11-psycopg2</td><td class="small">—</td><td class="num ">21d</td></tr>
+<tr data-search="rhel-183549 rhel-183549 konflux pipeline rpmbuild failed! (kernelshark) new jerome marchand — kernelshark pipeline / build failure kernelshark"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183549" target="_blank" rel="noopener">RHEL-183549</a></td><td>Konflux pipeline rpmbuild failed! (kernelshark)</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Jerome Marchand</td><td class="small">kernelshark</td><td class="small">—</td><td class="num ">21d</td></tr>
+<tr data-search="rhel-183550 rhel-183550 konflux pipeline rpmbuild failed! (swig) in progress jitka plesnikova — swig pipeline / build failure swig"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183550" target="_blank" rel="noopener">RHEL-183550</a></td><td>Konflux pipeline rpmbuild failed! (swig)</td><td class="num">1</td><td><span class="status st-progress">In Progress</span></td><td>Jitka Plesnikova</td><td class="small">swig</td><td class="small">—</td><td class="num ">0d</td></tr>
+<tr data-search="rhel-183554 rhel-183554 konflux pipeline rpmbuild failed! (ibus-typing-booster) planning mike fabian — ibus-typing-booster pipeline / build failure ibus-typing-booster"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183554" target="_blank" rel="noopener">RHEL-183554</a></td><td>Konflux pipeline rpmbuild failed! (ibus-typing-booster)</td><td class="num">1</td><td><span class="status st-progress">Planning</span></td><td>Mike Fabian</td><td class="small">ibus-typing-booster</td><td class="small">—</td><td class="num ">25d</td></tr>
+<tr data-search="rhel-192222 rhel-192222 keylime %check fails in konflux: test_sign_runtime_policy /dev/stdout permission denied planning anderson sasaki secengsp_planning_created keylime build-time signing keylime"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-192222" target="_blank" rel="noopener">RHEL-192222</a></td><td>keylime %check fails in Konflux: test_sign_runtime_policy /dev/stdout permission denied</td><td class="num">1</td><td><span class="status st-progress">Planning</span></td><td>Anderson Sasaki</td><td class="small">keylime</td><td class="small">secengsp_planning_created</td><td class="num ">5d</td></tr>
+<tr data-search="rhel-192223 rhel-192223 gtk2 rpmbuild fails on s390x in konflux (other 5 arches pass) planning matthias clasen — gtk2 pipeline / build failure "><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-192223" target="_blank" rel="noopener">RHEL-192223</a></td><td>gtk2 rpmbuild fails on s390x in Konflux (other 5 arches pass)</td><td class="num">1</td><td><span class="status st-progress">Planning</span></td><td>Matthias Clasen</td><td class="small">gtk2</td><td class="small">—</td><td class="num ">15d</td></tr>
+<tr data-search="rhel-192224 rhel-192224 mesa-compat fails at process-sources in konflux pipeline planning jose exposito quintana — mesa-compat pipeline / build failure "><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-192224" target="_blank" rel="noopener">RHEL-192224</a></td><td>mesa-compat fails at process-sources in Konflux pipeline</td><td class="num">1</td><td><span class="status st-progress">Planning</span></td><td>Jose Exposito Quintana</td><td class="small">mesa-compat</td><td class="small">—</td><td class="num ">24d</td></tr>
+<tr data-search="rhel-192225 rhel-192225 time rpmbuild fails on ppc64le in konflux (other 5 arches pass) integration ondrej pohorelsky — time pipeline / build failure "><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-192225" target="_blank" rel="noopener">RHEL-192225</a></td><td>time rpmbuild fails on ppc64le in Konflux (other 5 arches pass)</td><td class="num">1</td><td><span class="status st-progress">Integration</span></td><td>Ondrej Pohorelsky</td><td class="small">time</td><td class="small">—</td><td class="num ">15d</td></tr>
+<tr data-search="rhel-192226 rhel-192226 ruby %check fails in konflux: rinda multicast tests need network device planning ruby-maint bot — ruby pipeline / build failure ruby"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-192226" target="_blank" rel="noopener">RHEL-192226</a></td><td>ruby %check fails in Konflux: Rinda multicast tests need network device</td><td class="num">1</td><td><span class="status st-progress">Planning</span></td><td>ruby-maint bot</td><td class="small">ruby</td><td class="small">—</td><td class="num ">11d</td></tr>
+<tr data-search="rhel-192540 rhel-192540 dotnet7.0 rpmbuild fails on x86-64, aarch64, s390x, ppc64le in konflux new unassigned — dotnet7.0 pipeline / build failure dotnet7.0"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-192540" target="_blank" rel="noopener">RHEL-192540</a></td><td>dotnet7.0 rpmbuild fails on x86-64, aarch64, s390x, ppc64le in Konflux</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">dotnet7.0</td><td class="small">—</td><td class="num ">21d</td></tr>
+<tr data-search="rhel-192545 rhel-192545 rubygem-pg rpmbuild fails on all arches in konflux planning ruby-maint bot — rubygem-pg pipeline / build failure rubygem-pg"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-192545" target="_blank" rel="noopener">RHEL-192545</a></td><td>rubygem-pg rpmbuild fails on all arches in Konflux</td><td class="num">1</td><td><span class="status st-progress">Planning</span></td><td>ruby-maint bot</td><td class="small">rubygem-pg</td><td class="small">—</td><td class="num ">7d</td></tr>
+<tr data-search="rhel-211387 rhelmisc-18928 snpguest unable to be pushed to dist-git in progress tyler fanelli rok-blocker, covm-cy26-roadmap snpguest dist-git / source snpguest"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-211387" target="_blank" rel="noopener">RHEL-211387</a> <span class="muted tiny">(was RHELMISC-18928)</span></td><td>snpguest unable to be pushed to dist-git</td><td class="num">1</td><td><span class="status st-progress">In Progress</span></td><td>Tyler Fanelli</td><td class="small">snpguest</td><td class="small">RoK-blocker, covm-CY26-roadmap</td><td class="num ">10d</td></tr>
+<tr data-search="rhelbld-18165 rhelbld-18165 push-rpm-to-koji - failed (python-httpretty) failed brew/koji to do unassigned — rok pipeline / build failure python-httpretty"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18165" target="_blank" rel="noopener">RHELBLD-18165</a></td><td>push-rpm-to-koji - Failed (python-httpretty) Failed Brew/Koji</td><td class="num">1</td><td><span class="status st-todo">To Do</span></td><td>Unassigned</td><td class="small">rok</td><td class="small">—</td><td class="num age-stale">118d</td></tr>
+<tr data-search="rhelbld-18835 rhelbld-18835 checksec konflux build fails: oc project produces malformed tenant name backlog unassigned — rok pipeline / build failure checksec"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18835" target="_blank" rel="noopener">RHELBLD-18835</a></td><td>checksec Konflux build fails: oc project produces malformed tenant name</td><td class="num">1</td><td><span class="status st-todo">Backlog</span></td><td>Unassigned</td><td class="small">rok</td><td class="small">—</td><td class="num ">20d</td></tr>
+<tr data-search="rhelbld-18836 rhelbld-18836 man-pages-overrides rpmbuild passes but push-rpm-to-koji fails review lisa smith — releng pipeline / build failure man-pages-overrides"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18836" target="_blank" rel="noopener">RHELBLD-18836</a></td><td>man-pages-overrides rpmbuild passes but push-rpm-to-koji fails</td><td class="num">1</td><td><span class="status st-progress">Review</span></td><td>Lisa Smith</td><td class="small">releng</td><td class="small">—</td><td class="num ">4d</td></tr>
+<tr data-search="rhelbld-18965 rok-2135 gcc-toolset-16-gcc needs test mr for konflux build review veronika doubkova — releng other gcc-toolset-16-gcc"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18965" target="_blank" rel="noopener">RHELBLD-18965</a> <span class="muted tiny">(was ROK-2135)</span></td><td>gcc-toolset-16-gcc needs test MR for Konflux build</td><td class="num">1</td><td><span class="status st-progress">Review</span></td><td>Veronika Doubkova</td><td class="small">releng</td><td class="small">—</td><td class="num ">5d</td></tr>
+<tr data-search="rhelbld-18975 rok-2132 kmod-nvidia-open has no gitlab repo, cannot submit konflux test build to do djordje todorovic — releng repo / branch gap kmod-nvidia-open"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18975" target="_blank" rel="noopener">RHELBLD-18975</a> <span class="muted tiny">(was ROK-2132)</span></td><td>kmod-nvidia-open has no GitLab repo, cannot submit Konflux test build</td><td class="num">1</td><td><span class="status st-todo">To Do</span></td><td>Djordje Todorovic</td><td class="small">releng</td><td class="small">—</td><td class="num ">3d</td></tr>
+<tr data-search="rok-1888 rok-1888 8 packages fail with &#x27;+ false&#x27; after successful dep install in konflux rpmbuild task new unassigned — — pipeline / build failure libomp"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1888" target="_blank" rel="noopener">ROK-1888</a></td><td>8 packages fail with &#x27;+ false&#x27; after successful dep install in Konflux rpmbuild task</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td><td class="num age-stale">47d</td></tr>
+<tr data-search="rok-1925 rok-1925 missing konflux component for ceph in rhel-sst-rh-ceph-storage tenant new unassigned — — missing konflux component ceph"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1925" target="_blank" rel="noopener">ROK-1925</a></td><td>Missing Konflux component for ceph in rhel-sst-rh-ceph-storage tenant</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td><td class="num age-stale">49d</td></tr>
+<tr data-search="rok-1926 rok-1926 calculate-deps fails for ceph -- missing bzip2-devel and libzstd-devel in buildroot new unassigned — — calculate-deps / buildroot ceph"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1926" target="_blank" rel="noopener">ROK-1926</a></td><td>calculate-deps fails for ceph -- missing bzip2-devel and libzstd-devel in buildroot</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td><td class="num age-stale">49d</td></tr>
+<tr data-search="rok-1927 rok-1927 7 packages fail with oc flag parse error on image-builder-tenant -- pipeline script quoting bug new yan vugenfirer — — pipeline / build failure msitools"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1927" target="_blank" rel="noopener">ROK-1927</a></td><td>7 packages fail with oc flag parse error on image-builder-tenant -- pipeline script quoting bug</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Yan Vugenfirer</td><td class="small">—</td><td class="small">—</td><td class="num ">14d</td></tr>
+<tr data-search="rok-1944 rok-1944 golang %check fails -- expired tls test certificates (net/smtp, os/signal timeout) new unassigned — — build-time signing golang"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1944" target="_blank" rel="noopener">ROK-1944</a></td><td>golang %check fails -- expired TLS test certificates (net/smtp, os/signal timeout)</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td><td class="num age-stale">47d</td></tr>
+<tr data-search="rok-1945 rok-1945 python-lxml/3.11/3.12 %check fails -- test_simple_xml elementtreepulltestcase regression new unassigned — — pipeline / build failure python-lxml"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1945" target="_blank" rel="noopener">ROK-1945</a></td><td>python-lxml/3.11/3.12 %check fails -- test_simple_xml ElementTreePullTestCase regression</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td><td class="num ">18d</td></tr>
+<tr data-search="rok-2134 rok-2134 gcc-toolset-16-binutils needs test mr for konflux build new unassigned — — other gcc-toolset-16-binutils"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-2134" target="_blank" rel="noopener">ROK-2134</a></td><td>gcc-toolset-16-binutils needs test MR for Konflux build</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td><td class="num ">4d</td></tr>
+<tr data-search="rok-2136 rok-2136 redhat-cloud-client-configuration needs test mr (rhel-only, rhel-9-main) new unassigned — — other redhat-cloud-client-configuration"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-2136" target="_blank" rel="noopener">ROK-2136</a></td><td>redhat-cloud-client-configuration needs test MR (RHEL-only, rhel-9-main)</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td><td class="num ">21d</td></tr>
+<tr data-search="rok-2137 rok-2137 kmod-amdgpu konflux test build blocked: mr closed, api access denied new unassigned — — other kmod-amdgpu"><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-2137" target="_blank" rel="noopener">ROK-2137</a></td><td>kmod-amdgpu Konflux test build blocked: MR closed, API access denied</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td><td class="num ">21d</td></tr>
+<tr data-search="rhel-134804 rhel-134804 rubygem-pg test failures related to encoding [c10s] planning ruby-maint bot jotnar_backport_in_progress rubygem-pg pipeline / build failure "><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-134804" target="_blank" rel="noopener">RHEL-134804</a></td><td>rubygem-pg test failures related to encoding [c10s]</td><td class="num">0</td><td><span class="status st-progress">Planning</span></td><td>ruby-maint bot</td><td class="small">rubygem-pg</td><td class="small">jotnar_backport_in_progress</td><td class="num ">16d</td></tr>
+<tr data-search="rhel-156738 rhel-156738 allow openmpi tests for fftw to succeed on systems with fewer than 4 processors integration siteshwar vashisht plumbers-backfill, plumbers-synced fftw other "><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-156738" target="_blank" rel="noopener">RHEL-156738</a></td><td>Allow openmpi tests for fftw to succeed on systems with fewer than 4 processors</td><td class="num">0</td><td><span class="status st-progress">Integration</span></td><td>Siteshwar Vashisht</td><td class="small">fftw</td><td class="small">plumbers-backfill, plumbers-synced</td><td class="num ">6d</td></tr>
+<tr data-search="rhel-173187 rhel-173187 curl fails to build in konflux integration jacek migacz — curl pipeline / build failure "><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-173187" target="_blank" rel="noopener">RHEL-173187</a></td><td>curl fails to build in Konflux</td><td class="num">0</td><td><span class="status st-progress">Integration</span></td><td>Jacek Migacz</td><td class="small">curl</td><td class="small">—</td><td class="num ">12d</td></tr>
+<tr data-search="rhelbld-18120 rhelbld-18120 fail to build package mesa-compat in konflux pipeline on branch c9s to do pavel raiskup — rok pipeline / build failure "><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18120" target="_blank" rel="noopener">RHELBLD-18120</a></td><td>Fail to build package mesa-compat in konflux pipeline on branch c9s</td><td class="num">0</td><td><span class="status st-todo">To Do</span></td><td>Pavel Raiskup</td><td class="small">rok</td><td class="small">—</td><td class="num age-stale">118d</td></tr>
+<tr data-search="rhelbld-18586 rok-1908 2 packages fail in konflux but pass in brew -- gtk2 (%install s390x) and time (%check ppc64le) to do djordje todorovic konflux, rhel-9, rok rok pipeline / build failure "><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18586" target="_blank" rel="noopener">RHELBLD-18586</a> <span class="muted tiny">(was ROK-1908)</span></td><td>2 packages fail in Konflux but pass in Brew -- gtk2 (%install s390x) and time (%check ppc64le)</td><td class="num">0</td><td><span class="status st-todo">To Do</span></td><td>Djordje Todorovic</td><td class="small">rok</td><td class="small">konflux, rhel-9, rok</td><td class="num age-stale">61d</td></tr>
+<tr data-search="rok-1878 rok-1878 missing konflux components in rhel-storage-io-2-tenant -- blocks 1 packages new unassigned — — missing konflux component "><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1878" target="_blank" rel="noopener">ROK-1878</a></td><td>Missing Konflux components in rhel-storage-io-2-tenant -- blocks 1 packages</td><td class="num">0</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td><td class="num age-stale">41d</td></tr>
+<tr data-search="rok-1879 rok-1879 missing konflux component in rhel-virt-tools-tenant -- blocks 1 package new unassigned — — missing konflux component "><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1879" target="_blank" rel="noopener">ROK-1879</a></td><td>Missing Konflux component in rhel-virt-tools-tenant -- blocks 1 package</td><td class="num">0</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td><td class="num age-stale">49d</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 7. Stale -->
+  <section id="stale">
+    <h2>Stale open blockers (≥30 days) <span class="count-badge">10</span></h2>
+    <p class="section-sub">Open issues with no recent update — candidates for triage, reassignment, or closure.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>Summary</th>
+            <th class="num">Pkgs</th>
+            <th>Status</th>
+            <th>Assignee</th>
+            <th class="num">Age</th>
+            <th>Theme</th>
+          </tr>
+        </thead>
+        <tbody>
+<tr><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18165" target="_blank" rel="noopener">RHELBLD-18165</a></td><td>push-rpm-to-koji - Failed (python-httpretty) Failed Brew/Koji</td><td class="num">1</td><td><span class="status st-todo">To Do</span></td><td>Unassigned</td><td class="num age-stale">118d</td><td class="small">pipeline / build failure</td></tr>
+<tr><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18120" target="_blank" rel="noopener">RHELBLD-18120</a></td><td>Fail to build package mesa-compat in konflux pipeline on branch c9s</td><td class="num">0</td><td><span class="status st-todo">To Do</span></td><td>Pavel Raiskup</td><td class="num age-stale">118d</td><td class="small">pipeline / build failure</td></tr>
+<tr><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18586" target="_blank" rel="noopener">RHELBLD-18586</a></td><td>2 packages fail in Konflux but pass in Brew -- gtk2 (%install s390x) and time (%check ppc64le)</td><td class="num">0</td><td><span class="status st-todo">To Do</span></td><td>Djordje Todorovic</td><td class="num age-stale">61d</td><td class="small">pipeline / build failure</td></tr>
+<tr><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1925" target="_blank" rel="noopener">ROK-1925</a></td><td>Missing Konflux component for ceph in rhel-sst-rh-ceph-storage tenant</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="num age-stale">49d</td><td class="small">missing Konflux component</td></tr>
+<tr><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1926" target="_blank" rel="noopener">ROK-1926</a></td><td>calculate-deps fails for ceph -- missing bzip2-devel and libzstd-devel in buildroot</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="num age-stale">49d</td><td class="small">calculate-deps / buildroot</td></tr>
+<tr><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1879" target="_blank" rel="noopener">ROK-1879</a></td><td>Missing Konflux component in rhel-virt-tools-tenant -- blocks 1 package</td><td class="num">0</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="num age-stale">49d</td><td class="small">missing Konflux component</td></tr>
+<tr><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1888" target="_blank" rel="noopener">ROK-1888</a></td><td>8 packages fail with &#x27;+ false&#x27; after successful dep install in Konflux rpmbuild task</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="num age-stale">47d</td><td class="small">pipeline / build failure</td></tr>
+<tr><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1944" target="_blank" rel="noopener">ROK-1944</a></td><td>golang %check fails -- expired TLS test certificates (net/smtp, os/signal timeout)</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="num age-stale">47d</td><td class="small">build-time signing</td></tr>
+<tr><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1878" target="_blank" rel="noopener">ROK-1878</a></td><td>Missing Konflux components in rhel-storage-io-2-tenant -- blocks 1 packages</td><td class="num">0</td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="num age-stale">41d</td><td class="small">missing Konflux component</td></tr>
+<tr><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-155402" target="_blank" rel="noopener">RHEL-155402</a></td><td>Konflux pipeline rpm_build failed! - decentxml</td><td class="num">1</td><td><span class="status st-todo">New</span></td><td>Josh Matsuoka</td><td class="num age-stale">31d</td><td class="small">pipeline / build failure</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 8. Packages -->
+  <section id="packages">
+    <h2>All blocked packages <span class="count-badge">118</span></h2>
+    <p class="section-sub">Packages currently marked blocked, with blocker keys and ownership.</p>
+    <div class="toolbar">
+      <label for="filter-packages">Filter</label>
+      <input type="search" id="filter-packages" placeholder="Search package, SST, assignee, blocker…" autocomplete="off" />
+      <span class="muted tiny" id="filter-packages-count"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="tbl-packages">
+        <thead>
+          <tr>
+            <th>Package</th>
+            <th>SST</th>
+            <th>Pkg assignee</th>
+            <th>Blockers</th>
+            <th>Blocker state</th>
+            <th>Jira status</th>
+            <th>Jira assignee</th>
+            <th>Components</th>
+            <th>Labels</th>
+          </tr>
+        </thead>
+        <tbody>
+<tr data-search="checksec (none) unassigned rhelbld-18835 open backlog unassigned — rok rhelbld-18835"><td class="nowrap"><strong>checksec</strong></td><td class="small">(none)</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18835" target="_blank" rel="noopener">RHELBLD-18835</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">Backlog</span></td><td>Unassigned</td><td class="small">rok</td><td class="small">—</td></tr>
+<tr data-search="msitools (none) đorđe todorović rok-1927 open new yan vugenfirer — — rok-1927"><td class="nowrap"><strong>msitools</strong></td><td class="small">(none)</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1927" target="_blank" rel="noopener">ROK-1927</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Yan Vugenfirer</td><td class="small">—</td><td class="small">—</td></tr>
+<tr data-search="cuda rhel-sst-accelerators đorđe todorović rok-2131 all resolved closed veronika doubkova — releng rhelbld-18976"><td class="nowrap"><strong>cuda</strong></td><td class="small">accelerators</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-2131" target="_blank" rel="noopener">ROK-2131</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Veronika Doubkova</td><td class="small">releng</td><td class="small">—</td></tr>
+<tr data-search="kmod-amdgpu rhel-sst-accelerators đorđe todorović rok-2137 open new unassigned — — rok-2137"><td class="nowrap"><strong>kmod-amdgpu</strong></td><td class="small">accelerators</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-2137" target="_blank" rel="noopener">ROK-2137</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td></tr>
+<tr data-search="kmod-nvidia-open rhel-sst-accelerators đorđe todorović rok-2132 open to do djordje todorovic — releng rhelbld-18975"><td class="nowrap"><strong>kmod-nvidia-open</strong></td><td class="small">accelerators</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-2132" target="_blank" rel="noopener">ROK-2132</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">To Do</span></td><td>Djordje Todorovic</td><td class="small">releng</td><td class="small">—</td></tr>
+<tr data-search="s390utils rhel-sst-arch-hw unassigned konflux-6111 open approved djordje todorovic cy25q3, cy25q4, cy26q2, cy26q2-commitment-delivered, cy26q3, cy26q3-inprogress, rok-ready, upstream rpm build konflux-6111"><td class="nowrap"><strong>s390utils</strong></td><td class="small">arch-hw</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/KONFLUX-6111" target="_blank" rel="noopener">KONFLUX-6111</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-done">Approved</span></td><td>Djordje Todorovic</td><td class="small">RPM Build</td><td class="small">CY25Q3, CY25Q4, CY26Q2, CY26Q2-Commitment-Delivered, CY26Q3, CY26Q3-InProgress, rok-ready, upstream</td></tr>
+<tr data-search="libi2cd rhel-sst-arm-and-acpi đorđe todorović rhelbld-18719 all resolved resolved djordje todorovic — — rhelwf-14315"><td class="nowrap"><strong>libi2cd</strong></td><td class="small">arm-and-acpi</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18719" target="_blank" rel="noopener">RHELBLD-18719</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Resolved</span></td><td>Djordje Todorovic</td><td class="small">—</td><td class="small">—</td></tr>
+<tr data-search="libgit2 rhel-sst-centos-stream đorđe todorović rhelbld-18203 all resolved closed veronika doubkova — rok rhelbld-18203"><td class="nowrap"><strong>libgit2</strong></td><td class="small">centos-stream</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18203" target="_blank" rel="noopener">RHELBLD-18203</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Veronika Doubkova</td><td class="small">rok</td><td class="small">—</td></tr>
+<tr data-search="python-podman-api rhel-sst-container-tools đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-podman-api</strong></td><td class="small">container-tools</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="gnu-efi rhel-sst-cs-bootloaders đorđe todorović rhel-183536 open integration bootloader -eng-team — gnu-efi rhel-183536"><td class="nowrap"><strong>gnu-efi</strong></td><td class="small">cs-bootloaders</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183536" target="_blank" rel="noopener">RHEL-183536</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-progress">Integration</span></td><td>bootloader -eng-team</td><td class="small">gnu-efi</td><td class="small">—</td></tr>
+<tr data-search="grub2 rhel-sst-cs-bootloaders unassigned konflux-6111 open approved djordje todorovic cy25q3, cy25q4, cy26q2, cy26q2-commitment-delivered, cy26q3, cy26q3-inprogress, rok-ready, upstream rpm build konflux-6111"><td class="nowrap"><strong>grub2</strong></td><td class="small">cs-bootloaders</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/KONFLUX-6111" target="_blank" rel="noopener">KONFLUX-6111</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-done">Approved</span></td><td>Djordje Todorovic</td><td class="small">RPM Build</td><td class="small">CY25Q3, CY25Q4, CY26Q2, CY26Q2-Commitment-Delivered, CY26Q3, CY26Q3-InProgress, rok-ready, upstream</td></tr>
+<tr data-search="shim rhel-sst-cs-bootloaders unassigned konflux-6111 open approved djordje todorovic cy25q3, cy25q4, cy26q2, cy26q2-commitment-delivered, cy26q3, cy26q3-inprogress, rok-ready, upstream rpm build konflux-6111"><td class="nowrap"><strong>shim</strong></td><td class="small">cs-bootloaders</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/KONFLUX-6111" target="_blank" rel="noopener">KONFLUX-6111</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-done">Approved</span></td><td>Djordje Todorovic</td><td class="small">RPM Build</td><td class="small">CY25Q3, CY25Q4, CY26Q2, CY26Q2-Commitment-Delivered, CY26Q3, CY26Q3-InProgress, rok-ready, upstream</td></tr>
+<tr data-search="groff rhel-sst-cs-databases đorđe todorović rhel-183537 open new michal schorm — groff rhel-183537"><td class="nowrap"><strong>groff</strong></td><td class="small">cs-databases</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183537" target="_blank" rel="noopener">RHEL-183537</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Michal Schorm</td><td class="small">groff</td><td class="small">—</td></tr>
+<tr data-search="pg_repack rhel-sst-cs-databases đorđe todorović rhel-183530 open new filip janus — pg_repack rhel-183530"><td class="nowrap"><strong>pg_repack</strong></td><td class="small">cs-databases</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183530" target="_blank" rel="noopener">RHEL-183530</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Filip Janus</td><td class="small">pg_repack</td><td class="small">—</td></tr>
+<tr data-search="pgaudit rhel-sst-cs-databases đorđe todorović rhel-183529 open new filip janus — pgaudit rhel-183529"><td class="nowrap"><strong>pgaudit</strong></td><td class="small">cs-databases</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183529" target="_blank" rel="noopener">RHEL-183529</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Filip Janus</td><td class="small">pgaudit</td><td class="small">—</td></tr>
+<tr data-search="postgres-decoderbufs rhel-sst-cs-databases đorđe todorović rhel-183531 open new unassigned — postgres-decoderbufs rhel-183531"><td class="nowrap"><strong>postgres-decoderbufs</strong></td><td class="small">cs-databases</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183531" target="_blank" rel="noopener">RHEL-183531</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">postgres-decoderbufs</td><td class="small">—</td></tr>
+<tr data-search="python-psycopg2 rhel-sst-cs-databases đorđe todorović rhel-183545 open planning filip janus — python-psycopg2 rhel-183545"><td class="nowrap"><strong>python-psycopg2</strong></td><td class="small">cs-databases</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183545" target="_blank" rel="noopener">RHEL-183545</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-progress">Planning</span></td><td>Filip Janus</td><td class="small">python-psycopg2</td><td class="small">—</td></tr>
+<tr data-search="libmemcached-awesome rhel-sst-cs-net-perf-services đorđe todorović rhel-183533 all resolved closed tomas korbar — libmemcached-awesome rhel-183533"><td class="nowrap"><strong>libmemcached-awesome</strong></td><td class="small">cs-net-perf-services</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183533" target="_blank" rel="noopener">RHEL-183533</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Tomas Korbar</td><td class="small">libmemcached-awesome</td><td class="small">—</td></tr>
+<tr data-search="memtest86+ rhel-sst-cs-net-perf-services unassigned rok-1915 all resolved closed djordje todorovic konflux, rhel-9, rok rok rhelbld-18587"><td class="nowrap"><strong>memtest86+</strong></td><td class="small">cs-net-perf-services</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1915" target="_blank" rel="noopener">ROK-1915</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Djordje Todorovic</td><td class="small">rok</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="perl-ldap rhel-sst-cs-stacks đorđe todorović rok-2167 open new unassigned — — rok-2167"><td class="nowrap"><strong>perl-LDAP</strong></td><td class="small">cs-stacks</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-2167" target="_blank" rel="noopener">ROK-2167</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td></tr>
+<tr data-search="perl-text-unidecode rhel-sst-cs-stacks đorđe todorović rok-1939 open new unassigned — — rok-1939"><td class="nowrap"><strong>perl-Text-Unidecode</strong></td><td class="small">cs-stacks</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1939" target="_blank" rel="noopener">ROK-1939</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td></tr>
+<tr data-search="swig rhel-sst-cs-stacks đorđe todorović rhel-183550 open in progress jitka plesnikova — swig rhel-183550"><td class="nowrap"><strong>swig</strong></td><td class="small">cs-stacks</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183550" target="_blank" rel="noopener">RHEL-183550</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-progress">In Progress</span></td><td>Jitka Plesnikova</td><td class="small">swig</td><td class="small">—</td></tr>
+<tr data-search="redhat-cloud-client-configuration rhel-sst-csi-client-tools đorđe todorović rok-2136 open new unassigned — — rok-2136"><td class="nowrap"><strong>redhat-cloud-client-configuration</strong></td><td class="small">csi-client-tools</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-2136" target="_blank" rel="noopener">ROK-2136</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td></tr>
+<tr data-search="python-markdown rhel-sst-display-desktop-foundation đorđe todorović rhel-192544 all resolved closed david king — python-markdown rhel-192544"><td class="nowrap"><strong>python-markdown</strong></td><td class="small">display-desktop-foundation</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-192544" target="_blank" rel="noopener">RHEL-192544</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>David King</td><td class="small">python-markdown</td><td class="small">—</td></tr>
+<tr data-search="fwupd rhel-sst-display-hardware-multimedia unassigned konflux-6111 open approved djordje todorovic cy25q3, cy25q4, cy26q2, cy26q2-commitment-delivered, cy26q3, cy26q3-inprogress, rok-ready, upstream rpm build konflux-6111"><td class="nowrap"><strong>fwupd</strong></td><td class="small">display-hardware-multimedia</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/KONFLUX-6111" target="_blank" rel="noopener">KONFLUX-6111</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-done">Approved</span></td><td>Djordje Todorovic</td><td class="small">RPM Build</td><td class="small">CY25Q3, CY25Q4, CY26Q2, CY26Q2-Commitment-Delivered, CY26Q3, CY26Q3-InProgress, rok-ready, upstream</td></tr>
+<tr data-search="ibus-typing-booster rhel-sst-display-i18n đorđe todorović rhel-183554 open planning mike fabian — ibus-typing-booster rhel-183554"><td class="nowrap"><strong>ibus-typing-booster</strong></td><td class="small">display-i18n</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183554" target="_blank" rel="noopener">RHEL-183554</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-progress">Planning</span></td><td>Mike Fabian</td><td class="small">ibus-typing-booster</td><td class="small">—</td></tr>
+<tr data-search="gnome-photos rhel-sst-display-productivity đorđe todorović rok-1887 all resolved closed veronika doubkova — rok rhelbld-18366"><td class="nowrap"><strong>gnome-photos</strong></td><td class="small">display-productivity</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1887" target="_blank" rel="noopener">ROK-1887</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Veronika Doubkova</td><td class="small">rok</td><td class="small">—</td></tr>
+<tr data-search="gnome-software rhel-sst-display-productivity đorđe todorović rhel-183532 open planning richard hughes — gnome-software rhel-183532"><td class="nowrap"><strong>gnome-software</strong></td><td class="small">display-productivity</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183532" target="_blank" rel="noopener">RHEL-183532</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-progress">Planning</span></td><td>Richard Hughes</td><td class="small">gnome-software</td><td class="small">—</td></tr>
+<tr data-search="libbase rhel-sst-display-productivity đorđe todorović rhel-192541 all resolved release pending tomas popela ymir_backported libbase rhel-192541"><td class="nowrap"><strong>libbase</strong></td><td class="small">display-productivity</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-192541" target="_blank" rel="noopener">RHEL-192541</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-other">Release Pending</span></td><td>Tomas Popela</td><td class="small">libbase</td><td class="small">ymir_backported</td></tr>
+<tr data-search="libreoffice rhel-sst-display-productivity đorđe todorović rhelbld-18838 all resolved closed veronika doubkova — rok rhelbld-18838"><td class="nowrap"><strong>libreoffice</strong></td><td class="small">display-productivity</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18838" target="_blank" rel="noopener">RHELBLD-18838</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Veronika Doubkova</td><td class="small">rok</td><td class="small">—</td></tr>
+<tr data-search="librepository rhel-sst-display-productivity đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>librepository</strong></td><td class="small">display-productivity</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="dotnet6.0 rhel-sst-dotnet karthi r there&#x27;s some weirdness around dotnet* unknown — — — — —"><td class="nowrap"><strong>dotnet6.0</strong></td><td class="small">dotnet</td><td>Karthi R</td><td class="nowrap">there&#x27;s some weirdness around dotnet*</td><td><span class="status st-other">Unknown</span></td><td><span class="status st-other">—</span></td><td>—</td><td class="small">—</td><td class="small">—</td></tr>
+<tr data-search="dotnet7.0 rhel-sst-dotnet karthi r rhel-192540 open new unassigned — dotnet7.0 rhel-192540"><td class="nowrap"><strong>dotnet7.0</strong></td><td class="small">dotnet</td><td>Karthi R</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-192540" target="_blank" rel="noopener">RHEL-192540</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">dotnet7.0</td><td class="small">—</td></tr>
+<tr data-search="dotnet9.0 rhel-sst-dotnet karthi r there&#x27;s some weirdness around dotnet* unknown — — — — —"><td class="nowrap"><strong>dotnet9.0</strong></td><td class="small">dotnet</td><td>Karthi R</td><td class="nowrap">there&#x27;s some weirdness around dotnet*</td><td><span class="status st-other">Unknown</span></td><td><span class="status st-other">—</span></td><td>—</td><td class="small">—</td><td class="small">—</td></tr>
+<tr data-search="google-api-python-client rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>google-api-python-client</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="google-auth-httplib2 rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>google-auth-httplib2</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="grpcz;elll rhel-sst-high-availability đorđe todorović rhelbld-18720 all resolved closed veronika doubkova — releng rhelbld-18720"><td class="nowrap"><strong>grpcz;elll</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18720" target="_blank" rel="noopener">RHELBLD-18720</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Veronika Doubkova</td><td class="small">releng</td><td class="small">—</td></tr>
+<tr data-search="python-cliff rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-cliff</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-d2to1 rhel-sst-high-availability đorđe todorović rhelbld-18717 all resolved closed veronika doubkova — releng rhelbld-18717"><td class="nowrap"><strong>python-d2to1</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18717" target="_blank" rel="noopener">RHELBLD-18717</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Veronika Doubkova</td><td class="small">releng</td><td class="small">—</td></tr>
+<tr data-search="python-ddt rhel-sst-high-availability đorđe todorović rhelbld-18717 all resolved closed veronika doubkova — releng rhelbld-18717"><td class="nowrap"><strong>python-ddt</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18717" target="_blank" rel="noopener">RHELBLD-18717</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Veronika Doubkova</td><td class="small">releng</td><td class="small">—</td></tr>
+<tr data-search="python-debtcollector rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-debtcollector</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-eventlet rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-eventlet</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-fasteners rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-fasteners</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-google-api-core rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-google-api-core</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-hacking rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-hacking</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-kerberos rhel-sst-high-availability đorđe todorović rhelbld-18717 all resolved closed veronika doubkova — releng rhelbld-18717"><td class="nowrap"><strong>python-kerberos</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18717" target="_blank" rel="noopener">RHELBLD-18717</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Veronika Doubkova</td><td class="small">releng</td><td class="small">—</td></tr>
+<tr data-search="python-keystoneauth1 rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-keystoneauth1</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-mox3 rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-mox3</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-novaclient rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-novaclient</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-oauth2client rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-oauth2client</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-os-service-types rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-os-service-types</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-oslo-config rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-oslo-config</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-oslo-i18n rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-oslo-i18n</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-oslo-serialization rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-oslo-serialization</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-oslo-sphinx rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-oslo-sphinx</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-oslo-utils rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-oslo-utils</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-oslotest rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-oslotest</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-requests-kerberos rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-requests-kerberos</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-requests-mock rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-requests-mock</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-rfc3986 rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-rfc3986</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-rsa rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-rsa</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-simplejson rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-simplejson</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-stestr rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-stestr</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-stevedore rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-stevedore</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="python-testrepository rhel-sst-high-availability đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>python-testrepository</strong></td><td class="small">high-availability</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="jboss-jsp-2.2-api rhel-sst-idm-cs shivanand boragalli rhel-156850 open new rhcs maintenance — jboss-jsp-2.2-api rhel-156850"><td class="nowrap"><strong>jboss-jsp-2.2-api</strong></td><td class="small">idm-cs</td><td>Shivanand Boragalli</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-156850" target="_blank" rel="noopener">RHEL-156850</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>RHCS Maintenance</td><td class="small">jboss-jsp-2.2-api</td><td class="small">—</td></tr>
+<tr data-search="tomcatjss rhel-sst-idm-cs shivanand boragalli rhel-156848 open new rhcs maintenance — tomcatjss rhel-156848"><td class="nowrap"><strong>tomcatjss</strong></td><td class="small">idm-cs</td><td>Shivanand Boragalli</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-156848" target="_blank" rel="noopener">RHEL-156848</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>RHCS Maintenance</td><td class="small">tomcatjss</td><td class="small">—</td></tr>
+<tr data-search="decentxml rhel-sst-java shivanand boragalli rhel-155402 open new josh matsuoka — decentxml rhel-155402"><td class="nowrap"><strong>decentxml</strong></td><td class="small">java</td><td>Shivanand Boragalli</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-155402" target="_blank" rel="noopener">RHEL-155402</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Josh Matsuoka</td><td class="small">decentxml</td><td class="small">—</td></tr>
+<tr data-search="java-1.8.0-openjdk rhel-sst-java shivanand boragalli rhelbld-18718 open backlog aviv sabadra — releng rhelbld-18718"><td class="nowrap"><strong>java-1.8.0-openjdk</strong></td><td class="small">java</td><td>Shivanand Boragalli</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18718" target="_blank" rel="noopener">RHELBLD-18718</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">Backlog</span></td><td>Aviv Sabadra</td><td class="small">releng</td><td class="small">—</td></tr>
+<tr data-search="java-11-openjdk rhel-sst-java shivanand boragalli rhelbld-18718 open backlog aviv sabadra — releng rhelbld-18718"><td class="nowrap"><strong>java-11-openjdk</strong></td><td class="small">java</td><td>Shivanand Boragalli</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18718" target="_blank" rel="noopener">RHELBLD-18718</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">Backlog</span></td><td>Aviv Sabadra</td><td class="small">releng</td><td class="small">—</td></tr>
+<tr data-search="java-17-openjdk rhel-sst-java shivanand boragalli rhelbld-18718 open backlog aviv sabadra — releng rhelbld-18718"><td class="nowrap"><strong>java-17-openjdk</strong></td><td class="small">java</td><td>Shivanand Boragalli</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18718" target="_blank" rel="noopener">RHELBLD-18718</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">Backlog</span></td><td>Aviv Sabadra</td><td class="small">releng</td><td class="small">—</td></tr>
+<tr data-search="java-21-openjdk rhel-sst-java unassigned rhelbld-18718 open backlog aviv sabadra — releng rhelbld-18718"><td class="nowrap"><strong>java-21-openjdk</strong></td><td class="small">java</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18718" target="_blank" rel="noopener">RHELBLD-18718</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">Backlog</span></td><td>Aviv Sabadra</td><td class="small">releng</td><td class="small">—</td></tr>
+<tr data-search="java-25-openjdk rhel-sst-java unassigned rhelbld-18718 open backlog aviv sabadra — releng rhelbld-18718"><td class="nowrap"><strong>java-25-openjdk</strong></td><td class="small">java</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18718" target="_blank" rel="noopener">RHELBLD-18718</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">Backlog</span></td><td>Aviv Sabadra</td><td class="small">releng</td><td class="small">—</td></tr>
+<tr data-search="jmc rhel-sst-java shivanand boragalli rhel-156486 open new josh matsuoka — jmc rhel-156486"><td class="nowrap"><strong>jmc</strong></td><td class="small">java</td><td>Shivanand Boragalli</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-156486" target="_blank" rel="noopener">RHEL-156486</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Josh Matsuoka</td><td class="small">jmc</td><td class="small">—</td></tr>
+<tr data-search="jmc-core rhel-sst-java shivanand boragalli rhel-156488 open new josh matsuoka — jmc-core rhel-156488"><td class="nowrap"><strong>jmc-core</strong></td><td class="small">java</td><td>Shivanand Boragalli</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-156488" target="_blank" rel="noopener">RHEL-156488</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Josh Matsuoka</td><td class="small">jmc-core</td><td class="small">—</td></tr>
+<tr data-search="kernel rhel-sst-kernel unassigned konflux-6111 open approved djordje todorovic cy25q3, cy25q4, cy26q2, cy26q2-commitment-delivered, cy26q3, cy26q3-inprogress, rok-ready, upstream rpm build konflux-6111"><td class="nowrap"><strong>kernel</strong></td><td class="small">kernel</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/KONFLUX-6111" target="_blank" rel="noopener">KONFLUX-6111</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-done">Approved</span></td><td>Djordje Todorovic</td><td class="small">RPM Build</td><td class="small">CY25Q3, CY25Q4, CY26Q2, CY26Q2-Commitment-Delivered, CY26Q3, CY26Q3-InProgress, rok-ready, upstream</td></tr>
+<tr data-search="kernel-rt rhel-sst-kernel-rts unassigned konflux-6111 open approved djordje todorovic cy25q3, cy25q4, cy26q2, cy26q2-commitment-delivered, cy26q3, cy26q3-inprogress, rok-ready, upstream rpm build konflux-6111"><td class="nowrap"><strong>kernel-rt</strong></td><td class="small">kernel-rts</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/KONFLUX-6111" target="_blank" rel="noopener">KONFLUX-6111</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-done">Approved</span></td><td>Djordje Todorovic</td><td class="small">RPM Build</td><td class="small">CY25Q3, CY25Q4, CY26Q2, CY26Q2-Commitment-Delivered, CY26Q3, CY26Q3-InProgress, rok-ready, upstream</td></tr>
+<tr data-search="kernelshark rhel-sst-kernel-tps đorđe todorović rhel-183549 open new jerome marchand — kernelshark rhel-183549"><td class="nowrap"><strong>kernelshark</strong></td><td class="small">kernel-tps</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183549" target="_blank" rel="noopener">RHEL-183549</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Jerome Marchand</td><td class="small">kernelshark</td><td class="small">—</td></tr>
+<tr data-search="strace rhel-sst-kernel-tps unassigned rhel-136502 all resolved closed michael petlan — strace rhel-136502"><td class="nowrap"><strong>strace</strong></td><td class="small">kernel-tps</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-136502" target="_blank" rel="noopener">RHEL-136502</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Michael Petlan</td><td class="small">strace</td><td class="small">—</td></tr>
+<tr data-search="kmod-kvdo rhel-sst-logical-storage srinivas allibilli rok-1881, rhelbld-18943 open closed peter rajnoha — — rok-1881"><td class="nowrap"><strong>kmod-kvdo</strong></td><td class="small">logical-storage</td><td>Srinivas Allibilli</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1881" target="_blank" rel="noopener">ROK-1881</a>, <a href="https://redhat.atlassian.net/browse/RHELBLD-18943" target="_blank" rel="noopener">RHELBLD-18943</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-done">Closed</span></td><td>Peter Rajnoha</td><td class="small">—</td><td class="small">—</td></tr>
+<tr data-search="lmod rhel-sst-network-drivers srinivas allibilli rhel-157300, rok-1885 open planning kamal heib — lmod, openmpi rhel-157300"><td class="nowrap"><strong>Lmod</strong></td><td class="small">network-drivers</td><td>Srinivas Allibilli</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-157300" target="_blank" rel="noopener">RHEL-157300</a>, <a href="https://redhat.atlassian.net/browse/ROK-1885" target="_blank" rel="noopener">ROK-1885</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-progress">Planning</span></td><td>Kamal Heib</td><td class="small">Lmod, openmpi</td><td class="small">—</td></tr>
+<tr data-search="openmpi rhel-sst-network-drivers srinivas allibilli rhel-157300 open planning kamal heib — lmod, openmpi rhel-157300"><td class="nowrap"><strong>openmpi</strong></td><td class="small">network-drivers</td><td>Srinivas Allibilli</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-157300" target="_blank" rel="noopener">RHEL-157300</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-progress">Planning</span></td><td>Kamal Heib</td><td class="small">Lmod, openmpi</td><td class="small">—</td></tr>
+<tr data-search="modemmanager rhel-sst-network-management karthi r rhel-158347 open planning network management team — modemmanager rhel-158347"><td class="nowrap"><strong>ModemManager</strong></td><td class="small">network-management</td><td>Karthi R</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-158347" target="_blank" rel="noopener">RHEL-158347</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-progress">Planning</span></td><td>Network Management Team</td><td class="small">ModemManager</td><td class="small">—</td></tr>
+<tr data-search="nispor rhel-sst-network-management karthi r rhel-159656 open planning network management team — nispor rhel-159656"><td class="nowrap"><strong>nispor</strong></td><td class="small">network-management</td><td>Karthi R</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-159656" target="_blank" rel="noopener">RHEL-159656</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-progress">Planning</span></td><td>Network Management Team</td><td class="small">nispor</td><td class="small">—</td></tr>
+<tr data-search="compat-libgfortran-48 rhel-sst-pt-gcc đorđe todorović rok-1877 all resolved closed lukas holecek — rok migration, rpm release rok-1877"><td class="nowrap"><strong>compat-libgfortran-48</strong></td><td class="small">pt-gcc</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1877" target="_blank" rel="noopener">ROK-1877</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Lukas Holecek</td><td class="small">RoK Migration, RPM Release</td><td class="small">—</td></tr>
+<tr data-search="gcc-toolset-13 rhel-sst-pt-gcc đorđe todorović rok-1877 all resolved closed lukas holecek — rok migration, rpm release rok-1877"><td class="nowrap"><strong>gcc-toolset-13</strong></td><td class="small">pt-gcc</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1877" target="_blank" rel="noopener">ROK-1877</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Lukas Holecek</td><td class="small">RoK Migration, RPM Release</td><td class="small">—</td></tr>
+<tr data-search="gcc-toolset-13-dwz rhel-sst-pt-gcc đorđe todorović rhel-183552 all resolved closed unassigned — gcc-toolset-13-dwz rhel-183552"><td class="nowrap"><strong>gcc-toolset-13-dwz</strong></td><td class="small">pt-gcc</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183552" target="_blank" rel="noopener">RHEL-183552</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Unassigned</td><td class="small">gcc-toolset-13-dwz</td><td class="small">—</td></tr>
+<tr data-search="gcc-toolset-13-gcc rhel-sst-pt-gcc đorđe todorović rok-1877 all resolved closed lukas holecek — rok migration, rpm release rok-1877"><td class="nowrap"><strong>gcc-toolset-13-gcc</strong></td><td class="small">pt-gcc</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1877" target="_blank" rel="noopener">ROK-1877</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Lukas Holecek</td><td class="small">RoK Migration, RPM Release</td><td class="small">—</td></tr>
+<tr data-search="gcc-toolset-14 rhel-sst-pt-gcc đorđe todorović rok-1877 all resolved closed lukas holecek — rok migration, rpm release rok-1877"><td class="nowrap"><strong>gcc-toolset-14</strong></td><td class="small">pt-gcc</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1877" target="_blank" rel="noopener">ROK-1877</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Lukas Holecek</td><td class="small">RoK Migration, RPM Release</td><td class="small">—</td></tr>
+<tr data-search="gcc-toolset-14-gcc rhel-sst-pt-gcc đorđe todorović rok-1877 all resolved closed lukas holecek — rok migration, rpm release rok-1877"><td class="nowrap"><strong>gcc-toolset-14-gcc</strong></td><td class="small">pt-gcc</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1877" target="_blank" rel="noopener">ROK-1877</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Lukas Holecek</td><td class="small">RoK Migration, RPM Release</td><td class="small">—</td></tr>
+<tr data-search="gcc-toolset-16-annobin rhel-sst-pt-gcc đorđe todorović rok-2133 all resolved closed veronika doubkova — releng rhelbld-18966"><td class="nowrap"><strong>gcc-toolset-16-annobin</strong></td><td class="small">pt-gcc</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-2133" target="_blank" rel="noopener">ROK-2133</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Veronika Doubkova</td><td class="small">releng</td><td class="small">—</td></tr>
+<tr data-search="gcc-toolset-16-binutils rhel-sst-pt-gcc đorđe todorović rok-2134 open new unassigned — — rok-2134"><td class="nowrap"><strong>gcc-toolset-16-binutils</strong></td><td class="small">pt-gcc</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-2134" target="_blank" rel="noopener">ROK-2134</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td></tr>
+<tr data-search="gcc-toolset-16-gcc rhel-sst-pt-gcc đorđe todorović rok-2135 open review veronika doubkova — releng rhelbld-18965"><td class="nowrap"><strong>gcc-toolset-16-gcc</strong></td><td class="small">pt-gcc</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-2135" target="_blank" rel="noopener">ROK-2135</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-progress">Review</span></td><td>Veronika Doubkova</td><td class="small">releng</td><td class="small">—</td></tr>
+<tr data-search="compat-sap-c++-12 rhel-sst-pt-libraries unassigned rok-1915 all resolved closed djordje todorovic konflux, rhel-9, rok rok rhelbld-18587"><td class="nowrap"><strong>compat-sap-c++-12</strong></td><td class="small">pt-libraries</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1915" target="_blank" rel="noopener">ROK-1915</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Djordje Todorovic</td><td class="small">rok</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="compat-sap-c++-13 rhel-sst-pt-libraries unassigned rok-1915 all resolved closed djordje todorovic konflux, rhel-9, rok rok rhelbld-18587"><td class="nowrap"><strong>compat-sap-c++-13</strong></td><td class="small">pt-libraries</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1915" target="_blank" rel="noopener">ROK-1915</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Djordje Todorovic</td><td class="small">rok</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="glibc rhel-sst-pt-libraries đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>glibc</strong></td><td class="small">pt-libraries</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="glibc32 rhel-sst-pt-libraries đorđe todorović rok-1907 open new unassigned konflux, rhel-9, rok — rok-1907"><td class="nowrap"><strong>glibc32</strong></td><td class="small">pt-libraries</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1907" target="_blank" rel="noopener">ROK-1907</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="man-pages-overrides rhel-sst-pt-libraries unassigned rhelbld-18836 open review lisa smith — releng rhelbld-18836"><td class="nowrap"><strong>man-pages-overrides</strong></td><td class="small">pt-libraries</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18836" target="_blank" rel="noopener">RHELBLD-18836</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-progress">Review</span></td><td>Lisa Smith</td><td class="small">releng</td><td class="small">—</td></tr>
+<tr data-search="golang rhel-sst-pt-llvm-rust-go đorđe todorović rok-1944 open new unassigned — — rok-1944"><td class="nowrap"><strong>golang</strong></td><td class="small">pt-llvm-rust-go</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1944" target="_blank" rel="noopener">ROK-1944</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td></tr>
+<tr data-search="libomp rhel-sst-pt-llvm-rust-go đorđe todorović rok-1888 open new unassigned — — rok-1888"><td class="nowrap"><strong>libomp</strong></td><td class="small">pt-llvm-rust-go</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1888" target="_blank" rel="noopener">ROK-1888</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td></tr>
+<tr data-search="nodejs rhel-sst-pt-python-ruby-nodejs đorđe todorović rhel-192543 all resolved closed tomas juhasz — nodejs rhel-192543"><td class="nowrap"><strong>nodejs</strong></td><td class="small">pt-python-ruby-nodejs</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-192543" target="_blank" rel="noopener">RHEL-192543</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Tomas Juhasz</td><td class="small">nodejs</td><td class="small">—</td></tr>
+<tr data-search="python-lxml rhel-sst-pt-python-ruby-nodejs đorđe todorović rok-1945 open new unassigned — — rok-1945"><td class="nowrap"><strong>python-lxml</strong></td><td class="small">pt-python-ruby-nodejs</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1945" target="_blank" rel="noopener">ROK-1945</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td></tr>
+<tr data-search="python-pytest-subtests rhel-sst-pt-python-ruby-nodejs đorđe todorović rok-1939 open new unassigned — — rok-1939"><td class="nowrap"><strong>python-pytest-subtests</strong></td><td class="small">pt-python-ruby-nodejs</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1939" target="_blank" rel="noopener">ROK-1939</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td></tr>
+<tr data-search="python3.11-lxml rhel-sst-pt-python-ruby-nodejs đorđe todorović rhel-183543 open new lumir balhar — python3.11-lxml rhel-183543"><td class="nowrap"><strong>python3.11-lxml</strong></td><td class="small">pt-python-ruby-nodejs</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183543" target="_blank" rel="noopener">RHEL-183543</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Lumir Balhar</td><td class="small">python3.11-lxml</td><td class="small">—</td></tr>
+<tr data-search="python3.11-psycopg2 rhel-sst-pt-python-ruby-nodejs đorđe todorović rhel-183547 open new lumir balhar — python3.11-psycopg2 rhel-183547"><td class="nowrap"><strong>python3.11-psycopg2</strong></td><td class="small">pt-python-ruby-nodejs</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-183547" target="_blank" rel="noopener">RHEL-183547</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Lumir Balhar</td><td class="small">python3.11-psycopg2</td><td class="small">—</td></tr>
+<tr data-search="ruby rhel-sst-pt-python-ruby-nodejs đorđe todorović rhel-192226 open planning ruby-maint bot — ruby rhel-192226"><td class="nowrap"><strong>ruby</strong></td><td class="small">pt-python-ruby-nodejs</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-192226" target="_blank" rel="noopener">RHEL-192226</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-progress">Planning</span></td><td>ruby-maint bot</td><td class="small">ruby</td><td class="small">—</td></tr>
+<tr data-search="rubygem-pg rhel-sst-pt-python-ruby-nodejs unassigned rhel-192545 open planning ruby-maint bot — rubygem-pg rhel-192545"><td class="nowrap"><strong>rubygem-pg</strong></td><td class="small">pt-python-ruby-nodejs</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-192545" target="_blank" rel="noopener">RHEL-192545</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-progress">Planning</span></td><td>ruby-maint bot</td><td class="small">rubygem-pg</td><td class="small">—</td></tr>
+<tr data-search="ceph rhel-sst-rh-ceph-storage đorđe todorović rok-1925, rok-1926 open new unassigned — — rok-1925"><td class="nowrap"><strong>ceph</strong></td><td class="small">rh-ceph-storage</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1925" target="_blank" rel="noopener">ROK-1925</a>, <a href="https://redhat.atlassian.net/browse/ROK-1926" target="_blank" rel="noopener">ROK-1926</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">New</span></td><td>Unassigned</td><td class="small">—</td><td class="small">—</td></tr>
+<tr data-search="rust-ssh-key-dir rhel-sst-rhcos karthi r rhel-156481 all resolved release pending rolv apneseth coreoswest-triaged, rhcos-engaged rust-ssh-key-dir rhel-156481"><td class="nowrap"><strong>rust-ssh-key-dir</strong></td><td class="small">rhcos</td><td>Karthi R</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-156481" target="_blank" rel="noopener">RHEL-156481</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-other">Release Pending</span></td><td>Rolv Apneseth</td><td class="small">rust-ssh-key-dir</td><td class="small">coreoswest-triaged, rhcos-engaged</td></tr>
+<tr data-search="nss rhel-sst-security-crypto unassigned rhel-192539 all resolved closed robert relyea — nss rhel-192539"><td class="nowrap"><strong>nss</strong></td><td class="small">security-crypto</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-192539" target="_blank" rel="noopener">RHEL-192539</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Robert Relyea</td><td class="small">nss</td><td class="small">—</td></tr>
+<tr data-search="keylime rhel-sst-security-special-projects unassigned rhel-192222 open planning anderson sasaki secengsp_planning_created keylime rhel-192222"><td class="nowrap"><strong>keylime</strong></td><td class="small">security-special-projects</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-192222" target="_blank" rel="noopener">RHEL-192222</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-progress">Planning</span></td><td>Anderson Sasaki</td><td class="small">keylime</td><td class="small">secengsp_planning_created</td></tr>
+<tr data-search="libguestfs rhel-sst-virt-tools unassigned rhelbld-17891 all resolved release pending tomas kopecek — rok rhelbld-17891"><td class="nowrap"><strong>libguestfs</strong></td><td class="small">virt-tools</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-17891" target="_blank" rel="noopener">RHELBLD-17891</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-other">Release Pending</span></td><td>Tomas Kopecek</td><td class="small">rok</td><td class="small">—</td></tr>
+<tr data-search="libvirt-dbus rhel-sst-virt-tools đorđe todorović rok-1910 all resolved closed veronika doubkova konflux, rhel-9, rok rok rhelbld-18393"><td class="nowrap"><strong>libvirt-dbus</strong></td><td class="small">virt-tools</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1910" target="_blank" rel="noopener">ROK-1910</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Veronika Doubkova</td><td class="small">rok</td><td class="small">konflux, rhel-9, rok</td></tr>
+<tr data-search="snpguest rhel-sst-virtualization unassigned rhelmisc-18928 open in progress tyler fanelli rok-blocker, covm-cy26-roadmap snpguest rhel-211387"><td class="nowrap"><strong>snpguest</strong></td><td class="small">virtualization</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELMISC-18928" target="_blank" rel="noopener">RHELMISC-18928</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-progress">In Progress</span></td><td>Tyler Fanelli</td><td class="small">snpguest</td><td class="small">RoK-blocker, covm-CY26-roadmap</td></tr>
+<tr data-search="python-httpretty rhel-sst-virtualization-cloud karthi r rhelbld-18165 open to do unassigned — rok rhelbld-18165"><td class="nowrap"><strong>python-httpretty</strong></td><td class="small">virtualization-cloud</td><td>Karthi R</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHELBLD-18165" target="_blank" rel="noopener">RHELBLD-18165</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-todo">To Do</span></td><td>Unassigned</td><td class="small">rok</td><td class="small">—</td></tr>
+<tr data-search="mingw-gettext rhel-sst-virtualization-windows đorđe todorović rok-1911 all resolved closed veronika doubkova — rok rhelbld-18367"><td class="nowrap"><strong>mingw-gettext</strong></td><td class="small">virtualization-windows</td><td>Đorđe Todorović</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/ROK-1911" target="_blank" rel="noopener">ROK-1911</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Veronika Doubkova</td><td class="small">rok</td><td class="small">—</td></tr>
+<tr data-search="mingw-termcap rhel-sst-virtualization-windows unassigned rhel-129226 all resolved closed elizabeth ashurov rok-blocker mingw-termcap rhel-129226"><td class="nowrap"><strong>mingw-termcap</strong></td><td class="small">virtualization-windows</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/RHEL-129226" target="_blank" rel="noopener">RHEL-129226</a></td><td><span class="status st-done">All resolved</span></td><td><span class="status st-done">Closed</span></td><td>Elizabeth Ashurov</td><td class="small">mingw-termcap</td><td class="small">RoK-blocker</td></tr>
+<tr data-search="virtio-win rhel-sst-virtualization-windows unassigned kfluxmig-363, osci-9260 open pending approval yan vugenfirer migration, non-container-based, rhel — kfluxmig-363"><td class="nowrap"><strong>virtio-win</strong></td><td class="small">virtualization-windows</td><td>Unassigned</td><td class="nowrap"><a href="https://redhat.atlassian.net/browse/KFLUXMIG-363" target="_blank" rel="noopener">KFLUXMIG-363</a>, <a href="https://redhat.atlassian.net/browse/OSCI-9260" target="_blank" rel="noopener">OSCI-9260</a></td><td><span class="status st-todo">Open</span></td><td><span class="status st-progress">Pending Approval</span></td><td>Yan Vugenfirer</td><td class="small">—</td><td class="small">migration, non-container-based, rhel</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 9. Ready to clear -->
+  <section id="ready">
+    <h2>Packages ready to clear <span class="count-badge">30</span></h2>
+    <p class="section-sub">Blockers appear fully resolved, but packages are still listed as blocked — clear spreadsheet status.</p>
+    <div class="ready-list"><code>cuda</code>, <code>libi2cd</code>, <code>libgit2</code>, <code>libmemcached-awesome</code>, <code>memtest86+</code>, <code>python-markdown</code>, <code>gnome-photos</code>, <code>libbase</code>, <code>libreoffice</code>, <code>grpcz;elll</code>, <code>python-d2to1</code>, <code>python-ddt</code>, <code>python-kerberos</code>, <code>strace</code>, <code>compat-libgfortran-48</code>, <code>gcc-toolset-13</code>, <code>gcc-toolset-13-dwz</code>, <code>gcc-toolset-13-gcc</code>, <code>gcc-toolset-14</code>, <code>gcc-toolset-14-gcc</code>, <code>gcc-toolset-16-annobin</code>, <code>compat-sap-c++-12</code>, <code>compat-sap-c++-13</code>, <code>nodejs</code>, <code>rust-ssh-key-dir</code>, <code>nss</code>, <code>libguestfs</code>, <code>libvirt-dbus</code>, <code>mingw-gettext</code>, <code>mingw-termcap</code></div>
+  </section>
+
+  <!-- 10. Labels & components -->
+  <section id="labels">
+    <h2>Labels &amp; components</h2>
+    <p class="section-sub">Frequency across open blockers (components none = 14).</p>
+    <h3 style="font-size:.95rem;margin:0 0 .5rem">Labels</h3>
+    <div class="pills" style="margin-bottom:1rem"><span class="pill">konflux <strong>2</strong></span>
+<span class="pill">rhel-9 <strong>2</strong></span>
+<span class="pill">rok <strong>2</strong></span>
+<span class="pill">CY25Q3 <strong>1</strong></span>
+<span class="pill">CY25Q4 <strong>1</strong></span>
+<span class="pill">CY26Q2 <strong>1</strong></span>
+<span class="pill">CY26Q2-Commitment-Delivered <strong>1</strong></span>
+<span class="pill">CY26Q3 <strong>1</strong></span>
+<span class="pill">CY26Q3-InProgress <strong>1</strong></span>
+<span class="pill">rok-ready <strong>1</strong></span>
+<span class="pill">upstream <strong>1</strong></span>
+<span class="pill">migration <strong>1</strong></span>
+<span class="pill">non-container-based <strong>1</strong></span>
+<span class="pill">rhel <strong>1</strong></span>
+<span class="pill">secengsp_planning_created <strong>1</strong></span>
+<span class="pill">RoK-blocker <strong>1</strong></span>
+<span class="pill">covm-CY26-roadmap <strong>1</strong></span>
+<span class="pill">jotnar_backport_in_progress <strong>1</strong></span>
+<span class="pill">plumbers-backfill <strong>1</strong></span>
+<span class="pill">plumbers-synced <strong>1</strong></span></div>
+    <h3 style="font-size:.95rem;margin:0 0 .5rem">Components</h3>
+    <div class="pills"><span class="pill">releng <strong>4</strong></span>
+<span class="pill">rok <strong>4</strong></span>
+<span class="pill">rubygem-pg <strong>2</strong></span>
+<span class="pill">RPM Build <strong>1</strong></span>
+<span class="pill">Lmod <strong>1</strong></span>
+<span class="pill">openmpi <strong>1</strong></span>
+<span class="pill">python-argcomplete <strong>1</strong></span>
+<span class="pill">xmlrpc-c <strong>1</strong></span>
+<span class="pill">decentxml <strong>1</strong></span>
+<span class="pill">jmc <strong>1</strong></span>
+<span class="pill">jmc-core <strong>1</strong></span>
+<span class="pill">tomcatjss <strong>1</strong></span>
+<span class="pill">jboss-jsp-2.2-api <strong>1</strong></span>
+<span class="pill">ModemManager <strong>1</strong></span>
+<span class="pill">nispor <strong>1</strong></span>
+<span class="pill pill-muted">none / empty <strong>14</strong></span></div>
+  </section>
+
+  <!-- 11. Source -->
+  <section id="source" class="appendix">
+    <h2>Source appendix</h2>
+    <ul>
+      <li>Snapshot date: <strong>28 Jul 2026</strong></li>
+      <li>Spreadsheet: <a href="https://docs.google.com/spreadsheets/d/1MJhmkOFgbSjuvuO9f8v5DDWiuxiMTGPOhVOHII67-5o" target="_blank" rel="noopener">https://docs.google.com/spreadsheets/d/1MJhmkOFgbSjuvuO9f8v5DDWiuxiMTGPOhVOHII67-5o</a></li>
+      <li>Epics / trackers: <a href="https://redhat.atlassian.net/browse/KFLUXMIG-1166" target="_blank" rel="noopener">KFLUXMIG-1166</a>, <a href="https://redhat.atlassian.net/browse/KFLUXMIG-937" target="_blank" rel="noopener">KFLUXMIG-937</a></li>
+      <li>Data files: <code>/tmp/rhel9_blocker_dashboard.json</code> (optional <code>/tmp/canvas_data.json</code>)</li>
+      <li>Jira browse base: <code>https://redhat.atlassian.net/browse/</code></li>
+      <li>Report is self-contained HTML (inline CSS/JS). Google Fonts load when online; system fonts apply offline.</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+(function () {
+  function wireFilter(inputId, tableId, countId) {
+    var input = document.getElementById(inputId);
+    var table = document.getElementById(tableId);
+    var countEl = document.getElementById(countId);
+    if (!input || !table) return;
+    var rows = Array.prototype.slice.call(table.querySelectorAll('tbody tr'));
+    function update() {
+      var q = (input.value || '').trim().toLowerCase();
+      var shown = 0;
+      rows.forEach(function (tr) {
+        var hay = tr.getAttribute('data-search') || tr.textContent.toLowerCase();
+        var ok = !q || hay.indexOf(q) !== -1;
+        tr.style.display = ok ? '' : 'none';
+        if (ok) shown++;
+      });
+      if (countEl) countEl.textContent = shown + ' / ' + rows.length + ' shown';
+    }
+    input.addEventListener('input', update);
+    update();
+  }
+  wireFilter('filter-blockers', 'tbl-blockers', 'filter-blockers-count');
+  wireFilter('filter-packages', 'tbl-packages', 'filter-packages-count');
+
+  document.getElementById('btn-print').addEventListener('click', function () {
+    window.print();
+  });
+  document.getElementById('btn-download').addEventListener('click', function () {
+    var html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'RHEL9-Konflux-Blockers-Report.html';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+  });
+})();
+</script>
+</body>
+</html>
