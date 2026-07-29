@@ -8,3 +8,27 @@ Static snapshot of blocked packages from the RHEL 9 Konflux migration spreadshee
 Open the GitHub Pages site (Settings → Pages) or open `index.html` after cloning.
 
 **Access:** This repository is private. Grant collaborators **Read** access so they can open the Pages URL while logged into GitHub.
+
+## Auto-refresh
+
+`index.html` and `data/dashboard.json` are regenerated automatically every day
+(~09:40 IST / 04:10 UTC) by [`.github/workflows/refresh-report.yml`](.github/workflows/refresh-report.yml),
+and can also be triggered manually from the Actions tab (**Run workflow**).
+The workflow runs `scripts/build_report.py`, which:
+
+- downloads the tracking spreadsheet from Google Drive via a service account
+  (`GOOGLE_SERVICE_ACCOUNT_JSON` repo secret),
+- enriches every blocker key with live Jira status/assignee/labels
+  (`JIRA_EMAIL` + `JIRA_API_TOKEN` repo secrets), and
+- commits the refreshed `index.html` / `data/dashboard.json` back to `main`
+  only when something changed.
+
+To run it locally instead:
+
+```bash
+scripts/run_local.sh /path/to/RHEL9-Konflux-migration.xlsx
+```
+
+Jira enrichment is optional locally — export `JIRA_EMAIL`/`JIRA_API_TOKEN`
+(and optionally `JIRA_BASE`) first if you want live status; otherwise the
+report is built from the spreadsheet alone with blocker status `Unknown`.
