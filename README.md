@@ -7,7 +7,7 @@ Static snapshot of blocked packages from the RHEL 9 Konflux migration spreadshee
 
 Open the GitHub Pages site (Settings → Pages) or open `index.html` after cloning.
 
-**Access:** This repository is private. Grant collaborators **Read** access so they can open the Pages URL while logged into GitHub.
+**Access:** Public GitHub Pages — anyone with the URL can view the report: https://adityarj18.github.io/rhel9-konflux-blockers-report/
 
 ## Auto-refresh
 
