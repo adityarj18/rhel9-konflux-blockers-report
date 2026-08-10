@@ -1,7 +1,7 @@
 {
-  "generated_at_iso": "2026-07-29T04:34:23.422997+00:00",
-  "snapshot_date_display": "29 Jul 2026",
-  "source_desc": "local file `RHEL 9 Konflux migration_0e73becf.xlsx`",
+  "generated_at_iso": "2026-08-10T07:39:15.456767+00:00",
+  "snapshot_date_display": "10 Aug 2026",
+  "source_desc": "local file `RHEL 9 Konflux migration_d617eda0.xlsx`",
   "spreadsheet_id": "1MJhmkOFgbSjuvuO9f8v5DDWiuxiMTGPOhVOHII67-5o",
   "spreadsheet_url": "https://docs.google.com/spreadsheets/d/1MJhmkOFgbSjuvuO9f8v5DDWiuxiMTGPOhVOHII67-5o",
   "jira_base": "https://redhat.atlassian.net",
@@ -12,10 +12,10 @@
     "onboarded_pct": 96.4,
     "has_blockers_sheet": 78,
     "blocked_packages": 78,
-    "open_blockers": 46,
-    "ready_to_clear": 21,
+    "open_blockers": 45,
+    "ready_to_clear": 22,
     "unassigned_open": 24,
-    "stale_open": 6,
+    "stale_open": 20,
     "blockers_field_rows": 76,
     "unique_blocker_keys": 62,
     "jira_resolved_keys": 108,
@@ -41,7 +41,7 @@
         "rok-ready",
         "upstream"
       ],
-      "age_days": 0,
+      "age_days": 4,
       "package_count": 6,
       "packages": [
         "fwupd",
@@ -65,14 +65,14 @@
     {
       "key": "RHELBLD-18718",
       "summary": "java-openjdk portable packages missing from java-openjdk-rhel-9-build Koji tag",
-      "status": "Backlog",
+      "status": "To Do",
       "status_category": "new",
       "assignee": "Aviv Sabadra",
       "components": [
         "releng"
       ],
       "labels": [],
-      "age_days": 13,
+      "age_days": 10,
       "package_count": 5,
       "packages": [
         "java-1.8.0-openjdk",
@@ -103,7 +103,7 @@
         "openmpi"
       ],
       "labels": [],
-      "age_days": 29,
+      "age_days": 41,
       "package_count": 2,
       "packages": [
         "Lmod",
@@ -128,7 +128,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 22,
+      "age_days": 34,
       "package_count": 2,
       "packages": [
         "perl-Text-Unidecode",
@@ -157,7 +157,7 @@
         "non-container-based",
         "rhel"
       ],
-      "age_days": 21,
+      "age_days": 33,
       "package_count": 1,
       "packages": [
         "virtio-win"
@@ -183,7 +183,7 @@
         "decentxml"
       ],
       "labels": [],
-      "age_days": 32,
+      "age_days": 44,
       "package_count": 1,
       "packages": [
         "decentxml"
@@ -209,7 +209,7 @@
         "jmc"
       ],
       "labels": [],
-      "age_days": 21,
+      "age_days": 33,
       "package_count": 1,
       "packages": [
         "jmc"
@@ -235,7 +235,7 @@
         "jmc-core"
       ],
       "labels": [],
-      "age_days": 21,
+      "age_days": 33,
       "package_count": 1,
       "packages": [
         "jmc-core"
@@ -261,7 +261,7 @@
         "tomcatjss"
       ],
       "labels": [],
-      "age_days": 4,
+      "age_days": 17,
       "package_count": 1,
       "packages": [
         "tomcatjss"
@@ -287,7 +287,7 @@
         "jboss-jsp-2.2-api"
       ],
       "labels": [],
-      "age_days": 29,
+      "age_days": 41,
       "package_count": 1,
       "packages": [
         "jboss-jsp-2.2-api"
@@ -313,7 +313,7 @@
         "ModemManager"
       ],
       "labels": [],
-      "age_days": 4,
+      "age_days": 16,
       "package_count": 1,
       "packages": [
         "ModemManager"
@@ -339,7 +339,7 @@
         "nispor"
       ],
       "labels": [],
-      "age_days": 4,
+      "age_days": 16,
       "package_count": 1,
       "packages": [
         "nispor"
@@ -365,7 +365,7 @@
         "pgaudit"
       ],
       "labels": [],
-      "age_days": 25,
+      "age_days": 37,
       "package_count": 1,
       "packages": [
         "pgaudit"
@@ -391,7 +391,7 @@
         "pg_repack"
       ],
       "labels": [],
-      "age_days": 25,
+      "age_days": 37,
       "package_count": 1,
       "packages": [
         "pg_repack"
@@ -417,7 +417,7 @@
         "postgres-decoderbufs"
       ],
       "labels": [],
-      "age_days": 25,
+      "age_days": 37,
       "package_count": 1,
       "packages": [
         "postgres-decoderbufs"
@@ -443,7 +443,7 @@
         "gnome-software"
       ],
       "labels": [],
-      "age_days": 28,
+      "age_days": 41,
       "package_count": 1,
       "packages": [
         "gnome-software"
@@ -469,7 +469,7 @@
         "gnu-efi"
       ],
       "labels": [],
-      "age_days": 20,
+      "age_days": 32,
       "package_count": 1,
       "packages": [
         "gnu-efi"
@@ -495,7 +495,7 @@
         "groff"
       ],
       "labels": [],
-      "age_days": 16,
+      "age_days": 28,
       "package_count": 1,
       "packages": [
         "groff"
@@ -521,7 +521,7 @@
         "kernelshark"
       ],
       "labels": [],
-      "age_days": 22,
+      "age_days": 5,
       "package_count": 1,
       "packages": [
         "kernelshark"
@@ -538,32 +538,6 @@
       }
     },
     {
-      "key": "RHEL-183554",
-      "summary": "Konflux pipeline rpmbuild failed! (ibus-typing-booster)",
-      "status": "Planning",
-      "status_category": "new",
-      "assignee": "Mike Fabian",
-      "components": [
-        "ibus-typing-booster"
-      ],
-      "labels": [],
-      "age_days": 26,
-      "package_count": 1,
-      "packages": [
-        "ibus-typing-booster"
-      ],
-      "url": "https://redhat.atlassian.net/browse/RHEL-183554",
-      "moved_from": null,
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "RHEL-183554"
-      }
-    },
-    {
       "key": "RHEL-192226",
       "summary": "ruby %check fails in Konflux: Rinda multicast tests need network device",
       "status": "Planning",
@@ -573,7 +547,7 @@
         "ruby"
       ],
       "labels": [],
-      "age_days": 12,
+      "age_days": 3,
       "package_count": 1,
       "packages": [
         "ruby"
@@ -599,7 +573,7 @@
         "dotnet7.0"
       ],
       "labels": [],
-      "age_days": 22,
+      "age_days": 34,
       "package_count": 1,
       "packages": [
         "dotnet7.0"
@@ -625,7 +599,7 @@
         "rubygem-pg"
       ],
       "labels": [],
-      "age_days": 8,
+      "age_days": 20,
       "package_count": 1,
       "packages": [
         "rubygem-pg"
@@ -651,7 +625,7 @@
         "rok"
       ],
       "labels": [],
-      "age_days": 119,
+      "age_days": 131,
       "package_count": 1,
       "packages": [
         "python-httpretty"
@@ -677,7 +651,7 @@
         "rok"
       ],
       "labels": [],
-      "age_days": 0,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "libgit2"
@@ -726,7 +700,7 @@
         "rok"
       ],
       "labels": [],
-      "age_days": 21,
+      "age_days": 33,
       "package_count": 1,
       "packages": [
         "checksec"
@@ -842,7 +816,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 48,
+      "age_days": 60,
       "package_count": 1,
       "packages": [
         "libomp"
@@ -912,7 +886,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 50,
+      "age_days": 62,
       "package_count": 1,
       "packages": [
         "ceph"
@@ -936,7 +910,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 50,
+      "age_days": 62,
       "package_count": 1,
       "packages": [
         "ceph"
@@ -960,7 +934,7 @@
       "assignee": "Yan Vugenfirer",
       "components": [],
       "labels": [],
-      "age_days": 15,
+      "age_days": 27,
       "package_count": 1,
       "packages": [
         "msitools"
@@ -984,7 +958,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 48,
+      "age_days": 60,
       "package_count": 1,
       "packages": [
         "golang"
@@ -1008,7 +982,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 19,
+      "age_days": 31,
       "package_count": 1,
       "packages": [
         "python-lxml"
@@ -1101,7 +1075,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 5,
+      "age_days": 17,
       "package_count": 1,
       "packages": [
         "gcc-toolset-16-binutils"
@@ -1148,7 +1122,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 0,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "kmod-amdgpu"
@@ -1172,7 +1146,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 8,
+      "age_days": 20,
       "package_count": 1,
       "packages": [
         "perl-LDAP"
@@ -1200,7 +1174,7 @@
         "rok"
       ],
       "labels": [],
-      "age_days": 119,
+      "age_days": 131,
       "package_count": 1,
       "packages": [
         "python-httpretty"
@@ -1224,7 +1198,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 50,
+      "age_days": 62,
       "package_count": 1,
       "packages": [
         "ceph"
@@ -1248,7 +1222,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 50,
+      "age_days": 62,
       "package_count": 1,
       "packages": [
         "ceph"
@@ -1272,7 +1246,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 48,
+      "age_days": 60,
       "package_count": 1,
       "packages": [
         "libomp"
@@ -1296,7 +1270,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 48,
+      "age_days": 60,
       "package_count": 1,
       "packages": [
         "golang"
@@ -1322,7 +1296,7 @@
         "decentxml"
       ],
       "labels": [],
-      "age_days": 32,
+      "age_days": 44,
       "package_count": 1,
       "packages": [
         "decentxml"
@@ -1336,6 +1310,371 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-155402"
+      }
+    },
+    {
+      "key": "RHEL-156850",
+      "summary": "Konflux pipeline failed!. (calculate-deps-s390x Failed) - jboss-jsp-2.2-api",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "RHCS Maintenance",
+      "components": [
+        "jboss-jsp-2.2-api"
+      ],
+      "labels": [],
+      "age_days": 41,
+      "package_count": 1,
+      "packages": [
+        "jboss-jsp-2.2-api"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-156850",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-156850"
+      }
+    },
+    {
+      "key": "RHEL-157300",
+      "summary": "konflux pipeline failed from rhel-sst-network-drivers ",
+      "status": "Planning",
+      "status_category": "new",
+      "assignee": "Kamal Heib",
+      "components": [
+        "Lmod",
+        "openmpi"
+      ],
+      "labels": [],
+      "age_days": 41,
+      "package_count": 2,
+      "packages": [
+        "Lmod",
+        "openmpi"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-157300",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 2,
+        "todo": 2,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-157300"
+      }
+    },
+    {
+      "key": "RHEL-183532",
+      "summary": "GNOME Software FTBFS on RHEL 9",
+      "status": "Planning",
+      "status_category": "new",
+      "assignee": "Richard Hughes",
+      "components": [
+        "gnome-software"
+      ],
+      "labels": [],
+      "age_days": 41,
+      "package_count": 1,
+      "packages": [
+        "gnome-software"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-183532",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-183532"
+      }
+    },
+    {
+      "key": "RHEL-183529",
+      "summary": "Konflux pipeline calculate-deps failed! (pgaudit)",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Filip Janus",
+      "components": [
+        "pgaudit"
+      ],
+      "labels": [],
+      "age_days": 37,
+      "package_count": 1,
+      "packages": [
+        "pgaudit"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-183529",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-183529"
+      }
+    },
+    {
+      "key": "RHEL-183530",
+      "summary": "Konflux pipeline calculate-deps failed! (pg_repack)",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Filip Janus",
+      "components": [
+        "pg_repack"
+      ],
+      "labels": [],
+      "age_days": 37,
+      "package_count": 1,
+      "packages": [
+        "pg_repack"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-183530",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-183530"
+      }
+    },
+    {
+      "key": "RHEL-183531",
+      "summary": "Konflux pipeline calculate-deps failed! (postgres-decoderbufs)",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Unassigned",
+      "components": [
+        "postgres-decoderbufs"
+      ],
+      "labels": [],
+      "age_days": 37,
+      "package_count": 1,
+      "packages": [
+        "postgres-decoderbufs"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-183531",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-183531"
+      }
+    },
+    {
+      "key": "RHEL-192540",
+      "summary": "dotnet7.0 rpmbuild fails on x86-64, aarch64, s390x, ppc64le in Konflux",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Unassigned",
+      "components": [
+        "dotnet7.0"
+      ],
+      "labels": [],
+      "age_days": 34,
+      "package_count": 1,
+      "packages": [
+        "dotnet7.0"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-192540",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-192540"
+      }
+    },
+    {
+      "key": "ROK-1939",
+      "summary": "3 packages fail clone-repository -- quay.io 401/read-only on oras push",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Unassigned",
+      "components": [],
+      "labels": [],
+      "age_days": 34,
+      "package_count": 2,
+      "packages": [
+        "perl-Text-Unidecode",
+        "python-pytest-subtests"
+      ],
+      "url": "https://redhat.atlassian.net/browse/ROK-1939",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 2,
+        "todo": 2,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "ROK-1939"
+      }
+    },
+    {
+      "key": "KFLUXMIG-363",
+      "summary": "virtio-win enablement",
+      "status": "Pending Approval",
+      "status_category": "indeterminate",
+      "assignee": "Yan Vugenfirer",
+      "components": [],
+      "labels": [
+        "migration",
+        "non-container-based",
+        "rhel"
+      ],
+      "age_days": 33,
+      "package_count": 1,
+      "packages": [
+        "virtio-win"
+      ],
+      "url": "https://redhat.atlassian.net/browse/KFLUXMIG-363",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "KFLUXMIG-363"
+      }
+    },
+    {
+      "key": "RHEL-156486",
+      "summary": "Konflux pipeline rpm_build failed! - jmc",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Josh Matsuoka",
+      "components": [
+        "jmc"
+      ],
+      "labels": [],
+      "age_days": 33,
+      "package_count": 1,
+      "packages": [
+        "jmc"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-156486",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-156486"
+      }
+    },
+    {
+      "key": "RHEL-156488",
+      "summary": "Konflux pipeline rpm_build failed! - jmc-core",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Josh Matsuoka",
+      "components": [
+        "jmc-core"
+      ],
+      "labels": [],
+      "age_days": 33,
+      "package_count": 1,
+      "packages": [
+        "jmc-core"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-156488",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-156488"
+      }
+    },
+    {
+      "key": "RHELBLD-18835",
+      "summary": "checksec Konflux build fails: oc project produces malformed tenant name",
+      "status": "Backlog",
+      "status_category": "new",
+      "assignee": "Unassigned",
+      "components": [
+        "rok"
+      ],
+      "labels": [],
+      "age_days": 33,
+      "package_count": 1,
+      "packages": [
+        "checksec"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHELBLD-18835",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHELBLD-18835"
+      }
+    },
+    {
+      "key": "RHEL-183536",
+      "summary": "Konflux pipeline rpmbuild failed! (gnu-efi)",
+      "status": "Integration",
+      "status_category": "indeterminate",
+      "assignee": "bootloader -eng-team",
+      "components": [
+        "gnu-efi"
+      ],
+      "labels": [],
+      "age_days": 32,
+      "package_count": 1,
+      "packages": [
+        "gnu-efi"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-183536",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-183536"
+      }
+    },
+    {
+      "key": "ROK-1945",
+      "summary": "python-lxml/3.11/3.12 %check fails -- test_simple_xml ElementTreePullTestCase regression",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Unassigned",
+      "components": [],
+      "labels": [],
+      "age_days": 31,
+      "package_count": 1,
+      "packages": [
+        "python-lxml"
+      ],
+      "url": "https://redhat.atlassian.net/browse/ROK-1945",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "ROK-1945"
       }
     }
   ],
@@ -1758,9 +2097,9 @@
       "blocker_keys": [
         "RHEL-183554"
       ],
-      "blocker_state": "Open",
-      "jira_status": "Planning",
-      "jira_status_category": "new",
+      "blocker_state": "All resolved",
+      "jira_status": "Closed",
+      "jira_status_category": "done",
       "jira_assignee": "Mike Fabian",
       "components": [
         "ibus-typing-booster"
@@ -1776,7 +2115,7 @@
         "RHELBLD-18718"
       ],
       "blocker_state": "Open",
-      "jira_status": "Backlog",
+      "jira_status": "To Do",
       "jira_status_category": "new",
       "jira_assignee": "Aviv Sabadra",
       "components": [
@@ -1793,7 +2132,7 @@
         "RHELBLD-18718"
       ],
       "blocker_state": "Open",
-      "jira_status": "Backlog",
+      "jira_status": "To Do",
       "jira_status_category": "new",
       "jira_assignee": "Aviv Sabadra",
       "components": [
@@ -1810,7 +2149,7 @@
         "RHELBLD-18718"
       ],
       "blocker_state": "Open",
-      "jira_status": "Backlog",
+      "jira_status": "To Do",
       "jira_status_category": "new",
       "jira_assignee": "Aviv Sabadra",
       "components": [
@@ -1827,7 +2166,7 @@
         "RHELBLD-18718"
       ],
       "blocker_state": "Open",
-      "jira_status": "Backlog",
+      "jira_status": "To Do",
       "jira_status_category": "new",
       "jira_assignee": "Aviv Sabadra",
       "components": [
@@ -1844,7 +2183,7 @@
         "RHELBLD-18718"
       ],
       "blocker_state": "Open",
-      "jira_status": "Backlog",
+      "jira_status": "To Do",
       "jira_status_category": "new",
       "jira_assignee": "Aviv Sabadra",
       "components": [
@@ -2703,6 +3042,7 @@
     "gcc-toolset-14",
     "gcc-toolset-14-gcc",
     "grpc",
+    "ibus-typing-booster",
     "libbase",
     "libguestfs",
     "libmemcached-awesome",
@@ -2769,10 +3109,6 @@
     ],
     [
       "Jerome Marchand",
-      1
-    ],
-    [
-      "Mike Fabian",
       1
     ],
     [
@@ -2877,10 +3213,10 @@
     ],
     [
       "Planning",
-      7
+      6
     ],
     [
-      "Backlog",
+      "To Do",
       2
     ],
     [
@@ -2896,7 +3232,7 @@
       1
     ],
     [
-      "To Do",
+      "Backlog",
       1
     ]
   ],
@@ -3028,10 +3364,6 @@
       1
     ],
     [
-      "ibus-typing-booster",
-      1
-    ],
-    [
       "ruby",
       1
     ],
@@ -3066,12 +3398,12 @@
     },
     {
       "tag": "Spreadsheet hygiene",
-      "title": "21 pkgs ready to clear",
+      "title": "22 pkgs ready to clear",
       "body": "78 packages marked blocked; 76 rows carry a Blockers value. Clearing fully-resolved blockers will drop the blocked tally."
     },
     {
       "tag": "Needs attention",
-      "title": "24 unassigned \u00b7 6 stale (\u226530d)",
+      "title": "24 unassigned \u00b7 20 stale (\u226530d)",
       "body": "Open blockers with no owner or no recent update \u2014 good candidates for triage or closure."
     }
   ]
