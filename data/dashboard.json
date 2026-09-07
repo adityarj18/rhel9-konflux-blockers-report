@@ -1,7 +1,7 @@
 {
-  "generated_at_iso": "2026-09-01T06:15:02.051482+00:00",
-  "snapshot_date_display": "01 Sep 2026",
-  "source_desc": "local file `RHEL 9 Konflux migration_9c148568-375e-4acf-9aa5-3cbe7c694017.xlsx`",
+  "generated_at_iso": "2026-09-07T06:00:40.705190+00:00",
+  "snapshot_date_display": "07 Sep 2026",
+  "source_desc": "local file `RHEL 9 Konflux migration_213a4ca1-562f-473e-8427-b6a4d169d3c8.xlsx`",
   "spreadsheet_id": "1MJhmkOFgbSjuvuO9f8v5DDWiuxiMTGPOhVOHII67-5o",
   "spreadsheet_url": "https://docs.google.com/spreadsheets/d/1MJhmkOFgbSjuvuO9f8v5DDWiuxiMTGPOhVOHII67-5o",
   "jira_base": "https://redhat.atlassian.net",
@@ -12,14 +12,14 @@
     "onboarded_pct": 96.4,
     "has_blockers_sheet": 69,
     "blocked_packages": 69,
-    "open_blockers": 36,
-    "ready_to_clear": 24,
-    "unassigned_open": 19,
-    "stale_open": 11,
+    "open_blockers": 35,
+    "ready_to_clear": 25,
+    "unassigned_open": 18,
+    "stale_open": 12,
     "blockers_field_rows": 66,
     "unique_blocker_keys": 57,
-    "jira_resolved_keys": 109,
-    "jira_missing_keys": 15
+    "jira_resolved_keys": 84,
+    "jira_missing_keys": 14
   },
   "open_blockers": [
     {
@@ -41,7 +41,7 @@
         "rok-ready",
         "upstream"
       ],
-      "age_days": 11,
+      "age_days": 17,
       "package_count": 6,
       "packages": [
         "fwupd",
@@ -73,7 +73,7 @@
         "openmpi"
       ],
       "labels": [],
-      "age_days": 13,
+      "age_days": 19,
       "package_count": 2,
       "packages": [
         "Lmod",
@@ -126,7 +126,7 @@
         "non-container-based",
         "rhel"
       ],
-      "age_days": 55,
+      "age_days": 61,
       "package_count": 1,
       "packages": [
         "virtio-win"
@@ -152,7 +152,7 @@
         "decentxml"
       ],
       "labels": [],
-      "age_days": 66,
+      "age_days": 72,
       "package_count": 1,
       "packages": [
         "decentxml"
@@ -178,7 +178,7 @@
         "jmc"
       ],
       "labels": [],
-      "age_days": 55,
+      "age_days": 61,
       "package_count": 1,
       "packages": [
         "jmc"
@@ -204,7 +204,7 @@
         "jmc-core"
       ],
       "labels": [],
-      "age_days": 55,
+      "age_days": 61,
       "package_count": 1,
       "packages": [
         "jmc-core"
@@ -230,7 +230,7 @@
         "tomcatjss"
       ],
       "labels": [],
-      "age_days": 39,
+      "age_days": 44,
       "package_count": 1,
       "packages": [
         "tomcatjss"
@@ -256,7 +256,7 @@
         "jboss-jsp-2.2-api"
       ],
       "labels": [],
-      "age_days": 63,
+      "age_days": 69,
       "package_count": 1,
       "packages": [
         "jboss-jsp-2.2-api"
@@ -282,7 +282,7 @@
         "ModemManager"
       ],
       "labels": [],
-      "age_days": 38,
+      "age_days": 44,
       "package_count": 1,
       "packages": [
         "ModemManager"
@@ -308,7 +308,7 @@
         "nispor"
       ],
       "labels": [],
-      "age_days": 6,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "nispor"
@@ -334,7 +334,7 @@
         "pgaudit"
       ],
       "labels": [],
-      "age_days": 14,
+      "age_days": 20,
       "package_count": 1,
       "packages": [
         "pgaudit"
@@ -360,7 +360,7 @@
         "pg_repack"
       ],
       "labels": [],
-      "age_days": 14,
+      "age_days": 20,
       "package_count": 1,
       "packages": [
         "pg_repack"
@@ -386,7 +386,7 @@
         "postgres-decoderbufs"
       ],
       "labels": [],
-      "age_days": 14,
+      "age_days": 20,
       "package_count": 1,
       "packages": [
         "postgres-decoderbufs"
@@ -412,7 +412,7 @@
         "gnome-software"
       ],
       "labels": [],
-      "age_days": 62,
+      "age_days": 68,
       "package_count": 1,
       "packages": [
         "gnome-software"
@@ -438,7 +438,7 @@
         "gnu-efi"
       ],
       "labels": [],
-      "age_days": 54,
+      "age_days": 60,
       "package_count": 1,
       "packages": [
         "gnu-efi"
@@ -464,7 +464,7 @@
         "kernelshark"
       ],
       "labels": [],
-      "age_days": 27,
+      "age_days": 33,
       "package_count": 1,
       "packages": [
         "kernelshark"
@@ -490,7 +490,7 @@
         "rubygem-pg"
       ],
       "labels": [],
-      "age_days": 4,
+      "age_days": 10,
       "package_count": 1,
       "packages": [
         "rubygem-pg"
@@ -516,7 +516,7 @@
         "rok"
       ],
       "labels": [],
-      "age_days": 153,
+      "age_days": 159,
       "package_count": 1,
       "packages": [
         "python-httpretty"
@@ -542,7 +542,7 @@
         "rok"
       ],
       "labels": [],
-      "age_days": 18,
+      "age_days": 24,
       "package_count": 1,
       "packages": [
         "libgit2"
@@ -568,7 +568,7 @@
         "rok"
       ],
       "labels": [],
-      "age_days": 19,
+      "age_days": 25,
       "package_count": 1,
       "packages": [
         "checksec"
@@ -582,29 +582,6 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHELBLD-18835"
-      }
-    },
-    {
-      "key": "RHELMISC-18928",
-      "summary": "(Jira data unavailable \u2014 spreadsheet-only)",
-      "status": "Unknown",
-      "status_category": "unknown",
-      "assignee": "Unassigned",
-      "components": [],
-      "labels": [],
-      "age_days": null,
-      "package_count": 1,
-      "packages": [
-        "snpguest"
-      ],
-      "url": "https://redhat.atlassian.net/browse/RHELMISC-18928",
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "RHELMISC-18928"
       }
     },
     {
@@ -661,7 +638,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 82,
+      "age_days": 88,
       "package_count": 1,
       "packages": [
         "libomp"
@@ -942,7 +919,7 @@
         "rok"
       ],
       "labels": [],
-      "age_days": 153,
+      "age_days": 159,
       "package_count": 1,
       "packages": [
         "python-httpretty"
@@ -966,7 +943,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 82,
+      "age_days": 88,
       "package_count": 1,
       "packages": [
         "libomp"
@@ -992,7 +969,7 @@
         "decentxml"
       ],
       "labels": [],
-      "age_days": 66,
+      "age_days": 72,
       "package_count": 1,
       "packages": [
         "decentxml"
@@ -1018,7 +995,7 @@
         "jboss-jsp-2.2-api"
       ],
       "labels": [],
-      "age_days": 63,
+      "age_days": 69,
       "package_count": 1,
       "packages": [
         "jboss-jsp-2.2-api"
@@ -1044,7 +1021,7 @@
         "gnome-software"
       ],
       "labels": [],
-      "age_days": 62,
+      "age_days": 68,
       "package_count": 1,
       "packages": [
         "gnome-software"
@@ -1072,7 +1049,7 @@
         "non-container-based",
         "rhel"
       ],
-      "age_days": 55,
+      "age_days": 61,
       "package_count": 1,
       "packages": [
         "virtio-win"
@@ -1098,7 +1075,7 @@
         "jmc"
       ],
       "labels": [],
-      "age_days": 55,
+      "age_days": 61,
       "package_count": 1,
       "packages": [
         "jmc"
@@ -1124,7 +1101,7 @@
         "jmc-core"
       ],
       "labels": [],
-      "age_days": 55,
+      "age_days": 61,
       "package_count": 1,
       "packages": [
         "jmc-core"
@@ -1150,7 +1127,7 @@
         "gnu-efi"
       ],
       "labels": [],
-      "age_days": 54,
+      "age_days": 60,
       "package_count": 1,
       "packages": [
         "gnu-efi"
@@ -1176,7 +1153,7 @@
         "tomcatjss"
       ],
       "labels": [],
-      "age_days": 39,
+      "age_days": 44,
       "package_count": 1,
       "packages": [
         "tomcatjss"
@@ -1202,7 +1179,7 @@
         "ModemManager"
       ],
       "labels": [],
-      "age_days": 38,
+      "age_days": 44,
       "package_count": 1,
       "packages": [
         "ModemManager"
@@ -1216,6 +1193,32 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-158347"
+      }
+    },
+    {
+      "key": "RHEL-183549",
+      "summary": "Konflux pipeline rpmbuild failed! (kernelshark)",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Jerome Marchand",
+      "components": [
+        "kernelshark"
+      ],
+      "labels": [],
+      "age_days": 33,
+      "package_count": 1,
+      "packages": [
+        "kernelshark"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-183549",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-183549"
       }
     }
   ],
@@ -2336,12 +2339,17 @@
       "blocker_keys": [
         "RHELMISC-18928"
       ],
-      "blocker_state": "Open",
-      "jira_status": "Unknown",
-      "jira_status_category": "unknown",
-      "jira_assignee": "Unassigned",
-      "components": [],
-      "labels": []
+      "blocker_state": "All resolved",
+      "jira_status": "Closed",
+      "jira_status_category": "done",
+      "jira_assignee": "Tyler Fanelli",
+      "components": [
+        "snpguest"
+      ],
+      "labels": [
+        "RoK-blocker",
+        "covm-CY26-roadmap"
+      ]
     },
     {
       "package": "strace",
@@ -2441,13 +2449,14 @@
     "python3.11-lxml",
     "python3.11-psycopg2",
     "ruby",
+    "snpguest",
     "strace",
     "swig"
   ],
   "assignee_load": [
     [
       "Unassigned",
-      19
+      18
     ],
     [
       "Josh Matsuoka",
@@ -2579,7 +2588,7 @@
   "status_breakdown": [
     [
       "Unknown",
-      15
+      14
     ],
     [
       "New",
@@ -2663,7 +2672,7 @@
   "components_freq": [
     [
       "(none)",
-      17
+      16
     ],
     [
       "rok",
@@ -2739,7 +2748,6 @@
     ]
   ],
   "missing_keys": [
-    "RHELMISC-18928",
     "ROK-1885",
     "ROK-1887",
     "ROK-1910",
@@ -2764,12 +2772,12 @@
     },
     {
       "tag": "Spreadsheet hygiene",
-      "title": "24 pkgs ready to clear",
+      "title": "25 pkgs ready to clear",
       "body": "69 packages marked blocked; 66 rows carry a Blockers value. Clearing fully-resolved blockers will drop the blocked tally."
     },
     {
       "tag": "Needs attention",
-      "title": "19 unassigned \u00b7 11 stale (\u226530d)",
+      "title": "18 unassigned \u00b7 12 stale (\u226530d)",
       "body": "Open blockers with no owner or no recent update \u2014 good candidates for triage or closure."
     }
   ]
