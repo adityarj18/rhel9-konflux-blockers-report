@@ -50,6 +50,8 @@ SHEET_DATA_CHART = "RHEL 9 Data and Chart"
 KEY_RE = re.compile(r"[A-Z][A-Z0-9]+-\d+")
 DONE_STATUS_NAMES = {"done", "closed", "resolved", "release pending"}
 JIRA_BATCH_SIZE = 40
+# Operational vs package-maintainer blocker ownership (ticket key prefix).
+OPERATIONAL_PREFIXES = ("ROK", "KONFLUX", "KFLUXMIG", "OSCI", "RHELBLD", "RHELWF")
 
 JIRA_FIELDS = [
     "summary",
@@ -245,7 +247,9 @@ def load_active_rpms(wb) -> list:
         keys = KEY_RE.findall(blockers_field) if isinstance(blockers_field, str) else []
         is_blocked_status = isinstance(status, str) and status.strip().lower() == "blocked"
 
-        if is_blocked_status or keys:
+        # Scope: Active RPMs rows explicitly marked Blocked (not onboarded/ready rows
+        # that still carry a legacy Blockers value).
+        if is_blocked_status:
             packages.append({
                 "package": str(name).strip(),
                 "status": status,
@@ -305,6 +309,11 @@ def _dc_pct(dc: dict, label: str):
     if not entry or entry.get("pct") is None:
         return None
     return round(entry["pct"] * 100, 1)
+
+
+def _blocker_category(key: str) -> str:
+    prefix = key.split("-", 1)[0]
+    return "operational" if prefix in OPERATIONAL_PREFIXES else "maintainer"
 
 
 # --------------------------------------------------------------------------
@@ -514,7 +523,10 @@ def build_dashboard(active_rpms, blockers_sheet, data_chart, jira_map, missing_k
                 "url": f"{jira_base}/browse/{k}",
                 "moved_from": j.get("moved_from"),
                 "sheet": sheet_info,
+                "category": _blocker_category(k),
             }
+        if "category" not in entry:
+            entry["category"] = _blocker_category(k)
         open_blockers.append(entry)
         assignee_counter[entry["assignee"] or "Unassigned"] += 1
         status_counter[entry["status"]] += 1
@@ -540,6 +552,15 @@ def build_dashboard(active_rpms, blockers_sheet, data_chart, jira_map, missing_k
     unassigned_open = sum(1 for e in open_blockers if (e["assignee"] or "Unassigned") == "Unassigned")
     blockers_field_rows = sum(1 for p in active_rpms if p["blocker_keys"])
 
+    operational_open = [e for e in open_blockers if e.get("category") == "operational"]
+    maintainer_open = [e for e in open_blockers if e.get("category") == "maintainer"]
+    operational_keys = {k for k in all_keys if _blocker_category(k) == "operational"}
+    maintainer_keys = {k for k in all_keys if _blocker_category(k) == "maintainer"}
+    operational_pkgs = {p["package"] for p in active_rpms if any(k in operational_keys for k in p["blocker_keys"])}
+    maintainer_pkgs = {p["package"] for p in active_rpms if any(k in maintainer_keys for k in p["blocker_keys"])}
+    operational_open_pkgs = {p["package"] for p in active_rpms if any(k in {e["key"] for e in operational_open} for k in p["blocker_keys"])}
+    maintainer_open_pkgs = {p["package"] for p in active_rpms if any(k in {e["key"] for e in maintainer_open} for k in p["blocker_keys"])}
+
     stats = {
         "total_rpms": _dc_count(data_chart, "Total RPMs"),
         "onboarded": _dc_count(data_chart, "Onboarded"),
@@ -554,6 +575,14 @@ def build_dashboard(active_rpms, blockers_sheet, data_chart, jira_map, missing_k
         "unique_blocker_keys": len(all_keys),
         "jira_resolved_keys": len(jira_map),
         "jira_missing_keys": len(missing_keys),
+        "operational_blockers": len(operational_keys),
+        "operational_open_blockers": len(operational_open),
+        "operational_packages": len(operational_pkgs),
+        "operational_open_packages": len(operational_open_pkgs),
+        "maintainer_blockers": len(maintainer_keys),
+        "maintainer_open_blockers": len(maintainer_open),
+        "maintainer_packages": len(maintainer_pkgs),
+        "maintainer_open_packages": len(maintainer_open_pkgs),
     }
 
     findings = []
@@ -591,6 +620,8 @@ def build_dashboard(active_rpms, blockers_sheet, data_chart, jira_map, missing_k
         "jira_enabled": jira_enabled,
         "stats": stats,
         "open_blockers": open_blockers,
+        "operational_open_blockers": operational_open,
+        "maintainer_open_blockers": maintainer_open,
         "stale_blockers": stale_blockers,
         "packages": packages_out,
         "ready_to_clear": sorted(ready_to_clear, key=str.lower),
@@ -1071,7 +1102,7 @@ def render_html(d: dict) -> str:
         sub_html = f'<br/><span class="muted">{esc(sub)}</span>' if sub else ""
         stat_cards.append(f'<div class="{cls}"><div class="n">{n}</div><div class="l">{esc(label)}{sub_html}</div></div>')
 
-    stat(stats["blocked_packages"], "Blocked packages", "status = blocked or has blocker keys", "danger")
+    stat(stats["blocked_packages"], "Blocked packages", "Active RPMs · status = Blocked", "danger")
     stat(stats["open_blockers"], "Open blockers", "live Jira issues" if d["jira_enabled"] else "Jira not queried")
     stat(stats["ready_to_clear"], "Resolved but still blocked", "pkgs ready to clear", "warn" if stats["ready_to_clear"] else "")
     unassigned_stale = f"{stats['unassigned_open']} unassigned + {stats['stale_open']} stale ≥30d"
@@ -1096,8 +1127,8 @@ def render_html(d: dict) -> str:
         "<h2>Count reconciliation</h2>"
         "<p>"
         f'Spreadsheet summary cell shows <strong>{stats["has_blockers_sheet"]}</strong> blocked, '
-        f'while packages with <code>status = blocked</code> or a Blockers value = <strong>{stats["blocked_packages"]}</strong>, '
-        f'and rows with a Blockers field = <strong>{stats["blockers_field_rows"]}</strong>. '
+        f'while <code>Active RPMs</code> rows with <code>status = Blocked</code> = <strong>{stats["blocked_packages"]}</strong>, '
+        f'and those rows with a Blockers field = <strong>{stats["blockers_field_rows"]}</strong>. '
         + (
             f'Onboarding progress: <strong>{stats["onboarded"]}</strong> / {stats["total_rpms"]} RPMs '
             f'(<strong>{stats["onboarded_pct"]}%</strong> onboarded).'
@@ -1105,8 +1136,8 @@ def render_html(d: dict) -> str:
         )
         + "</p>"
         "<ul>"
-        f'<li>Open blockers: <strong>{stats["open_blockers"]}</strong> · Unassigned open: <strong>{stats["unassigned_open"]}</strong></li>'
-        f'<li>Unique blocker keys: <strong>{stats["unique_blocker_keys"]}</strong> · Ready to clear: <strong>{stats["ready_to_clear"]}</strong></li>'
+        f'<li>Operational blockers (ROK/KONFLUX/KFLUXMIG/OSCI/RHELBLD/RHELWF): <strong>{stats["operational_open_blockers"]}</strong> open / {stats["operational_blockers"]} total · {stats["operational_open_packages"]} blocked pkgs with open operational blockers</li>'
+        f'<li>Package maintainer blockers (mainly RHEL): <strong>{stats["maintainer_open_blockers"]}</strong> open / {stats["maintainer_blockers"]} total · {stats["maintainer_open_packages"]} blocked pkgs with open maintainer blockers</li>'
         f'<li>Stale open blockers (≥30 days since update): <strong>{stats["stale_open"]}</strong></li>'
         "</ul>"
         + jira_note
@@ -1132,6 +1163,8 @@ def render_html(d: dict) -> str:
     )
 
     open_rows = render_open_blockers_rows(d["open_blockers"])
+    operational_rows = render_open_blockers_rows(d.get("operational_open_blockers") or [])
+    maintainer_rows = render_open_blockers_rows(d.get("maintainer_open_blockers") or [])
     stale_rows = render_stale_rows(d["stale_blockers"])
     package_rows = render_packages_rows(d["packages"], d["jira_base"])
     ready_html = (
@@ -1167,7 +1200,7 @@ def render_html(d: dict) -> str:
 <div class="wrap">
   <header class="hero" id="top">
     <h1>RHEL 9 Konflux Migration — Blockers</h1>
-    <p class="sub">Auto-refreshed snapshot of open blockers, blocked packages, and spreadsheet hygiene.</p>
+    <p class="sub">Active RPMs sheet · status = Blocked · operational vs package-maintainer blocker split.</p>
     <div class="links">
       <a href="{esc(d["spreadsheet_url"])}" target="_blank" rel="noopener">Tracking spreadsheet</a>
       {epic_links_html}
@@ -1178,6 +1211,8 @@ def render_html(d: dict) -> str:
       <a href="#charts">Charts</a>
       <a href="#findings">Findings</a>
       <a href="#open-blockers">Open blockers</a>
+      <a href="#operational-blockers">Operational</a>
+      <a href="#maintainer-blockers">Maintainers</a>
       <a href="#stale">Stale</a>
       <a href="#packages">Blocked packages</a>
       <a href="#ready">Ready to clear</a>
@@ -1213,7 +1248,7 @@ def render_html(d: dict) -> str:
 
   <section id="open-blockers">
     <h2>Open blockers <span class="count-badge">{stats["open_blockers"]}</span></h2>
-    <p class="section-sub">Live Jira issues currently blocking RHEL 9 Konflux packages. Keys link to Jira.</p>
+    <p class="section-sub">All open Jira blockers referenced by <code>Active RPMs</code> rows with <code>status = Blocked</code>.</p>
     <div class="toolbar">
       <label for="filter-blockers">Filter</label>
       <input type="search" id="filter-blockers" placeholder="Search key, summary, assignee, label…" autocomplete="off" />
@@ -1235,6 +1270,54 @@ def render_html(d: dict) -> str:
         </thead>
         <tbody>
 {open_rows}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="operational-blockers">
+    <h2>Operational issues <span class="count-badge">{stats["operational_open_blockers"]}</span></h2>
+    <p class="section-sub">ROK · KONFLUX · KFLUXMIG · OSCI · RHELBLD · RHELWF — {stats["operational_open_packages"]} blocked packages affected.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>Summary</th>
+            <th class="num">Pkgs</th>
+            <th>Status</th>
+            <th>Assignee</th>
+            <th>Components</th>
+            <th>Labels</th>
+            <th class="num">Age</th>
+          </tr>
+        </thead>
+        <tbody>
+{operational_rows if operational_rows else '<tr><td colspan="8" class="empty-note">None.</td></tr>'}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="maintainer-blockers">
+    <h2>Package maintainer issues <span class="count-badge">{stats["maintainer_open_blockers"]}</span></h2>
+    <p class="section-sub">Mainly RHEL SST-owned tickets — {stats["maintainer_open_packages"]} blocked packages affected.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Key</th>
+            <th>Summary</th>
+            <th class="num">Pkgs</th>
+            <th>Status</th>
+            <th>Assignee</th>
+            <th>Components</th>
+            <th>Labels</th>
+            <th class="num">Age</th>
+          </tr>
+        </thead>
+        <tbody>
+{maintainer_rows if maintainer_rows else '<tr><td colspan="8" class="empty-note">None.</td></tr>'}
         </tbody>
       </table>
     </div>
@@ -1264,7 +1347,7 @@ def render_html(d: dict) -> str:
 
   <section id="packages">
     <h2>All blocked packages <span class="count-badge">{stats["blocked_packages"]}</span></h2>
-    <p class="section-sub">Packages currently marked blocked, with blocker keys and ownership.</p>
+    <p class="section-sub">Active RPMs rows with <code>status = Blocked</code>, blocker keys, and ownership.</p>
     <div class="toolbar">
       <label for="filter-packages">Filter</label>
       <input type="search" id="filter-packages" placeholder="Search package, SST, assignee, blocker…" autocomplete="off" />
@@ -1353,7 +1436,7 @@ def main():
     active_rpms = load_active_rpms(wb)
     blockers_sheet = load_rhel9_blockers(wb)
     data_chart = load_data_and_chart(wb)
-    print(f"Loaded {len(active_rpms)} blocked/flagged packages from `{SHEET_ACTIVE_RPMS}`.")
+    print(f"Loaded {len(active_rpms)} blocked packages from `{SHEET_ACTIVE_RPMS}` (status = Blocked only).")
 
     all_keys = sorted({k for p in active_rpms for k in p["blocker_keys"]})
     jira_enabled = bool(jira_email and jira_token) and not args.skip_jira

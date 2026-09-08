@@ -1,7 +1,7 @@
 {
-  "generated_at_iso": "2026-09-07T06:00:40.705190+00:00",
-  "snapshot_date_display": "07 Sep 2026",
-  "source_desc": "local file `RHEL 9 Konflux migration_213a4ca1-562f-473e-8427-b6a4d169d3c8.xlsx`",
+  "generated_at_iso": "2026-09-08T06:12:02.253825+00:00",
+  "snapshot_date_display": "08 Sep 2026",
+  "source_desc": "local file `RHEL 9 Konflux migration_ca2f0672-d860-44d4-8851-a76b400e1053.xlsx`",
   "spreadsheet_id": "1MJhmkOFgbSjuvuO9f8v5DDWiuxiMTGPOhVOHII67-5o",
   "spreadsheet_url": "https://docs.google.com/spreadsheets/d/1MJhmkOFgbSjuvuO9f8v5DDWiuxiMTGPOhVOHII67-5o",
   "jira_base": "https://redhat.atlassian.net",
@@ -12,14 +12,22 @@
     "onboarded_pct": 96.4,
     "has_blockers_sheet": 69,
     "blocked_packages": 69,
-    "open_blockers": 35,
-    "ready_to_clear": 25,
-    "unassigned_open": 18,
-    "stale_open": 12,
+    "open_blockers": 27,
+    "ready_to_clear": 32,
+    "unassigned_open": 6,
+    "stale_open": 11,
     "blockers_field_rows": 66,
     "unique_blocker_keys": 57,
-    "jira_resolved_keys": 84,
-    "jira_missing_keys": 14
+    "jira_resolved_keys": 57,
+    "jira_missing_keys": 0,
+    "operational_blockers": 23,
+    "operational_open_blockers": 11,
+    "operational_packages": 32,
+    "operational_open_packages": 17,
+    "maintainer_blockers": 34,
+    "maintainer_open_blockers": 16,
+    "maintainer_packages": 35,
+    "maintainer_open_packages": 17
   },
   "open_blockers": [
     {
@@ -41,7 +49,7 @@
         "rok-ready",
         "upstream"
       ],
-      "age_days": 17,
+      "age_days": 18,
       "package_count": 6,
       "packages": [
         "fwupd",
@@ -60,7 +68,27 @@
         "in_progress": 0,
         "completed": 0,
         "url": "KONFLUX-6111"
-      }
+      },
+      "category": "operational"
+    },
+    {
+      "key": "KONFLUX-15382",
+      "summary": "3 packages fail clone-repository -- quay.io 401/read-only on oras push",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Unassigned",
+      "components": [],
+      "labels": [],
+      "age_days": 0,
+      "package_count": 2,
+      "packages": [
+        "perl-Text-Unidecode",
+        "python-pytest-subtests"
+      ],
+      "url": "https://redhat.atlassian.net/browse/KONFLUX-15382",
+      "moved_from": null,
+      "sheet": null,
+      "category": "operational"
     },
     {
       "key": "RHEL-157300",
@@ -73,7 +101,7 @@
         "openmpi"
       ],
       "labels": [],
-      "age_days": 19,
+      "age_days": 20,
       "package_count": 2,
       "packages": [
         "Lmod",
@@ -88,31 +116,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-157300"
-      }
-    },
-    {
-      "key": "ROK-1939",
-      "summary": "(Jira data unavailable \u2014 spreadsheet-only)",
-      "status": "Unknown",
-      "status_category": "unknown",
-      "assignee": "Unassigned",
-      "components": [],
-      "labels": [],
-      "age_days": null,
-      "package_count": 2,
-      "packages": [
-        "perl-Text-Unidecode",
-        "python-pytest-subtests"
-      ],
-      "url": "https://redhat.atlassian.net/browse/ROK-1939",
-      "sheet": {
-        "type": "JIRA",
-        "total": 2,
-        "todo": 2,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "ROK-1939"
-      }
+      },
+      "category": "maintainer"
     },
     {
       "key": "KFLUXMIG-363",
@@ -126,7 +131,7 @@
         "non-container-based",
         "rhel"
       ],
-      "age_days": 61,
+      "age_days": 62,
       "package_count": 1,
       "packages": [
         "virtio-win"
@@ -140,7 +145,26 @@
         "in_progress": 0,
         "completed": 0,
         "url": "KFLUXMIG-363"
-      }
+      },
+      "category": "operational"
+    },
+    {
+      "key": "KONFLUX-15383",
+      "summary": "7 packages fail with oc flag parse error on image-builder-tenant -- pipeline script quoting bug",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Yan Vugenfirer",
+      "components": [],
+      "labels": [],
+      "age_days": 25,
+      "package_count": 1,
+      "packages": [
+        "msitools"
+      ],
+      "url": "https://redhat.atlassian.net/browse/KONFLUX-15383",
+      "moved_from": null,
+      "sheet": null,
+      "category": "operational"
     },
     {
       "key": "RHEL-155402",
@@ -152,7 +176,7 @@
         "decentxml"
       ],
       "labels": [],
-      "age_days": 72,
+      "age_days": 73,
       "package_count": 1,
       "packages": [
         "decentxml"
@@ -166,7 +190,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-155402"
-      }
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-156486",
@@ -178,7 +203,7 @@
         "jmc"
       ],
       "labels": [],
-      "age_days": 61,
+      "age_days": 62,
       "package_count": 1,
       "packages": [
         "jmc"
@@ -192,7 +217,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-156486"
-      }
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-156488",
@@ -204,7 +230,7 @@
         "jmc-core"
       ],
       "labels": [],
-      "age_days": 61,
+      "age_days": 62,
       "package_count": 1,
       "packages": [
         "jmc-core"
@@ -218,7 +244,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-156488"
-      }
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-156848",
@@ -230,7 +257,7 @@
         "tomcatjss"
       ],
       "labels": [],
-      "age_days": 44,
+      "age_days": 46,
       "package_count": 1,
       "packages": [
         "tomcatjss"
@@ -244,7 +271,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-156848"
-      }
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-156850",
@@ -256,7 +284,7 @@
         "jboss-jsp-2.2-api"
       ],
       "labels": [],
-      "age_days": 69,
+      "age_days": 70,
       "package_count": 1,
       "packages": [
         "jboss-jsp-2.2-api"
@@ -270,7 +298,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-156850"
-      }
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-158347",
@@ -282,7 +311,7 @@
         "ModemManager"
       ],
       "labels": [],
-      "age_days": 44,
+      "age_days": 45,
       "package_count": 1,
       "packages": [
         "ModemManager"
@@ -296,7 +325,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-158347"
-      }
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-159656",
@@ -308,7 +338,7 @@
         "nispor"
       ],
       "labels": [],
-      "age_days": 12,
+      "age_days": 13,
       "package_count": 1,
       "packages": [
         "nispor"
@@ -322,7 +352,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-159656"
-      }
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-183529",
@@ -334,7 +365,7 @@
         "pgaudit"
       ],
       "labels": [],
-      "age_days": 20,
+      "age_days": 21,
       "package_count": 1,
       "packages": [
         "pgaudit"
@@ -348,7 +379,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-183529"
-      }
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-183530",
@@ -360,7 +392,7 @@
         "pg_repack"
       ],
       "labels": [],
-      "age_days": 20,
+      "age_days": 21,
       "package_count": 1,
       "packages": [
         "pg_repack"
@@ -374,7 +406,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-183530"
-      }
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-183531",
@@ -386,7 +419,7 @@
         "postgres-decoderbufs"
       ],
       "labels": [],
-      "age_days": 20,
+      "age_days": 21,
       "package_count": 1,
       "packages": [
         "postgres-decoderbufs"
@@ -400,7 +433,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-183531"
-      }
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-183532",
@@ -412,7 +446,7 @@
         "gnome-software"
       ],
       "labels": [],
-      "age_days": 68,
+      "age_days": 69,
       "package_count": 1,
       "packages": [
         "gnome-software"
@@ -426,7 +460,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-183532"
-      }
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-183536",
@@ -438,7 +473,7 @@
         "gnu-efi"
       ],
       "labels": [],
-      "age_days": 60,
+      "age_days": 61,
       "package_count": 1,
       "packages": [
         "gnu-efi"
@@ -452,7 +487,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-183536"
-      }
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-183549",
@@ -464,7 +500,7 @@
         "kernelshark"
       ],
       "labels": [],
-      "age_days": 33,
+      "age_days": 34,
       "package_count": 1,
       "packages": [
         "kernelshark"
@@ -478,7 +514,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-183549"
-      }
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-192545",
@@ -490,7 +527,7 @@
         "rubygem-pg"
       ],
       "labels": [],
-      "age_days": 10,
+      "age_days": 11,
       "package_count": 1,
       "packages": [
         "rubygem-pg"
@@ -504,7 +541,28 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-192545"
-      }
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-239960",
+      "summary": "perl-LDAP: BuildRequires openldap-servers which does not exist in RHEL 9",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Unassigned",
+      "components": [
+        "perl-LDAP"
+      ],
+      "labels": [],
+      "age_days": 25,
+      "package_count": 1,
+      "packages": [
+        "perl-LDAP"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-239960",
+      "moved_from": null,
+      "sheet": null,
+      "category": "maintainer"
     },
     {
       "key": "RHELBLD-18165",
@@ -516,7 +574,7 @@
         "rok"
       ],
       "labels": [],
-      "age_days": 159,
+      "age_days": 160,
       "package_count": 1,
       "packages": [
         "python-httpretty"
@@ -530,7 +588,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHELBLD-18165"
-      }
+      },
+      "category": "operational"
     },
     {
       "key": "RHELBLD-18203",
@@ -542,7 +601,7 @@
         "rok"
       ],
       "labels": [],
-      "age_days": 24,
+      "age_days": 25,
       "package_count": 1,
       "packages": [
         "libgit2"
@@ -556,7 +615,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHELBLD-18203"
-      }
+      },
+      "category": "operational"
     },
     {
       "key": "RHELBLD-18835",
@@ -568,7 +628,7 @@
         "rok"
       ],
       "labels": [],
-      "age_days": 25,
+      "age_days": 0,
       "package_count": 1,
       "packages": [
         "checksec"
@@ -582,358 +642,68 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHELBLD-18835"
-      }
+      },
+      "category": "operational"
     },
     {
-      "key": "ROK-1885",
-      "summary": "(Jira data unavailable \u2014 spreadsheet-only)",
-      "status": "Unknown",
-      "status_category": "unknown",
-      "assignee": "Unassigned",
-      "components": [],
-      "labels": [],
-      "age_days": null,
-      "package_count": 1,
-      "packages": [
-        "Lmod"
-      ],
-      "url": "https://redhat.atlassian.net/browse/ROK-1885",
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "ROK-1885"
-      }
-    },
-    {
-      "key": "ROK-1887",
-      "summary": "(Jira data unavailable \u2014 spreadsheet-only)",
-      "status": "Unknown",
-      "status_category": "unknown",
-      "assignee": "Unassigned",
-      "components": [],
-      "labels": [],
-      "age_days": null,
-      "package_count": 1,
-      "packages": [
-        "gnome-photos"
-      ],
-      "url": "https://redhat.atlassian.net/browse/ROK-1887",
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "ROK-1887"
-      }
-    },
-    {
-      "key": "ROK-1888",
-      "summary": "8 packages fail with '+ false' after successful dep install in Konflux rpmbuild task",
-      "status": "New",
-      "status_category": "new",
-      "assignee": "Unassigned",
-      "components": [],
-      "labels": [],
-      "age_days": 88,
-      "package_count": 1,
-      "packages": [
-        "libomp"
-      ],
-      "url": "https://redhat.atlassian.net/browse/ROK-1888",
-      "moved_from": null,
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "ROK-1888"
-      }
-    },
-    {
-      "key": "ROK-1910",
-      "summary": "(Jira data unavailable \u2014 spreadsheet-only)",
-      "status": "Unknown",
-      "status_category": "unknown",
-      "assignee": "Unassigned",
-      "components": [],
-      "labels": [],
-      "age_days": null,
-      "package_count": 1,
-      "packages": [
-        "libvirt-dbus"
-      ],
-      "url": "https://redhat.atlassian.net/browse/ROK-1910",
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "ROK-1910"
-      }
-    },
-    {
-      "key": "ROK-1911",
-      "summary": "(Jira data unavailable \u2014 spreadsheet-only)",
-      "status": "Unknown",
-      "status_category": "unknown",
-      "assignee": "Unassigned",
-      "components": [],
-      "labels": [],
-      "age_days": null,
-      "package_count": 1,
-      "packages": [
-        "mingw-gettext"
-      ],
-      "url": "https://redhat.atlassian.net/browse/ROK-1911",
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "ROK-1911"
-      }
-    },
-    {
-      "key": "ROK-1927",
-      "summary": "(Jira data unavailable \u2014 spreadsheet-only)",
-      "status": "Unknown",
-      "status_category": "unknown",
-      "assignee": "Unassigned",
-      "components": [],
-      "labels": [],
-      "age_days": null,
-      "package_count": 1,
-      "packages": [
-        "msitools"
-      ],
-      "url": "https://redhat.atlassian.net/browse/ROK-1927",
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "ROK-1927"
-      }
-    },
-    {
-      "key": "ROK-1944",
-      "summary": "(Jira data unavailable \u2014 spreadsheet-only)",
-      "status": "Unknown",
-      "status_category": "unknown",
-      "assignee": "Unassigned",
-      "components": [],
-      "labels": [],
-      "age_days": null,
-      "package_count": 1,
-      "packages": [
-        "golang"
-      ],
-      "url": "https://redhat.atlassian.net/browse/ROK-1944",
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "ROK-1944"
-      }
-    },
-    {
-      "key": "ROK-1945",
-      "summary": "(Jira data unavailable \u2014 spreadsheet-only)",
-      "status": "Unknown",
-      "status_category": "unknown",
-      "assignee": "Unassigned",
-      "components": [],
-      "labels": [],
-      "age_days": null,
-      "package_count": 1,
-      "packages": [
-        "python-lxml"
-      ],
-      "url": "https://redhat.atlassian.net/browse/ROK-1945",
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "ROK-1945"
-      }
-    },
-    {
-      "key": "ROK-2131",
-      "summary": "(Jira data unavailable \u2014 spreadsheet-only)",
-      "status": "Unknown",
-      "status_category": "unknown",
-      "assignee": "Unassigned",
-      "components": [],
-      "labels": [],
-      "age_days": null,
-      "package_count": 1,
-      "packages": [
-        "cuda"
-      ],
-      "url": "https://redhat.atlassian.net/browse/ROK-2131",
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "ROK-2131"
-      }
-    },
-    {
-      "key": "ROK-2132",
-      "summary": "(Jira data unavailable \u2014 spreadsheet-only)",
-      "status": "Unknown",
-      "status_category": "unknown",
-      "assignee": "Unassigned",
-      "components": [],
-      "labels": [],
-      "age_days": null,
-      "package_count": 1,
-      "packages": [
-        "kmod-nvidia-open"
-      ],
-      "url": "https://redhat.atlassian.net/browse/ROK-2132",
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "ROK-2132"
-      }
-    },
-    {
-      "key": "ROK-2133",
-      "summary": "(Jira data unavailable \u2014 spreadsheet-only)",
-      "status": "Unknown",
-      "status_category": "unknown",
-      "assignee": "Unassigned",
-      "components": [],
-      "labels": [],
-      "age_days": null,
-      "package_count": 1,
-      "packages": [
-        "gcc-toolset-16-annobin"
-      ],
-      "url": "https://redhat.atlassian.net/browse/ROK-2133",
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "ROK-2133"
-      }
-    },
-    {
-      "key": "ROK-2134",
-      "summary": "(Jira data unavailable \u2014 spreadsheet-only)",
-      "status": "Unknown",
-      "status_category": "unknown",
-      "assignee": "Unassigned",
-      "components": [],
-      "labels": [],
-      "age_days": null,
-      "package_count": 1,
-      "packages": [
-        "gcc-toolset-16-binutils"
-      ],
-      "url": "https://redhat.atlassian.net/browse/ROK-2134",
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "ROK-2134"
-      }
-    },
-    {
-      "key": "ROK-2135",
-      "summary": "(Jira data unavailable \u2014 spreadsheet-only)",
-      "status": "Unknown",
-      "status_category": "unknown",
-      "assignee": "Unassigned",
-      "components": [],
-      "labels": [],
-      "age_days": null,
-      "package_count": 1,
-      "packages": [
-        "gcc-toolset-16-gcc"
-      ],
-      "url": "https://redhat.atlassian.net/browse/ROK-2135",
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "ROK-2135"
-      }
-    },
-    {
-      "key": "ROK-2167",
-      "summary": "(Jira data unavailable \u2014 spreadsheet-only)",
-      "status": "Unknown",
-      "status_category": "unknown",
-      "assignee": "Unassigned",
-      "components": [],
-      "labels": [],
-      "age_days": null,
-      "package_count": 1,
-      "packages": [
-        "perl-LDAP"
-      ],
-      "url": "https://redhat.atlassian.net/browse/ROK-2167",
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "ROK-2167"
-      }
-    }
-  ],
-  "stale_blockers": [
-    {
-      "key": "RHELBLD-18165",
-      "summary": "push-rpm-to-koji - Failed (python-httpretty) Failed Brew/Koji",
-      "status": "To Do",
-      "status_category": "new",
-      "assignee": "Unassigned",
+      "key": "RHELBLD-18965",
+      "summary": "gcc-toolset-16-gcc needs test MR for Konflux build",
+      "status": "Review",
+      "status_category": "indeterminate",
+      "assignee": "Djordje Todorovic",
       "components": [
         "rok"
       ],
       "labels": [],
-      "age_days": 159,
+      "age_days": 5,
       "package_count": 1,
       "packages": [
-        "python-httpretty"
+        "gcc-toolset-16-gcc"
       ],
-      "url": "https://redhat.atlassian.net/browse/RHELBLD-18165",
+      "url": "https://redhat.atlassian.net/browse/RHELBLD-18965",
       "moved_from": null,
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "RHELBLD-18165"
-      }
+      "sheet": null,
+      "category": "operational"
+    },
+    {
+      "key": "RHELBLD-18975",
+      "summary": "kmod-nvidia-open has no GitLab repo, cannot submit Konflux test build",
+      "status": "To Do",
+      "status_category": "new",
+      "assignee": "Djordje Todorovic",
+      "components": [
+        "rok"
+      ],
+      "labels": [],
+      "age_days": 26,
+      "package_count": 1,
+      "packages": [
+        "kmod-nvidia-open"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHELBLD-18975",
+      "moved_from": null,
+      "sheet": null,
+      "category": "operational"
+    },
+    {
+      "key": "RHELBLD-19069",
+      "summary": "gcc-toolset-16-binutils needs test MR for Konflux build",
+      "status": "Backlog",
+      "status_category": "new",
+      "assignee": "Djordje Todorovic",
+      "components": [
+        "rok"
+      ],
+      "labels": [],
+      "age_days": 25,
+      "package_count": 1,
+      "packages": [
+        "gcc-toolset-16-binutils"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHELBLD-19069",
+      "moved_from": null,
+      "sheet": null,
+      "category": "operational"
     },
     {
       "key": "ROK-1888",
@@ -943,7 +713,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 88,
+      "age_days": 0,
       "package_count": 1,
       "packages": [
         "libomp"
@@ -957,85 +727,70 @@
         "in_progress": 0,
         "completed": 0,
         "url": "ROK-1888"
-      }
+      },
+      "category": "operational"
+    }
+  ],
+  "operational_open_blockers": [
+    {
+      "key": "KONFLUX-6111",
+      "summary": "RPM build-time signing",
+      "status": "Approved",
+      "status_category": "indeterminate",
+      "assignee": "Djordje Todorovic",
+      "components": [
+        "RPM Build"
+      ],
+      "labels": [
+        "CY25Q3",
+        "CY25Q4",
+        "CY26Q2",
+        "CY26Q2-Commitment-Delivered",
+        "CY26Q3",
+        "CY26Q3-InProgress",
+        "rok-ready",
+        "upstream"
+      ],
+      "age_days": 18,
+      "package_count": 6,
+      "packages": [
+        "fwupd",
+        "grub2",
+        "kernel",
+        "kernel-rt",
+        "s390utils",
+        "shim"
+      ],
+      "url": "https://redhat.atlassian.net/browse/KONFLUX-6111",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 6,
+        "todo": 6,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "KONFLUX-6111"
+      },
+      "category": "operational"
     },
     {
-      "key": "RHEL-155402",
-      "summary": "Konflux pipeline rpm_build failed! - decentxml",
+      "key": "KONFLUX-15382",
+      "summary": "3 packages fail clone-repository -- quay.io 401/read-only on oras push",
       "status": "New",
       "status_category": "new",
-      "assignee": "Josh Matsuoka",
-      "components": [
-        "decentxml"
-      ],
+      "assignee": "Unassigned",
+      "components": [],
       "labels": [],
-      "age_days": 72,
-      "package_count": 1,
+      "age_days": 0,
+      "package_count": 2,
       "packages": [
-        "decentxml"
+        "perl-Text-Unidecode",
+        "python-pytest-subtests"
       ],
-      "url": "https://redhat.atlassian.net/browse/RHEL-155402",
+      "url": "https://redhat.atlassian.net/browse/KONFLUX-15382",
       "moved_from": null,
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "RHEL-155402"
-      }
-    },
-    {
-      "key": "RHEL-156850",
-      "summary": "Konflux pipeline failed!. (calculate-deps-s390x Failed) - jboss-jsp-2.2-api",
-      "status": "New",
-      "status_category": "new",
-      "assignee": "RHCS Maintenance",
-      "components": [
-        "jboss-jsp-2.2-api"
-      ],
-      "labels": [],
-      "age_days": 69,
-      "package_count": 1,
-      "packages": [
-        "jboss-jsp-2.2-api"
-      ],
-      "url": "https://redhat.atlassian.net/browse/RHEL-156850",
-      "moved_from": null,
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "RHEL-156850"
-      }
-    },
-    {
-      "key": "RHEL-183532",
-      "summary": "GNOME Software FTBFS on RHEL 9",
-      "status": "Planning",
-      "status_category": "new",
-      "assignee": "Richard Hughes",
-      "components": [
-        "gnome-software"
-      ],
-      "labels": [],
-      "age_days": 68,
-      "package_count": 1,
-      "packages": [
-        "gnome-software"
-      ],
-      "url": "https://redhat.atlassian.net/browse/RHEL-183532",
-      "moved_from": null,
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "RHEL-183532"
-      }
+      "sheet": null,
+      "category": "operational"
     },
     {
       "key": "KFLUXMIG-363",
@@ -1049,7 +804,7 @@
         "non-container-based",
         "rhel"
       ],
-      "age_days": 61,
+      "age_days": 62,
       "package_count": 1,
       "packages": [
         "virtio-win"
@@ -1063,7 +818,250 @@
         "in_progress": 0,
         "completed": 0,
         "url": "KFLUXMIG-363"
-      }
+      },
+      "category": "operational"
+    },
+    {
+      "key": "KONFLUX-15383",
+      "summary": "7 packages fail with oc flag parse error on image-builder-tenant -- pipeline script quoting bug",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Yan Vugenfirer",
+      "components": [],
+      "labels": [],
+      "age_days": 25,
+      "package_count": 1,
+      "packages": [
+        "msitools"
+      ],
+      "url": "https://redhat.atlassian.net/browse/KONFLUX-15383",
+      "moved_from": null,
+      "sheet": null,
+      "category": "operational"
+    },
+    {
+      "key": "RHELBLD-18165",
+      "summary": "push-rpm-to-koji - Failed (python-httpretty) Failed Brew/Koji",
+      "status": "To Do",
+      "status_category": "new",
+      "assignee": "Unassigned",
+      "components": [
+        "rok"
+      ],
+      "labels": [],
+      "age_days": 160,
+      "package_count": 1,
+      "packages": [
+        "python-httpretty"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHELBLD-18165",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHELBLD-18165"
+      },
+      "category": "operational"
+    },
+    {
+      "key": "RHELBLD-18203",
+      "summary": "17 packages blocked in rhel-9.9.0-draft Koji tag -- Konflux draft build import fails",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Djordje Todorovic",
+      "components": [
+        "rok"
+      ],
+      "labels": [],
+      "age_days": 25,
+      "package_count": 1,
+      "packages": [
+        "libgit2"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHELBLD-18203",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHELBLD-18203"
+      },
+      "category": "operational"
+    },
+    {
+      "key": "RHELBLD-18835",
+      "summary": "checksec Konflux build fails: oc project produces malformed tenant name",
+      "status": "Backlog",
+      "status_category": "new",
+      "assignee": "Unassigned",
+      "components": [
+        "rok"
+      ],
+      "labels": [],
+      "age_days": 0,
+      "package_count": 1,
+      "packages": [
+        "checksec"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHELBLD-18835",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHELBLD-18835"
+      },
+      "category": "operational"
+    },
+    {
+      "key": "RHELBLD-18965",
+      "summary": "gcc-toolset-16-gcc needs test MR for Konflux build",
+      "status": "Review",
+      "status_category": "indeterminate",
+      "assignee": "Djordje Todorovic",
+      "components": [
+        "rok"
+      ],
+      "labels": [],
+      "age_days": 5,
+      "package_count": 1,
+      "packages": [
+        "gcc-toolset-16-gcc"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHELBLD-18965",
+      "moved_from": null,
+      "sheet": null,
+      "category": "operational"
+    },
+    {
+      "key": "RHELBLD-18975",
+      "summary": "kmod-nvidia-open has no GitLab repo, cannot submit Konflux test build",
+      "status": "To Do",
+      "status_category": "new",
+      "assignee": "Djordje Todorovic",
+      "components": [
+        "rok"
+      ],
+      "labels": [],
+      "age_days": 26,
+      "package_count": 1,
+      "packages": [
+        "kmod-nvidia-open"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHELBLD-18975",
+      "moved_from": null,
+      "sheet": null,
+      "category": "operational"
+    },
+    {
+      "key": "RHELBLD-19069",
+      "summary": "gcc-toolset-16-binutils needs test MR for Konflux build",
+      "status": "Backlog",
+      "status_category": "new",
+      "assignee": "Djordje Todorovic",
+      "components": [
+        "rok"
+      ],
+      "labels": [],
+      "age_days": 25,
+      "package_count": 1,
+      "packages": [
+        "gcc-toolset-16-binutils"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHELBLD-19069",
+      "moved_from": null,
+      "sheet": null,
+      "category": "operational"
+    },
+    {
+      "key": "ROK-1888",
+      "summary": "8 packages fail with '+ false' after successful dep install in Konflux rpmbuild task",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Unassigned",
+      "components": [],
+      "labels": [],
+      "age_days": 0,
+      "package_count": 1,
+      "packages": [
+        "libomp"
+      ],
+      "url": "https://redhat.atlassian.net/browse/ROK-1888",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "ROK-1888"
+      },
+      "category": "operational"
+    }
+  ],
+  "maintainer_open_blockers": [
+    {
+      "key": "RHEL-157300",
+      "summary": "konflux pipeline failed from rhel-sst-network-drivers ",
+      "status": "Planning",
+      "status_category": "new",
+      "assignee": "Kamal Heib",
+      "components": [
+        "Lmod",
+        "openmpi"
+      ],
+      "labels": [],
+      "age_days": 20,
+      "package_count": 2,
+      "packages": [
+        "Lmod",
+        "openmpi"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-157300",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 2,
+        "todo": 2,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-157300"
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-155402",
+      "summary": "Konflux pipeline rpm_build failed! - decentxml",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Josh Matsuoka",
+      "components": [
+        "decentxml"
+      ],
+      "labels": [],
+      "age_days": 73,
+      "package_count": 1,
+      "packages": [
+        "decentxml"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-155402",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-155402"
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-156486",
@@ -1075,7 +1073,7 @@
         "jmc"
       ],
       "labels": [],
-      "age_days": 61,
+      "age_days": 62,
       "package_count": 1,
       "packages": [
         "jmc"
@@ -1089,7 +1087,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-156486"
-      }
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-156488",
@@ -1101,7 +1100,7 @@
         "jmc-core"
       ],
       "labels": [],
-      "age_days": 61,
+      "age_days": 62,
       "package_count": 1,
       "packages": [
         "jmc-core"
@@ -1115,33 +1114,8 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-156488"
-      }
-    },
-    {
-      "key": "RHEL-183536",
-      "summary": "Konflux pipeline rpmbuild failed! (gnu-efi)",
-      "status": "Integration",
-      "status_category": "indeterminate",
-      "assignee": "bootloader -eng-team",
-      "components": [
-        "gnu-efi"
-      ],
-      "labels": [],
-      "age_days": 60,
-      "package_count": 1,
-      "packages": [
-        "gnu-efi"
-      ],
-      "url": "https://redhat.atlassian.net/browse/RHEL-183536",
-      "moved_from": null,
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "RHEL-183536"
-      }
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-156848",
@@ -1153,7 +1127,7 @@
         "tomcatjss"
       ],
       "labels": [],
-      "age_days": 44,
+      "age_days": 46,
       "package_count": 1,
       "packages": [
         "tomcatjss"
@@ -1167,7 +1141,35 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-156848"
-      }
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-156850",
+      "summary": "Konflux pipeline failed!. (calculate-deps-s390x Failed) - jboss-jsp-2.2-api",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "RHCS Maintenance",
+      "components": [
+        "jboss-jsp-2.2-api"
+      ],
+      "labels": [],
+      "age_days": 70,
+      "package_count": 1,
+      "packages": [
+        "jboss-jsp-2.2-api"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-156850",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-156850"
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-158347",
@@ -1179,7 +1181,7 @@
         "ModemManager"
       ],
       "labels": [],
-      "age_days": 44,
+      "age_days": 45,
       "package_count": 1,
       "packages": [
         "ModemManager"
@@ -1193,7 +1195,170 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-158347"
-      }
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-159656",
+      "summary": "Konflux pipeline rpm_build failed! (nispor)",
+      "status": "Planning",
+      "status_category": "new",
+      "assignee": "Network Management Team",
+      "components": [
+        "nispor"
+      ],
+      "labels": [],
+      "age_days": 13,
+      "package_count": 1,
+      "packages": [
+        "nispor"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-159656",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-159656"
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-183529",
+      "summary": "Konflux pipeline calculate-deps failed! (pgaudit)",
+      "status": "In Progress",
+      "status_category": "indeterminate",
+      "assignee": "Filip Janus",
+      "components": [
+        "pgaudit"
+      ],
+      "labels": [],
+      "age_days": 21,
+      "package_count": 1,
+      "packages": [
+        "pgaudit"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-183529",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-183529"
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-183530",
+      "summary": "Konflux pipeline calculate-deps failed! (pg_repack)",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Filip Janus",
+      "components": [
+        "pg_repack"
+      ],
+      "labels": [],
+      "age_days": 21,
+      "package_count": 1,
+      "packages": [
+        "pg_repack"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-183530",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-183530"
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-183531",
+      "summary": "Konflux pipeline calculate-deps failed! (postgres-decoderbufs)",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Unassigned",
+      "components": [
+        "postgres-decoderbufs"
+      ],
+      "labels": [],
+      "age_days": 21,
+      "package_count": 1,
+      "packages": [
+        "postgres-decoderbufs"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-183531",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-183531"
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-183532",
+      "summary": "GNOME Software FTBFS on RHEL 9",
+      "status": "Planning",
+      "status_category": "new",
+      "assignee": "Richard Hughes",
+      "components": [
+        "gnome-software"
+      ],
+      "labels": [],
+      "age_days": 69,
+      "package_count": 1,
+      "packages": [
+        "gnome-software"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-183532",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-183532"
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-183536",
+      "summary": "Konflux pipeline rpmbuild failed! (gnu-efi)",
+      "status": "Integration",
+      "status_category": "indeterminate",
+      "assignee": "bootloader -eng-team",
+      "components": [
+        "gnu-efi"
+      ],
+      "labels": [],
+      "age_days": 61,
+      "package_count": 1,
+      "packages": [
+        "gnu-efi"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-183536",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-183536"
+      },
+      "category": "maintainer"
     },
     {
       "key": "RHEL-183549",
@@ -1205,7 +1370,7 @@
         "kernelshark"
       ],
       "labels": [],
-      "age_days": 33,
+      "age_days": 34,
       "package_count": 1,
       "packages": [
         "kernelshark"
@@ -1219,7 +1384,356 @@
         "in_progress": 0,
         "completed": 0,
         "url": "RHEL-183549"
-      }
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-192545",
+      "summary": "rubygem-pg rpmbuild fails on all arches in Konflux",
+      "status": "Planning",
+      "status_category": "new",
+      "assignee": "Jarek Prokop",
+      "components": [
+        "rubygem-pg"
+      ],
+      "labels": [],
+      "age_days": 11,
+      "package_count": 1,
+      "packages": [
+        "rubygem-pg"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-192545",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-192545"
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-239960",
+      "summary": "perl-LDAP: BuildRequires openldap-servers which does not exist in RHEL 9",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Unassigned",
+      "components": [
+        "perl-LDAP"
+      ],
+      "labels": [],
+      "age_days": 25,
+      "package_count": 1,
+      "packages": [
+        "perl-LDAP"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-239960",
+      "moved_from": null,
+      "sheet": null,
+      "category": "maintainer"
+    }
+  ],
+  "stale_blockers": [
+    {
+      "key": "RHELBLD-18165",
+      "summary": "push-rpm-to-koji - Failed (python-httpretty) Failed Brew/Koji",
+      "status": "To Do",
+      "status_category": "new",
+      "assignee": "Unassigned",
+      "components": [
+        "rok"
+      ],
+      "labels": [],
+      "age_days": 160,
+      "package_count": 1,
+      "packages": [
+        "python-httpretty"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHELBLD-18165",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHELBLD-18165"
+      },
+      "category": "operational"
+    },
+    {
+      "key": "RHEL-155402",
+      "summary": "Konflux pipeline rpm_build failed! - decentxml",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Josh Matsuoka",
+      "components": [
+        "decentxml"
+      ],
+      "labels": [],
+      "age_days": 73,
+      "package_count": 1,
+      "packages": [
+        "decentxml"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-155402",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-155402"
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-156850",
+      "summary": "Konflux pipeline failed!. (calculate-deps-s390x Failed) - jboss-jsp-2.2-api",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "RHCS Maintenance",
+      "components": [
+        "jboss-jsp-2.2-api"
+      ],
+      "labels": [],
+      "age_days": 70,
+      "package_count": 1,
+      "packages": [
+        "jboss-jsp-2.2-api"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-156850",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-156850"
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-183532",
+      "summary": "GNOME Software FTBFS on RHEL 9",
+      "status": "Planning",
+      "status_category": "new",
+      "assignee": "Richard Hughes",
+      "components": [
+        "gnome-software"
+      ],
+      "labels": [],
+      "age_days": 69,
+      "package_count": 1,
+      "packages": [
+        "gnome-software"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-183532",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-183532"
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "KFLUXMIG-363",
+      "summary": "virtio-win enablement",
+      "status": "Pending Approval",
+      "status_category": "indeterminate",
+      "assignee": "Yan Vugenfirer",
+      "components": [],
+      "labels": [
+        "migration",
+        "non-container-based",
+        "rhel"
+      ],
+      "age_days": 62,
+      "package_count": 1,
+      "packages": [
+        "virtio-win"
+      ],
+      "url": "https://redhat.atlassian.net/browse/KFLUXMIG-363",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "KFLUXMIG-363"
+      },
+      "category": "operational"
+    },
+    {
+      "key": "RHEL-156486",
+      "summary": "Konflux pipeline rpm_build failed! - jmc",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Josh Matsuoka",
+      "components": [
+        "jmc"
+      ],
+      "labels": [],
+      "age_days": 62,
+      "package_count": 1,
+      "packages": [
+        "jmc"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-156486",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-156486"
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-156488",
+      "summary": "Konflux pipeline rpm_build failed! - jmc-core",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Josh Matsuoka",
+      "components": [
+        "jmc-core"
+      ],
+      "labels": [],
+      "age_days": 62,
+      "package_count": 1,
+      "packages": [
+        "jmc-core"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-156488",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-156488"
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-183536",
+      "summary": "Konflux pipeline rpmbuild failed! (gnu-efi)",
+      "status": "Integration",
+      "status_category": "indeterminate",
+      "assignee": "bootloader -eng-team",
+      "components": [
+        "gnu-efi"
+      ],
+      "labels": [],
+      "age_days": 61,
+      "package_count": 1,
+      "packages": [
+        "gnu-efi"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-183536",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-183536"
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-156848",
+      "summary": "Konflux pipeline failed!. (calculate-deps-s390x Failed)- tomcatjss",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "RHCS Maintenance",
+      "components": [
+        "tomcatjss"
+      ],
+      "labels": [],
+      "age_days": 46,
+      "package_count": 1,
+      "packages": [
+        "tomcatjss"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-156848",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-156848"
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-158347",
+      "summary": "Konflux pipeline failed!  For (ModemManager)",
+      "status": "Planning",
+      "status_category": "new",
+      "assignee": "Network Management Team",
+      "components": [
+        "ModemManager"
+      ],
+      "labels": [],
+      "age_days": 45,
+      "package_count": 1,
+      "packages": [
+        "ModemManager"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-158347",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-158347"
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-183549",
+      "summary": "Konflux pipeline rpmbuild failed! (kernelshark)",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Jerome Marchand",
+      "components": [
+        "kernelshark"
+      ],
+      "labels": [],
+      "age_days": 34,
+      "package_count": 1,
+      "packages": [
+        "kernelshark"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-183549",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-183549"
+      },
+      "category": "maintainer"
     }
   ],
   "packages": [
@@ -1246,13 +1760,15 @@
       "sst_full": "rhel-sst-accelerators",
       "pkg_assignee": "Unassigned",
       "blocker_keys": [
-        "ROK-2131"
+        "RHELBLD-18976"
       ],
-      "blocker_state": "Open",
-      "jira_status": "Unknown",
-      "jira_status_category": "unknown",
-      "jira_assignee": "Unassigned",
-      "components": [],
+      "blocker_state": "All resolved",
+      "jira_status": "Closed",
+      "jira_status_category": "done",
+      "jira_assignee": "Veronika Doubkova",
+      "components": [
+        "releng"
+      ],
       "labels": []
     },
     {
@@ -1364,13 +1880,15 @@
       "sst_full": "rhel-sst-pt-gcc",
       "pkg_assignee": "Unassigned",
       "blocker_keys": [
-        "ROK-2133"
+        "RHELBLD-18966"
       ],
-      "blocker_state": "Open",
-      "jira_status": "Unknown",
-      "jira_status_category": "unknown",
-      "jira_assignee": "Unassigned",
-      "components": [],
+      "blocker_state": "All resolved",
+      "jira_status": "Closed",
+      "jira_status_category": "done",
+      "jira_assignee": "Veronika Doubkova",
+      "components": [
+        "releng"
+      ],
       "labels": []
     },
     {
@@ -1379,13 +1897,15 @@
       "sst_full": "rhel-sst-pt-gcc",
       "pkg_assignee": "Unassigned",
       "blocker_keys": [
-        "ROK-2134"
+        "RHELBLD-19069"
       ],
       "blocker_state": "Open",
-      "jira_status": "Unknown",
-      "jira_status_category": "unknown",
-      "jira_assignee": "Unassigned",
-      "components": [],
+      "jira_status": "Backlog",
+      "jira_status_category": "new",
+      "jira_assignee": "Djordje Todorovic",
+      "components": [
+        "rok"
+      ],
       "labels": []
     },
     {
@@ -1394,13 +1914,15 @@
       "sst_full": "rhel-sst-pt-gcc",
       "pkg_assignee": "Unassigned",
       "blocker_keys": [
-        "ROK-2135"
+        "RHELBLD-18965"
       ],
       "blocker_state": "Open",
-      "jira_status": "Unknown",
-      "jira_status_category": "unknown",
-      "jira_assignee": "Unassigned",
-      "components": [],
+      "jira_status": "Review",
+      "jira_status_category": "indeterminate",
+      "jira_assignee": "Djordje Todorovic",
+      "components": [
+        "rok"
+      ],
       "labels": []
     },
     {
@@ -1409,13 +1931,15 @@
       "sst_full": "rhel-sst-display-productivity",
       "pkg_assignee": "\u0110or\u0111e Todorovi\u0107",
       "blocker_keys": [
-        "ROK-1887"
+        "RHELBLD-18366"
       ],
-      "blocker_state": "Open",
-      "jira_status": "Unknown",
-      "jira_status_category": "unknown",
-      "jira_assignee": "Unassigned",
-      "components": [],
+      "blocker_state": "All resolved",
+      "jira_status": "Closed",
+      "jira_status_category": "done",
+      "jira_assignee": "Veronika Doubkova",
+      "components": [
+        "rok"
+      ],
       "labels": []
     },
     {
@@ -1458,13 +1982,15 @@
       "sst_full": "rhel-sst-pt-llvm-rust-go",
       "pkg_assignee": "\u0110or\u0111e Todorovi\u0107",
       "blocker_keys": [
-        "ROK-1944"
+        "RHEL-239965"
       ],
-      "blocker_state": "Open",
-      "jira_status": "Unknown",
-      "jira_status_category": "unknown",
-      "jira_assignee": "Unassigned",
-      "components": [],
+      "blocker_state": "All resolved",
+      "jira_status": "Closed",
+      "jira_status_category": "done",
+      "jira_assignee": "Go Maint",
+      "components": [
+        "golang"
+      ],
       "labels": []
     },
     {
@@ -1770,13 +2296,15 @@
       "sst_full": "rhel-sst-accelerators",
       "pkg_assignee": "Unassigned",
       "blocker_keys": [
-        "ROK-2132"
+        "RHELBLD-18975"
       ],
       "blocker_state": "Open",
-      "jira_status": "Unknown",
-      "jira_status_category": "unknown",
-      "jira_assignee": "Unassigned",
-      "components": [],
+      "jira_status": "To Do",
+      "jira_status_category": "new",
+      "jira_assignee": "Djordje Todorovic",
+      "components": [
+        "rok"
+      ],
       "labels": []
     },
     {
@@ -1887,14 +2415,20 @@
       "sst_full": "rhel-sst-virt-tools",
       "pkg_assignee": "\u0110or\u0111e Todorovi\u0107",
       "blocker_keys": [
-        "ROK-1910"
+        "RHELBLD-18393"
       ],
-      "blocker_state": "Open",
-      "jira_status": "Unknown",
-      "jira_status_category": "unknown",
-      "jira_assignee": "Unassigned",
-      "components": [],
-      "labels": []
+      "blocker_state": "All resolved",
+      "jira_status": "Closed",
+      "jira_status_category": "done",
+      "jira_assignee": "Veronika Doubkova",
+      "components": [
+        "rok"
+      ],
+      "labels": [
+        "konflux",
+        "rhel-9",
+        "rok"
+      ]
     },
     {
       "package": "Lmod",
@@ -1903,15 +2437,16 @@
       "pkg_assignee": "Srinivas Allibilli",
       "blocker_keys": [
         "RHEL-157300",
-        "ROK-1885"
+        "RHELBLD-18361"
       ],
       "blocker_state": "Open",
-      "jira_status": "Planning",
+      "jira_status": "Closed, Planning",
       "jira_status_category": "new",
-      "jira_assignee": "Kamal Heib",
+      "jira_assignee": "Kamal Heib, Veronika Doubkova",
       "components": [
         "Lmod",
-        "openmpi"
+        "openmpi",
+        "rok"
       ],
       "labels": []
     },
@@ -1921,13 +2456,15 @@
       "sst_full": "rhel-sst-virtualization-windows",
       "pkg_assignee": "\u0110or\u0111e Todorovi\u0107",
       "blocker_keys": [
-        "ROK-1911"
+        "RHELBLD-18367"
       ],
-      "blocker_state": "Open",
-      "jira_status": "Unknown",
-      "jira_status_category": "unknown",
-      "jira_assignee": "Unassigned",
-      "components": [],
+      "blocker_state": "All resolved",
+      "jira_status": "Closed",
+      "jira_status_category": "done",
+      "jira_assignee": "Veronika Doubkova",
+      "components": [
+        "rok"
+      ],
       "labels": []
     },
     {
@@ -1972,12 +2509,12 @@
       "sst_full": "(none)",
       "pkg_assignee": "\u0110or\u0111e Todorovi\u0107",
       "blocker_keys": [
-        "ROK-1927"
+        "KONFLUX-15383"
       ],
       "blocker_state": "Open",
-      "jira_status": "Unknown",
-      "jira_status_category": "unknown",
-      "jira_assignee": "Unassigned",
+      "jira_status": "New",
+      "jira_status_category": "new",
+      "jira_assignee": "Yan Vugenfirer",
       "components": [],
       "labels": []
     },
@@ -2042,13 +2579,15 @@
       "sst_full": "rhel-sst-cs-stacks",
       "pkg_assignee": "\u0110or\u0111e Todorovi\u0107",
       "blocker_keys": [
-        "ROK-2167"
+        "RHEL-239960"
       ],
       "blocker_state": "Open",
-      "jira_status": "Unknown",
-      "jira_status_category": "unknown",
+      "jira_status": "New",
+      "jira_status_category": "new",
       "jira_assignee": "Unassigned",
-      "components": [],
+      "components": [
+        "perl-LDAP"
+      ],
       "labels": []
     },
     {
@@ -2057,11 +2596,11 @@
       "sst_full": "rhel-sst-cs-stacks",
       "pkg_assignee": "\u0110or\u0111e Todorovi\u0107",
       "blocker_keys": [
-        "ROK-1939"
+        "KONFLUX-15382"
       ],
       "blocker_state": "Open",
-      "jira_status": "Unknown",
-      "jira_status_category": "unknown",
+      "jira_status": "New",
+      "jira_status_category": "new",
       "jira_assignee": "Unassigned",
       "components": [],
       "labels": []
@@ -2157,13 +2696,15 @@
       "sst_full": "rhel-sst-pt-python-ruby-nodejs",
       "pkg_assignee": "\u0110or\u0111e Todorovi\u0107",
       "blocker_keys": [
-        "ROK-1945"
+        "RHEL-239962"
       ],
-      "blocker_state": "Open",
-      "jira_status": "Unknown",
-      "jira_status_category": "unknown",
-      "jira_assignee": "Unassigned",
-      "components": [],
+      "blocker_state": "All resolved",
+      "jira_status": "Closed",
+      "jira_status_category": "done",
+      "jira_assignee": "Lumir Balhar",
+      "components": [
+        "python-lxml"
+      ],
       "labels": []
     },
     {
@@ -2189,11 +2730,11 @@
       "sst_full": "rhel-sst-pt-python-ruby-nodejs",
       "pkg_assignee": "\u0110or\u0111e Todorovi\u0107",
       "blocker_keys": [
-        "ROK-1939"
+        "KONFLUX-15382"
       ],
       "blocker_state": "Open",
-      "jira_status": "Unknown",
-      "jira_status_category": "unknown",
+      "jira_status": "New",
+      "jira_status_category": "new",
       "jira_assignee": "Unassigned",
       "components": [],
       "labels": []
@@ -2337,7 +2878,7 @@
       "sst_full": "rhel-sst-virtualization",
       "pkg_assignee": "Unassigned",
       "blocker_keys": [
-        "RHELMISC-18928"
+        "RHEL-211387"
       ],
       "blocker_state": "All resolved",
       "jira_status": "Closed",
@@ -2427,8 +2968,12 @@
     }
   ],
   "ready_to_clear": [
+    "cuda",
     "dotnet7.0",
     "gcc-toolset-13-dwz",
+    "gcc-toolset-16-annobin",
+    "gnome-photos",
+    "golang",
     "groff",
     "grpc",
     "ibus-typing-booster",
@@ -2442,9 +2987,12 @@
     "libguestfs",
     "libmemcached-awesome",
     "libreoffice",
+    "libvirt-dbus",
+    "mingw-gettext",
     "mingw-termcap",
     "nss",
     "python-d2to1",
+    "python-lxml",
     "python-markdown",
     "python3.11-lxml",
     "python3.11-psycopg2",
@@ -2456,14 +3004,18 @@
   "assignee_load": [
     [
       "Unassigned",
-      18
+      6
+    ],
+    [
+      "Djordje Todorovic",
+      5
     ],
     [
       "Josh Matsuoka",
       3
     ],
     [
-      "Djordje Todorovic",
+      "Yan Vugenfirer",
       2
     ],
     [
@@ -2477,10 +3029,6 @@
     [
       "Filip Janus",
       2
-    ],
-    [
-      "Yan Vugenfirer",
-      1
     ],
     [
       "Kamal Heib",
@@ -2587,16 +3135,20 @@
   ],
   "status_breakdown": [
     [
-      "Unknown",
-      14
-    ],
-    [
       "New",
-      10
+      13
     ],
     [
       "Planning",
       5
+    ],
+    [
+      "To Do",
+      2
+    ],
+    [
+      "Backlog",
+      2
     ],
     [
       "Pending Approval",
@@ -2615,11 +3167,7 @@
       1
     ],
     [
-      "To Do",
-      1
-    ],
-    [
-      "Backlog",
+      "Review",
       1
     ]
   ],
@@ -2671,12 +3219,12 @@
   ],
   "components_freq": [
     [
-      "(none)",
-      16
+      "rok",
+      6
     ],
     [
-      "rok",
-      3
+      "(none)",
+      4
     ],
     [
       "RPM Build",
@@ -2745,24 +3293,13 @@
     [
       "rubygem-pg",
       1
+    ],
+    [
+      "perl-LDAP",
+      1
     ]
   ],
-  "missing_keys": [
-    "ROK-1885",
-    "ROK-1887",
-    "ROK-1910",
-    "ROK-1911",
-    "ROK-1927",
-    "ROK-1939",
-    "ROK-1944",
-    "ROK-1945",
-    "ROK-2131",
-    "ROK-2132",
-    "ROK-2133",
-    "ROK-2134",
-    "ROK-2135",
-    "ROK-2167"
-  ],
+  "missing_keys": [],
   "findings": [
     {
       "tag": "Largest blocker",
@@ -2772,12 +3309,12 @@
     },
     {
       "tag": "Spreadsheet hygiene",
-      "title": "25 pkgs ready to clear",
+      "title": "32 pkgs ready to clear",
       "body": "69 packages marked blocked; 66 rows carry a Blockers value. Clearing fully-resolved blockers will drop the blocked tally."
     },
     {
       "tag": "Needs attention",
-      "title": "18 unassigned \u00b7 12 stale (\u226530d)",
+      "title": "6 unassigned \u00b7 11 stale (\u226530d)",
       "body": "Open blockers with no owner or no recent update \u2014 good candidates for triage or closure."
     }
   ]
