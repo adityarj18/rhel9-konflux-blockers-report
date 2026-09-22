@@ -1,33 +1,33 @@
 {
-  "generated_at_iso": "2026-09-22T09:04:41.943095+00:00",
+  "generated_at_iso": "2026-09-22T12:21:24.787717+00:00",
   "snapshot_date_display": "22 Sep 2026",
-  "source_desc": "local file `RHEL 9 Konflux migration_69a90d34-a38b-4fe4-b65e-e5e284cae7b1.xlsx`",
+  "source_desc": "local file `RHEL 9 Konflux migration_8e4b8ade-2dd4-4b65-b2b7-ac3965e8078f.xlsx`",
   "spreadsheet_id": "1MJhmkOFgbSjuvuO9f8v5DDWiuxiMTGPOhVOHII67-5o",
   "spreadsheet_url": "https://docs.google.com/spreadsheets/d/1MJhmkOFgbSjuvuO9f8v5DDWiuxiMTGPOhVOHII67-5o",
   "jira_base": "https://redhat.atlassian.net",
   "jira_enabled": true,
   "stats": {
-    "total_rpms": 2780,
+    "total_rpms": 2778,
     "onboarded": 2706,
-    "onboarded_pct": 97.3,
-    "has_blockers_sheet": 46,
-    "blocked_packages": 46,
-    "open_blockers": 22,
-    "ready_to_clear": 16,
+    "onboarded_pct": 97.4,
+    "has_blockers_sheet": 35,
+    "blocked_packages": 35,
+    "open_blockers": 24,
+    "ready_to_clear": 2,
     "unassigned_open": 4,
-    "stale_open": 5,
-    "blockers_field_rows": 45,
-    "unique_blocker_keys": 36,
+    "stale_open": 6,
+    "blockers_field_rows": 33,
+    "unique_blocker_keys": 28,
     "jira_resolved_keys": 41,
     "jira_missing_keys": 0,
-    "operational_blockers": 19,
+    "operational_blockers": 13,
     "operational_open_blockers": 9,
-    "operational_packages": 28,
+    "operational_packages": 18,
     "operational_open_packages": 15,
-    "maintainer_blockers": 17,
-    "maintainer_open_blockers": 13,
-    "maintainer_packages": 18,
-    "maintainer_open_packages": 14
+    "maintainer_blockers": 15,
+    "maintainer_open_blockers": 15,
+    "maintainer_packages": 16,
+    "maintainer_open_packages": 16
   },
   "open_blockers": [
     {
@@ -165,7 +165,7 @@
       "assignee": "Yan Vugenfirer",
       "components": [],
       "labels": [],
-      "age_days": 39,
+      "age_days": 40,
       "package_count": 1,
       "packages": [
         "msitools"
@@ -192,7 +192,7 @@
         "decentxml"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 6,
       "package_count": 1,
       "packages": [
         "decentxml"
@@ -246,7 +246,7 @@
         "jmc-core"
       ],
       "labels": [],
-      "age_days": 76,
+      "age_days": 77,
       "package_count": 1,
       "packages": [
         "jmc-core"
@@ -327,7 +327,7 @@
         "ModemManager"
       ],
       "labels": [],
-      "age_days": 13,
+      "age_days": 14,
       "package_count": 1,
       "packages": [
         "ModemManager"
@@ -342,6 +342,46 @@
         "completed": 0,
         "url": "RHEL-158347"
       },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-174401",
+      "summary": "calculate-deps fails for grpc - missing cmake(gflags) and python3dist(gevent) in buildroot",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Justin Caratzas",
+      "components": [
+        "grpc"
+      ],
+      "labels": [],
+      "age_days": 118,
+      "package_count": 1,
+      "packages": [
+        "grpc"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-174401",
+      "moved_from": null,
+      "sheet": null,
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-178286",
+      "summary": "babl rebased in RHEL 9 breaking its ACG level 2 guarantees (no API/ABI changes within RHEL 9)",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Josef Ridky",
+      "components": [
+        "babl"
+      ],
+      "labels": [],
+      "age_days": 5,
+      "package_count": 1,
+      "packages": [
+        "gnome-photos"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-178286",
+      "moved_from": null,
+      "sheet": null,
       "category": "maintainer"
     },
     {
@@ -489,7 +529,7 @@
         "perl-LDAP"
       ],
       "labels": [],
-      "age_days": 39,
+      "age_days": 40,
       "package_count": 1,
       "packages": [
         "perl-LDAP"
@@ -747,7 +787,7 @@
       "assignee": "Yan Vugenfirer",
       "components": [],
       "labels": [],
-      "age_days": 39,
+      "age_days": 40,
       "package_count": 1,
       "packages": [
         "msitools"
@@ -938,7 +978,7 @@
         "decentxml"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 6,
       "package_count": 1,
       "packages": [
         "decentxml"
@@ -992,7 +1032,7 @@
         "jmc-core"
       ],
       "labels": [],
-      "age_days": 76,
+      "age_days": 77,
       "package_count": 1,
       "packages": [
         "jmc-core"
@@ -1073,7 +1113,7 @@
         "ModemManager"
       ],
       "labels": [],
-      "age_days": 13,
+      "age_days": 14,
       "package_count": 1,
       "packages": [
         "ModemManager"
@@ -1088,6 +1128,46 @@
         "completed": 0,
         "url": "RHEL-158347"
       },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-174401",
+      "summary": "calculate-deps fails for grpc - missing cmake(gflags) and python3dist(gevent) in buildroot",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Justin Caratzas",
+      "components": [
+        "grpc"
+      ],
+      "labels": [],
+      "age_days": 118,
+      "package_count": 1,
+      "packages": [
+        "grpc"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-174401",
+      "moved_from": null,
+      "sheet": null,
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-178286",
+      "summary": "babl rebased in RHEL 9 breaking its ACG level 2 guarantees (no API/ABI changes within RHEL 9)",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Josef Ridky",
+      "components": [
+        "babl"
+      ],
+      "labels": [],
+      "age_days": 5,
+      "package_count": 1,
+      "packages": [
+        "gnome-photos"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-178286",
+      "moved_from": null,
+      "sheet": null,
       "category": "maintainer"
     },
     {
@@ -1235,7 +1315,7 @@
         "perl-LDAP"
       ],
       "labels": [],
-      "age_days": 39,
+      "age_days": 40,
       "package_count": 1,
       "packages": [
         "perl-LDAP"
@@ -1254,6 +1334,53 @@
     }
   ],
   "stale_blockers": [
+    {
+      "key": "RHEL-174401",
+      "summary": "calculate-deps fails for grpc - missing cmake(gflags) and python3dist(gevent) in buildroot",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Justin Caratzas",
+      "components": [
+        "grpc"
+      ],
+      "labels": [],
+      "age_days": 118,
+      "package_count": 1,
+      "packages": [
+        "grpc"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-174401",
+      "moved_from": null,
+      "sheet": null,
+      "category": "maintainer"
+    },
+    {
+      "key": "RHEL-156488",
+      "summary": "Konflux pipeline rpm_build failed! - jmc-core",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Josh Matsuoka",
+      "components": [
+        "jmc-core"
+      ],
+      "labels": [],
+      "age_days": 77,
+      "package_count": 1,
+      "packages": [
+        "jmc-core"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-156488",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-156488"
+      },
+      "category": "maintainer"
+    },
     {
       "key": "KFLUXMIG-363",
       "summary": "virtio-win enablement",
@@ -1284,21 +1411,19 @@
       "category": "operational"
     },
     {
-      "key": "RHEL-156488",
-      "summary": "Konflux pipeline rpm_build failed! - jmc-core",
+      "key": "KONFLUX-15383",
+      "summary": "7 packages fail with oc flag parse error on image-builder-tenant -- pipeline script quoting bug",
       "status": "New",
       "status_category": "new",
-      "assignee": "Josh Matsuoka",
-      "components": [
-        "jmc-core"
-      ],
+      "assignee": "Yan Vugenfirer",
+      "components": [],
       "labels": [],
-      "age_days": 76,
+      "age_days": 40,
       "package_count": 1,
       "packages": [
-        "jmc-core"
+        "msitools"
       ],
-      "url": "https://redhat.atlassian.net/browse/RHEL-156488",
+      "url": "https://redhat.atlassian.net/browse/KONFLUX-15383",
       "moved_from": null,
       "sheet": {
         "type": "JIRA",
@@ -1306,7 +1431,34 @@
         "todo": 1,
         "in_progress": 0,
         "completed": 0,
-        "url": "RHEL-156488"
+        "url": "KONFLUX-15383"
+      },
+      "category": "operational"
+    },
+    {
+      "key": "RHEL-239960",
+      "summary": "perl-LDAP: BuildRequires openldap-servers which does not exist in RHEL 9",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Unassigned",
+      "components": [
+        "perl-LDAP"
+      ],
+      "labels": [],
+      "age_days": 40,
+      "package_count": 1,
+      "packages": [
+        "perl-LDAP"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-239960",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-239960"
       },
       "category": "maintainer"
     },
@@ -1336,58 +1488,6 @@
         "url": "RHELBLD-18975"
       },
       "category": "operational"
-    },
-    {
-      "key": "KONFLUX-15383",
-      "summary": "7 packages fail with oc flag parse error on image-builder-tenant -- pipeline script quoting bug",
-      "status": "New",
-      "status_category": "new",
-      "assignee": "Yan Vugenfirer",
-      "components": [],
-      "labels": [],
-      "age_days": 39,
-      "package_count": 1,
-      "packages": [
-        "msitools"
-      ],
-      "url": "https://redhat.atlassian.net/browse/KONFLUX-15383",
-      "moved_from": null,
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "KONFLUX-15383"
-      },
-      "category": "operational"
-    },
-    {
-      "key": "RHEL-239960",
-      "summary": "perl-LDAP: BuildRequires openldap-servers which does not exist in RHEL 9",
-      "status": "New",
-      "status_category": "new",
-      "assignee": "Unassigned",
-      "components": [
-        "perl-LDAP"
-      ],
-      "labels": [],
-      "age_days": 39,
-      "package_count": 1,
-      "packages": [
-        "perl-LDAP"
-      ],
-      "url": "https://redhat.atlassian.net/browse/RHEL-239960",
-      "moved_from": null,
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "RHEL-239960"
-      },
-      "category": "maintainer"
     }
   ],
   "packages": [
@@ -1443,23 +1543,17 @@
       "labels": []
     },
     {
-      "package": "dotnet7.0",
+      "package": "dotnet6.0",
       "sst": "dotnet",
       "sst_full": "rhel-sst-dotnet",
       "pkg_assignee": "Karthi R",
-      "blocker_keys": [
-        "RHEL-155008"
-      ],
-      "blocker_state": "All resolved",
-      "jira_status": "Closed",
-      "jira_status_category": "done",
-      "jira_assignee": "Omair Majid",
-      "components": [
-        "dotnet7.0"
-      ],
-      "labels": [
-        "failed"
-      ]
+      "blocker_keys": [],
+      "blocker_state": "Open",
+      "jira_status": "\u2014",
+      "jira_status_category": "unknown",
+      "jira_assignee": "Unassigned",
+      "components": [],
+      "labels": []
     },
     {
       "package": "fwupd",
@@ -1546,14 +1640,14 @@
       "sst_full": "rhel-sst-display-productivity",
       "pkg_assignee": "\u0110or\u0111e Todorovi\u0107",
       "blocker_keys": [
-        "RHELBLD-18366"
+        "RHEL-178286"
       ],
-      "blocker_state": "All resolved",
-      "jira_status": "Closed",
-      "jira_status_category": "done",
-      "jira_assignee": "Veronika Doubkova",
+      "blocker_state": "Open",
+      "jira_status": "New",
+      "jira_status_category": "new",
+      "jira_assignee": "Josef Ridky",
       "components": [
-        "rok"
+        "babl"
       ],
       "labels": []
     },
@@ -1597,14 +1691,14 @@
       "sst_full": "rhel-sst-high-availability",
       "pkg_assignee": "\u0110or\u0111e Todorovi\u0107",
       "blocker_keys": [
-        "RHELBLD-18720"
+        "RHEL-174401"
       ],
-      "blocker_state": "All resolved",
-      "jira_status": "Closed",
-      "jira_status_category": "done",
-      "jira_assignee": "Veronika Doubkova",
+      "blocker_state": "Open",
+      "jira_status": "New",
+      "jira_status_category": "new",
+      "jira_assignee": "Justin Caratzas",
       "components": [
-        "releng"
+        "grpc"
       ],
       "labels": []
     },
@@ -1635,91 +1729,6 @@
         "rok-ready",
         "upstream"
       ]
-    },
-    {
-      "package": "java-1.8.0-openjdk",
-      "sst": "java",
-      "sst_full": "rhel-sst-java",
-      "pkg_assignee": "Shivanand Boragalli",
-      "blocker_keys": [
-        "RHELBLD-18718"
-      ],
-      "blocker_state": "All resolved",
-      "jira_status": "Closed",
-      "jira_status_category": "done",
-      "jira_assignee": "Aviv Sabadra",
-      "components": [
-        "releng"
-      ],
-      "labels": []
-    },
-    {
-      "package": "java-11-openjdk",
-      "sst": "java",
-      "sst_full": "rhel-sst-java",
-      "pkg_assignee": "Shivanand Boragalli",
-      "blocker_keys": [
-        "RHELBLD-18718"
-      ],
-      "blocker_state": "All resolved",
-      "jira_status": "Closed",
-      "jira_status_category": "done",
-      "jira_assignee": "Aviv Sabadra",
-      "components": [
-        "releng"
-      ],
-      "labels": []
-    },
-    {
-      "package": "java-17-openjdk",
-      "sst": "java",
-      "sst_full": "rhel-sst-java",
-      "pkg_assignee": "Shivanand Boragalli",
-      "blocker_keys": [
-        "RHELBLD-18718"
-      ],
-      "blocker_state": "All resolved",
-      "jira_status": "Closed",
-      "jira_status_category": "done",
-      "jira_assignee": "Aviv Sabadra",
-      "components": [
-        "releng"
-      ],
-      "labels": []
-    },
-    {
-      "package": "java-21-openjdk",
-      "sst": "java",
-      "sst_full": "rhel-sst-java",
-      "pkg_assignee": "Unassigned",
-      "blocker_keys": [
-        "RHELBLD-18718"
-      ],
-      "blocker_state": "All resolved",
-      "jira_status": "Closed",
-      "jira_status_category": "done",
-      "jira_assignee": "Aviv Sabadra",
-      "components": [
-        "releng"
-      ],
-      "labels": []
-    },
-    {
-      "package": "java-25-openjdk",
-      "sst": "java",
-      "sst_full": "rhel-sst-java",
-      "pkg_assignee": "Unassigned",
-      "blocker_keys": [
-        "RHELBLD-18718"
-      ],
-      "blocker_state": "All resolved",
-      "jira_status": "Closed",
-      "jira_status_category": "done",
-      "jira_assignee": "Aviv Sabadra",
-      "components": [
-        "releng"
-      ],
-      "labels": []
     },
     {
       "package": "jboss-jsp-2.2-api",
@@ -1863,42 +1872,6 @@
       "labels": []
     },
     {
-      "package": "libbase",
-      "sst": "display-productivity",
-      "sst_full": "rhel-sst-display-productivity",
-      "pkg_assignee": "\u0110or\u0111e Todorovi\u0107",
-      "blocker_keys": [
-        "RHEL-192541"
-      ],
-      "blocker_state": "All resolved",
-      "jira_status": "Release Pending",
-      "jira_status_category": "done",
-      "jira_assignee": "Tomas Popela",
-      "components": [
-        "libbase"
-      ],
-      "labels": [
-        "ymir_backported"
-      ]
-    },
-    {
-      "package": "libguestfs",
-      "sst": "virt-tools",
-      "sst_full": "rhel-sst-virt-tools",
-      "pkg_assignee": "Unassigned",
-      "blocker_keys": [
-        "RHELBLD-17891"
-      ],
-      "blocker_state": "All resolved",
-      "jira_status": "Release Pending",
-      "jira_status_category": "done",
-      "jira_assignee": "Tomas Kopecek",
-      "components": [
-        "rok"
-      ],
-      "labels": []
-    },
-    {
       "package": "libomp",
       "sst": "pt-llvm-rust-go",
       "sst_full": "rhel-sst-pt-llvm-rust-go",
@@ -1929,23 +1902,6 @@
       "components": [
         "Lmod",
         "openmpi",
-        "rok"
-      ],
-      "labels": []
-    },
-    {
-      "package": "mingw-gettext",
-      "sst": "virtualization-windows",
-      "sst_full": "rhel-sst-virtualization-windows",
-      "pkg_assignee": "\u0110or\u0111e Todorovi\u0107",
-      "blocker_keys": [
-        "RHELBLD-18367"
-      ],
-      "blocker_state": "All resolved",
-      "jira_status": "Closed",
-      "jira_status_category": "done",
-      "jira_assignee": "Veronika Doubkova",
-      "components": [
         "rok"
       ],
       "labels": []
@@ -2067,40 +2023,6 @@
       "labels": []
     },
     {
-      "package": "postgres-decoderbufs",
-      "sst": "cs-databases",
-      "sst_full": "rhel-sst-cs-databases",
-      "pkg_assignee": "\u0110or\u0111e Todorovi\u0107",
-      "blocker_keys": [
-        "RHEL-183531"
-      ],
-      "blocker_state": "All resolved",
-      "jira_status": "Closed",
-      "jira_status_category": "done",
-      "jira_assignee": "Filip Janus",
-      "components": [
-        "postgres-decoderbufs"
-      ],
-      "labels": []
-    },
-    {
-      "package": "python-d2to1",
-      "sst": "high-availability",
-      "sst_full": "rhel-sst-high-availability",
-      "pkg_assignee": "\u0110or\u0111e Todorovi\u0107",
-      "blocker_keys": [
-        "RHELBLD-18717"
-      ],
-      "blocker_state": "All resolved",
-      "jira_status": "Closed",
-      "jira_status_category": "done",
-      "jira_assignee": "Veronika Doubkova",
-      "components": [
-        "releng"
-      ],
-      "labels": []
-    },
-    {
       "package": "python-pytest-subtests",
       "sst": "pt-python-ruby-nodejs",
       "sst_full": "rhel-sst-pt-python-ruby-nodejs",
@@ -2126,23 +2048,6 @@
       "jira_status_category": "unknown",
       "jira_assignee": "Unassigned",
       "components": [],
-      "labels": []
-    },
-    {
-      "package": "rubygem-pg",
-      "sst": "pt-python-ruby-nodejs",
-      "sst_full": "rhel-sst-pt-python-ruby-nodejs",
-      "pkg_assignee": "Unassigned",
-      "blocker_keys": [
-        "RHEL-192545"
-      ],
-      "blocker_state": "All resolved",
-      "jira_status": "Closed",
-      "jira_status_category": "done",
-      "jira_assignee": "Jarek Prokop",
-      "components": [
-        "rubygem-pg"
-      ],
       "labels": []
     },
     {
@@ -2244,21 +2149,7 @@
   ],
   "ready_to_clear": [
     "cuda",
-    "dotnet7.0",
-    "gcc-toolset-16-annobin",
-    "gnome-photos",
-    "grpc",
-    "java-1.8.0-openjdk",
-    "java-11-openjdk",
-    "java-17-openjdk",
-    "java-21-openjdk",
-    "java-25-openjdk",
-    "libbase",
-    "libguestfs",
-    "mingw-gettext",
-    "postgres-decoderbufs",
-    "python-d2to1",
-    "rubygem-pg"
+    "gcc-toolset-16-annobin"
   ],
   "assignee_load": [
     [
@@ -2294,6 +2185,14 @@
       1
     ],
     [
+      "Justin Caratzas",
+      1
+    ],
+    [
+      "Josef Ridky",
+      1
+    ],
+    [
       "Richard Hughes",
       1
     ],
@@ -2309,22 +2208,14 @@
   "sst_breakdown": [
     [
       "java",
-      8
+      3
     ],
     [
       "pt-gcc",
       3
     ],
     [
-      "display-productivity",
-      3
-    ],
-    [
       "cs-bootloaders",
-      3
-    ],
-    [
-      "cs-databases",
       3
     ],
     [
@@ -2340,7 +2231,7 @@
       2
     ],
     [
-      "high-availability",
+      "display-productivity",
       2
     ],
     [
@@ -2348,15 +2239,11 @@
       2
     ],
     [
-      "virtualization-windows",
-      2
-    ],
-    [
       "cs-stacks",
       2
     ],
     [
-      "pt-python-ruby-nodejs",
+      "cs-databases",
       2
     ],
     [
@@ -2372,6 +2259,10 @@
       1
     ],
     [
+      "high-availability",
+      1
+    ],
+    [
       "kernel",
       1
     ],
@@ -2384,14 +2275,22 @@
       1
     ],
     [
-      "virt-tools",
+      "pt-llvm-rust-go",
+      1
+    ],
+    [
+      "pt-python-ruby-nodejs",
+      1
+    ],
+    [
+      "centos-stream",
       1
     ]
   ],
   "status_breakdown": [
     [
       "New",
-      11
+      13
     ],
     [
       "Planning",
@@ -2526,6 +2425,14 @@
       1
     ],
     [
+      "grpc",
+      1
+    ],
+    [
+      "babl",
+      1
+    ],
+    [
       "pgaudit",
       1
     ],
@@ -2560,12 +2467,12 @@
     },
     {
       "tag": "Spreadsheet hygiene",
-      "title": "16 pkgs ready to clear",
-      "body": "46 packages marked blocked; 45 rows carry a Blockers value. Clearing fully-resolved blockers will drop the blocked tally."
+      "title": "2 pkgs ready to clear",
+      "body": "35 packages marked blocked; 33 rows carry a Blockers value. Clearing fully-resolved blockers will drop the blocked tally."
     },
     {
       "tag": "Needs attention",
-      "title": "4 unassigned \u00b7 5 stale (\u226530d)",
+      "title": "4 unassigned \u00b7 6 stale (\u226530d)",
       "body": "Open blockers with no owner or no recent update \u2014 good candidates for triage or closure."
     }
   ]
