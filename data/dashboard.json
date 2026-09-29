@@ -1,7 +1,7 @@
 {
-  "generated_at_iso": "2026-09-22T12:21:24.787717+00:00",
-  "snapshot_date_display": "22 Sep 2026",
-  "source_desc": "local file `RHEL 9 Konflux migration_8e4b8ade-2dd4-4b65-b2b7-ac3965e8078f.xlsx`",
+  "generated_at_iso": "2026-09-29T05:43:56.189197+00:00",
+  "snapshot_date_display": "29 Sep 2026",
+  "source_desc": "local file `RHEL 9 Konflux migration_39b1db42-05ce-4c00-863f-305563123d93.xlsx`",
   "spreadsheet_id": "1MJhmkOFgbSjuvuO9f8v5DDWiuxiMTGPOhVOHII67-5o",
   "spreadsheet_url": "https://docs.google.com/spreadsheets/d/1MJhmkOFgbSjuvuO9f8v5DDWiuxiMTGPOhVOHII67-5o",
   "jira_base": "https://redhat.atlassian.net",
@@ -10,24 +10,24 @@
     "total_rpms": 2778,
     "onboarded": 2706,
     "onboarded_pct": 97.4,
-    "has_blockers_sheet": 35,
-    "blocked_packages": 35,
-    "open_blockers": 24,
+    "has_blockers_sheet": 34,
+    "blocked_packages": 34,
+    "open_blockers": 23,
     "ready_to_clear": 2,
     "unassigned_open": 4,
     "stale_open": 6,
-    "blockers_field_rows": 33,
-    "unique_blocker_keys": 28,
-    "jira_resolved_keys": 41,
+    "blockers_field_rows": 32,
+    "unique_blocker_keys": 27,
+    "jira_resolved_keys": 42,
     "jira_missing_keys": 0,
     "operational_blockers": 13,
     "operational_open_blockers": 9,
     "operational_packages": 18,
     "operational_open_packages": 15,
-    "maintainer_blockers": 15,
-    "maintainer_open_blockers": 15,
-    "maintainer_packages": 16,
-    "maintainer_open_packages": 16
+    "maintainer_blockers": 14,
+    "maintainer_open_blockers": 14,
+    "maintainer_packages": 15,
+    "maintainer_open_packages": 15
   },
   "open_blockers": [
     {
@@ -47,11 +47,13 @@
         "CY26Q3",
         "CY26Q3-InProgress",
         "CY26Q4",
+        "CY26Q4-InProgress",
+        "CY26Q4-Proposed",
         "CY27Q1",
         "rok-ready",
         "upstream"
       ],
-      "age_days": 0,
+      "age_days": 4,
       "package_count": 6,
       "packages": [
         "fwupd",
@@ -81,7 +83,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 12,
+      "age_days": 18,
       "package_count": 2,
       "packages": [
         "perl-Text-Unidecode",
@@ -110,7 +112,7 @@
         "openmpi"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 6,
       "package_count": 2,
       "packages": [
         "Lmod",
@@ -140,7 +142,7 @@
         "non-container-based",
         "rhel"
       ],
-      "age_days": 76,
+      "age_days": 83,
       "package_count": 1,
       "packages": [
         "virtio-win"
@@ -165,7 +167,7 @@
       "assignee": "Yan Vugenfirer",
       "components": [],
       "labels": [],
-      "age_days": 40,
+      "age_days": 46,
       "package_count": 1,
       "packages": [
         "msitools"
@@ -192,7 +194,7 @@
         "decentxml"
       ],
       "labels": [],
-      "age_days": 6,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "decentxml"
@@ -219,7 +221,7 @@
         "jmc"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "jmc"
@@ -246,7 +248,7 @@
         "jmc-core"
       ],
       "labels": [],
-      "age_days": 77,
+      "age_days": 83,
       "package_count": 1,
       "packages": [
         "jmc-core"
@@ -273,7 +275,7 @@
         "tomcatjss"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "tomcatjss"
@@ -300,7 +302,7 @@
         "jboss-jsp-2.2-api"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "jboss-jsp-2.2-api"
@@ -327,7 +329,7 @@
         "ModemManager"
       ],
       "labels": [],
-      "age_days": 14,
+      "age_days": 20,
       "package_count": 1,
       "packages": [
         "ModemManager"
@@ -354,14 +356,21 @@
         "grpc"
       ],
       "labels": [],
-      "age_days": 118,
+      "age_days": 124,
       "package_count": 1,
       "packages": [
         "grpc"
       ],
       "url": "https://redhat.atlassian.net/browse/RHEL-174401",
       "moved_from": null,
-      "sheet": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-174401"
+      },
       "category": "maintainer"
     },
     {
@@ -374,14 +383,21 @@
         "babl"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "gnome-photos"
       ],
       "url": "https://redhat.atlassian.net/browse/RHEL-178286",
       "moved_from": null,
-      "sheet": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-178286"
+      },
       "category": "maintainer"
     },
     {
@@ -394,7 +410,7 @@
         "pgaudit"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "pgaudit"
@@ -421,7 +437,7 @@
         "pg_repack"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "pg_repack"
@@ -448,7 +464,7 @@
         "gnome-software"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "gnome-software"
@@ -466,33 +482,6 @@
       "category": "maintainer"
     },
     {
-      "key": "RHEL-183536",
-      "summary": "Konflux pipeline rpmbuild failed! (gnu-efi)",
-      "status": "Integration",
-      "status_category": "indeterminate",
-      "assignee": "bootloader -eng-team",
-      "components": [
-        "gnu-efi"
-      ],
-      "labels": [],
-      "age_days": 5,
-      "package_count": 1,
-      "packages": [
-        "gnu-efi"
-      ],
-      "url": "https://redhat.atlassian.net/browse/RHEL-183536",
-      "moved_from": null,
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "RHEL-183536"
-      },
-      "category": "maintainer"
-    },
-    {
       "key": "RHEL-183549",
       "summary": "Konflux pipeline rpmbuild failed! (kernelshark)",
       "status": "New",
@@ -502,7 +491,7 @@
         "kernelshark"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "kernelshark"
@@ -529,7 +518,7 @@
         "perl-LDAP"
       ],
       "labels": [],
-      "age_days": 40,
+      "age_days": 46,
       "package_count": 1,
       "packages": [
         "perl-LDAP"
@@ -556,7 +545,7 @@
         "rok"
       ],
       "labels": [],
-      "age_days": 14,
+      "age_days": 21,
       "package_count": 1,
       "packages": [
         "checksec"
@@ -576,14 +565,14 @@
     {
       "key": "RHELBLD-18965",
       "summary": "gcc-toolset-16-gcc needs test MR for Konflux build",
-      "status": "Review",
+      "status": "In Progress",
       "status_category": "indeterminate",
       "assignee": "Djordje Todorovic",
       "components": [
         "rok"
       ],
       "labels": [],
-      "age_days": 19,
+      "age_days": 5,
       "package_count": 1,
       "packages": [
         "gcc-toolset-16-gcc"
@@ -610,7 +599,7 @@
         "rok"
       ],
       "labels": [],
-      "age_days": 40,
+      "age_days": 47,
       "package_count": 1,
       "packages": [
         "kmod-nvidia-open"
@@ -637,7 +626,7 @@
         "rok"
       ],
       "labels": [],
-      "age_days": 12,
+      "age_days": 18,
       "package_count": 1,
       "packages": [
         "gcc-toolset-16-binutils"
@@ -662,7 +651,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 12,
+      "age_days": 18,
       "package_count": 1,
       "packages": [
         "libomp"
@@ -698,11 +687,13 @@
         "CY26Q3",
         "CY26Q3-InProgress",
         "CY26Q4",
+        "CY26Q4-InProgress",
+        "CY26Q4-Proposed",
         "CY27Q1",
         "rok-ready",
         "upstream"
       ],
-      "age_days": 0,
+      "age_days": 4,
       "package_count": 6,
       "packages": [
         "fwupd",
@@ -732,7 +723,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 12,
+      "age_days": 18,
       "package_count": 2,
       "packages": [
         "perl-Text-Unidecode",
@@ -762,7 +753,7 @@
         "non-container-based",
         "rhel"
       ],
-      "age_days": 76,
+      "age_days": 83,
       "package_count": 1,
       "packages": [
         "virtio-win"
@@ -787,7 +778,7 @@
       "assignee": "Yan Vugenfirer",
       "components": [],
       "labels": [],
-      "age_days": 40,
+      "age_days": 46,
       "package_count": 1,
       "packages": [
         "msitools"
@@ -814,7 +805,7 @@
         "rok"
       ],
       "labels": [],
-      "age_days": 14,
+      "age_days": 21,
       "package_count": 1,
       "packages": [
         "checksec"
@@ -834,14 +825,14 @@
     {
       "key": "RHELBLD-18965",
       "summary": "gcc-toolset-16-gcc needs test MR for Konflux build",
-      "status": "Review",
+      "status": "In Progress",
       "status_category": "indeterminate",
       "assignee": "Djordje Todorovic",
       "components": [
         "rok"
       ],
       "labels": [],
-      "age_days": 19,
+      "age_days": 5,
       "package_count": 1,
       "packages": [
         "gcc-toolset-16-gcc"
@@ -868,7 +859,7 @@
         "rok"
       ],
       "labels": [],
-      "age_days": 40,
+      "age_days": 47,
       "package_count": 1,
       "packages": [
         "kmod-nvidia-open"
@@ -895,7 +886,7 @@
         "rok"
       ],
       "labels": [],
-      "age_days": 12,
+      "age_days": 18,
       "package_count": 1,
       "packages": [
         "gcc-toolset-16-binutils"
@@ -920,7 +911,7 @@
       "assignee": "Unassigned",
       "components": [],
       "labels": [],
-      "age_days": 12,
+      "age_days": 18,
       "package_count": 1,
       "packages": [
         "libomp"
@@ -950,7 +941,7 @@
         "openmpi"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 6,
       "package_count": 2,
       "packages": [
         "Lmod",
@@ -978,7 +969,7 @@
         "decentxml"
       ],
       "labels": [],
-      "age_days": 6,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "decentxml"
@@ -1005,7 +996,7 @@
         "jmc"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "jmc"
@@ -1032,7 +1023,7 @@
         "jmc-core"
       ],
       "labels": [],
-      "age_days": 77,
+      "age_days": 83,
       "package_count": 1,
       "packages": [
         "jmc-core"
@@ -1059,7 +1050,7 @@
         "tomcatjss"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "tomcatjss"
@@ -1086,7 +1077,7 @@
         "jboss-jsp-2.2-api"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "jboss-jsp-2.2-api"
@@ -1113,7 +1104,7 @@
         "ModemManager"
       ],
       "labels": [],
-      "age_days": 14,
+      "age_days": 20,
       "package_count": 1,
       "packages": [
         "ModemManager"
@@ -1140,14 +1131,21 @@
         "grpc"
       ],
       "labels": [],
-      "age_days": 118,
+      "age_days": 124,
       "package_count": 1,
       "packages": [
         "grpc"
       ],
       "url": "https://redhat.atlassian.net/browse/RHEL-174401",
       "moved_from": null,
-      "sheet": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-174401"
+      },
       "category": "maintainer"
     },
     {
@@ -1160,14 +1158,21 @@
         "babl"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "gnome-photos"
       ],
       "url": "https://redhat.atlassian.net/browse/RHEL-178286",
       "moved_from": null,
-      "sheet": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-178286"
+      },
       "category": "maintainer"
     },
     {
@@ -1180,7 +1185,7 @@
         "pgaudit"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "pgaudit"
@@ -1207,7 +1212,7 @@
         "pg_repack"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "pg_repack"
@@ -1234,7 +1239,7 @@
         "gnome-software"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "gnome-software"
@@ -1252,33 +1257,6 @@
       "category": "maintainer"
     },
     {
-      "key": "RHEL-183536",
-      "summary": "Konflux pipeline rpmbuild failed! (gnu-efi)",
-      "status": "Integration",
-      "status_category": "indeterminate",
-      "assignee": "bootloader -eng-team",
-      "components": [
-        "gnu-efi"
-      ],
-      "labels": [],
-      "age_days": 5,
-      "package_count": 1,
-      "packages": [
-        "gnu-efi"
-      ],
-      "url": "https://redhat.atlassian.net/browse/RHEL-183536",
-      "moved_from": null,
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "RHEL-183536"
-      },
-      "category": "maintainer"
-    },
-    {
       "key": "RHEL-183549",
       "summary": "Konflux pipeline rpmbuild failed! (kernelshark)",
       "status": "New",
@@ -1288,7 +1266,7 @@
         "kernelshark"
       ],
       "labels": [],
-      "age_days": 5,
+      "age_days": 12,
       "package_count": 1,
       "packages": [
         "kernelshark"
@@ -1315,7 +1293,7 @@
         "perl-LDAP"
       ],
       "labels": [],
-      "age_days": 40,
+      "age_days": 46,
       "package_count": 1,
       "packages": [
         "perl-LDAP"
@@ -1344,32 +1322,12 @@
         "grpc"
       ],
       "labels": [],
-      "age_days": 118,
+      "age_days": 124,
       "package_count": 1,
       "packages": [
         "grpc"
       ],
       "url": "https://redhat.atlassian.net/browse/RHEL-174401",
-      "moved_from": null,
-      "sheet": null,
-      "category": "maintainer"
-    },
-    {
-      "key": "RHEL-156488",
-      "summary": "Konflux pipeline rpm_build failed! - jmc-core",
-      "status": "New",
-      "status_category": "new",
-      "assignee": "Josh Matsuoka",
-      "components": [
-        "jmc-core"
-      ],
-      "labels": [],
-      "age_days": 77,
-      "package_count": 1,
-      "packages": [
-        "jmc-core"
-      ],
-      "url": "https://redhat.atlassian.net/browse/RHEL-156488",
       "moved_from": null,
       "sheet": {
         "type": "JIRA",
@@ -1377,7 +1335,7 @@
         "todo": 1,
         "in_progress": 0,
         "completed": 0,
-        "url": "RHEL-156488"
+        "url": "RHEL-174401"
       },
       "category": "maintainer"
     },
@@ -1393,7 +1351,7 @@
         "non-container-based",
         "rhel"
       ],
-      "age_days": 76,
+      "age_days": 83,
       "package_count": 1,
       "packages": [
         "virtio-win"
@@ -1411,6 +1369,60 @@
       "category": "operational"
     },
     {
+      "key": "RHEL-156488",
+      "summary": "Konflux pipeline rpm_build failed! - jmc-core",
+      "status": "New",
+      "status_category": "new",
+      "assignee": "Josh Matsuoka",
+      "components": [
+        "jmc-core"
+      ],
+      "labels": [],
+      "age_days": 83,
+      "package_count": 1,
+      "packages": [
+        "jmc-core"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHEL-156488",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHEL-156488"
+      },
+      "category": "maintainer"
+    },
+    {
+      "key": "RHELBLD-18975",
+      "summary": "kmod-nvidia-open has no GitLab repo, cannot submit Konflux test build",
+      "status": "To Do",
+      "status_category": "new",
+      "assignee": "Djordje Todorovic",
+      "components": [
+        "rok"
+      ],
+      "labels": [],
+      "age_days": 47,
+      "package_count": 1,
+      "packages": [
+        "kmod-nvidia-open"
+      ],
+      "url": "https://redhat.atlassian.net/browse/RHELBLD-18975",
+      "moved_from": null,
+      "sheet": {
+        "type": "JIRA",
+        "total": 1,
+        "todo": 1,
+        "in_progress": 0,
+        "completed": 0,
+        "url": "RHELBLD-18975"
+      },
+      "category": "operational"
+    },
+    {
       "key": "KONFLUX-15383",
       "summary": "7 packages fail with oc flag parse error on image-builder-tenant -- pipeline script quoting bug",
       "status": "New",
@@ -1418,7 +1430,7 @@
       "assignee": "Yan Vugenfirer",
       "components": [],
       "labels": [],
-      "age_days": 40,
+      "age_days": 46,
       "package_count": 1,
       "packages": [
         "msitools"
@@ -1445,7 +1457,7 @@
         "perl-LDAP"
       ],
       "labels": [],
-      "age_days": 40,
+      "age_days": 46,
       "package_count": 1,
       "packages": [
         "perl-LDAP"
@@ -1461,33 +1473,6 @@
         "url": "RHEL-239960"
       },
       "category": "maintainer"
-    },
-    {
-      "key": "RHELBLD-18975",
-      "summary": "kmod-nvidia-open has no GitLab repo, cannot submit Konflux test build",
-      "status": "To Do",
-      "status_category": "new",
-      "assignee": "Djordje Todorovic",
-      "components": [
-        "rok"
-      ],
-      "labels": [],
-      "age_days": 40,
-      "package_count": 1,
-      "packages": [
-        "kmod-nvidia-open"
-      ],
-      "url": "https://redhat.atlassian.net/browse/RHELBLD-18975",
-      "moved_from": null,
-      "sheet": {
-        "type": "JIRA",
-        "total": 1,
-        "todo": 1,
-        "in_progress": 0,
-        "completed": 0,
-        "url": "RHELBLD-18975"
-      },
-      "category": "operational"
     }
   ],
   "packages": [
@@ -1578,6 +1563,8 @@
         "CY26Q3",
         "CY26Q3-InProgress",
         "CY26Q4",
+        "CY26Q4-InProgress",
+        "CY26Q4-Proposed",
         "CY27Q1",
         "rok-ready",
         "upstream"
@@ -1626,7 +1613,7 @@
         "RHELBLD-18965"
       ],
       "blocker_state": "Open",
-      "jira_status": "Review",
+      "jira_status": "In Progress",
       "jira_status_category": "indeterminate",
       "jira_assignee": "Djordje Todorovic",
       "components": [
@@ -1665,23 +1652,6 @@
       "jira_assignee": "Richard Hughes",
       "components": [
         "gnome-software"
-      ],
-      "labels": []
-    },
-    {
-      "package": "gnu-efi",
-      "sst": "cs-bootloaders",
-      "sst_full": "rhel-sst-cs-bootloaders",
-      "pkg_assignee": "\u0110or\u0111e Todorovi\u0107",
-      "blocker_keys": [
-        "RHEL-183536"
-      ],
-      "blocker_state": "Open",
-      "jira_status": "Integration",
-      "jira_status_category": "indeterminate",
-      "jira_assignee": "bootloader -eng-team",
-      "components": [
-        "gnu-efi"
       ],
       "labels": []
     },
@@ -1725,6 +1695,8 @@
         "CY26Q3",
         "CY26Q3-InProgress",
         "CY26Q4",
+        "CY26Q4-InProgress",
+        "CY26Q4-Proposed",
         "CY27Q1",
         "rok-ready",
         "upstream"
@@ -1804,6 +1776,8 @@
         "CY26Q3",
         "CY26Q3-InProgress",
         "CY26Q4",
+        "CY26Q4-InProgress",
+        "CY26Q4-Proposed",
         "CY27Q1",
         "rok-ready",
         "upstream"
@@ -1832,6 +1806,8 @@
         "CY26Q3",
         "CY26Q3-InProgress",
         "CY26Q4",
+        "CY26Q4-InProgress",
+        "CY26Q4-Proposed",
         "CY27Q1",
         "rok-ready",
         "upstream"
@@ -2073,6 +2049,8 @@
         "CY26Q3",
         "CY26Q3-InProgress",
         "CY26Q4",
+        "CY26Q4-InProgress",
+        "CY26Q4-Proposed",
         "CY27Q1",
         "rok-ready",
         "upstream"
@@ -2101,6 +2079,8 @@
         "CY26Q3",
         "CY26Q3-InProgress",
         "CY26Q4",
+        "CY26Q4-InProgress",
+        "CY26Q4-Proposed",
         "CY27Q1",
         "rok-ready",
         "upstream"
@@ -2197,10 +2177,6 @@
       1
     ],
     [
-      "bootloader -eng-team",
-      1
-    ],
-    [
       "Jerome Marchand",
       1
     ]
@@ -2212,10 +2188,6 @@
     ],
     [
       "pt-gcc",
-      3
-    ],
-    [
-      "cs-bootloaders",
       3
     ],
     [
@@ -2232,6 +2204,10 @@
     ],
     [
       "display-productivity",
+      2
+    ],
+    [
+      "cs-bootloaders",
       2
     ],
     [
@@ -2297,6 +2273,10 @@
       3
     ],
     [
+      "In Progress",
+      2
+    ],
+    [
       "Backlog",
       2
     ],
@@ -2306,18 +2286,6 @@
     ],
     [
       "Approved",
-      1
-    ],
-    [
-      "In Progress",
-      1
-    ],
-    [
-      "Integration",
-      1
-    ],
-    [
-      "Review",
       1
     ],
     [
@@ -2352,6 +2320,14 @@
     ],
     [
       "CY26Q4",
+      1
+    ],
+    [
+      "CY26Q4-InProgress",
+      1
+    ],
+    [
+      "CY26Q4-Proposed",
       1
     ],
     [
@@ -2445,10 +2421,6 @@
       1
     ],
     [
-      "gnu-efi",
-      1
-    ],
-    [
       "kernelshark",
       1
     ],
@@ -2468,7 +2440,7 @@
     {
       "tag": "Spreadsheet hygiene",
       "title": "2 pkgs ready to clear",
-      "body": "35 packages marked blocked; 33 rows carry a Blockers value. Clearing fully-resolved blockers will drop the blocked tally."
+      "body": "34 packages marked blocked; 32 rows carry a Blockers value. Clearing fully-resolved blockers will drop the blocked tally."
     },
     {
       "tag": "Needs attention",
